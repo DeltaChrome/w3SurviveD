@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html>
-    
-<header>
-        WHOAAAAAA
- </header>   
+<!-- control+alt+i opens dope editor in real time -->
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="app.js"></script>
+     <title>WebVR Introduction</title>
+     <script src = "/js/aframe-v0.8.2.min.js"></script>
 </head>
 <body>
-    
+    <a-scene>
+        <a-assets>
+            <img id="skymap" src="/assets/textures/CloudySky.jpg">  
+            <img id="cowmap" src="/assets/textures/Cow.png">  
+            <a-asset-item id="Helmet-gltf" src="/assets/models/DamagedHelmet.glb"></a-asset-item>
+            <a-asset-item id="Cow-obj" src="/assets/models/Cow.obj"></a-asset-item>
+            
+        </a-assets>
+        <a-gltf-model   id="Helemt"
+                        src="#Helmet-gltf"
+                        position="0 0 0"
+                        scale="1 1 1"
+                        shadow="cast:true; receive:true">
+        </a-gltf-model>
+        <!-- <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow   ></a-box> -->
+        <a-entity id="box" 
+                position="-1 0.5 -3"
+                rotation="0 45 0"
+                scale="1 1 1"
+                geometry="primitive:box; width:1; height:1; depth:1;"
+                shadow="cast:true; receive:true;"
+                material="color:#EF2D5E; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.0; "
+                ></a-entity>
+        <!-- <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+        <a-plane position="0 0 -4" width="4" height="4" rotation="-90 0 0" color="#7BC8A4" shadow></a-plane>
+        <a-sky color="#ECECEC"></a-sky> -->
+        <a-entity id="sky"
+                geometry="primitive:sphere; radius:500"
+                material="shader:flat; src:#skymap; side:back">
+        </a-entity>
+    </a-scene>
+
 </body>
+
 </html>
