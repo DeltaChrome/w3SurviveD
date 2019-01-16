@@ -4,14 +4,19 @@
 <head>
      <title>WebVR Introduction</title>
      <script src = "/js/aframe-v0.8.2.min.js"></script>
+     <script src="js/component.js"></script>
 </head>
 <body>
     <a-scene>
         <a-assets>
             <img id="skymap" src="/assets/textures/CloudySky.jpg">  
             <img id="cowmap" src="/assets/textures/Cow.png">  
+              
+            
             <a-asset-item id="Helmet-gltf" src="/assets/models/DamagedHelmet.glb"></a-asset-item>
             <a-asset-item id="Cow-obj" src="/assets/models/Cow.obj"></a-asset-item>
+            <a-asset-item id="thing1-obj" src="/assets/thing1.obj"></a-asset-item>
+            <a-asset-item id="thing1-mat" src="/assets/thing1.mtl"></a-asset-item>
             
         </a-assets>
         <a-gltf-model   id="Helemt"
@@ -20,6 +25,7 @@
                         scale="1 1 1"
                         shadow="cast:true; receive:true">
         </a-gltf-model>
+        <a-entity obj-model="obj: #thing1-obj; mtl: #thing1-mat"></a-entity>
         <!-- <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow   ></a-box> -->
         <a-entity id="box" 
                 position="-1 0.5 -3"
@@ -37,6 +43,12 @@
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">
         </a-entity>
+        <a-light type="point" color="yellow" position="40 40 10"></a-light>
+        <a-entity position="0 0 10">
+            <a-camera></a-camera>
+        </a-entity>
+        <a-entity test-component="message: suh dude; name: Jacob"></a-entity>
+
     </a-scene>
 
 </body>
