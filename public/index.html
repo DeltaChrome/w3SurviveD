@@ -15,11 +15,12 @@
             
             <a-asset-item id="tree_1-obj" src="/assets/models/Tree_1_V5.obj"></a-asset-item>
             <a-asset-item id="tree_1-mat" src="/assets/textures/Tree_1_V5.mtl"></a-asset-item>
+            <a-asset-item id="tree_2-obj" src="/assets/models/Tree_3.obj"></a-asset-item>
+            <a-asset-item id="tree_2-mat" src="/assets/textures/Tree_3.mtl"></a-asset-item>
+            <a-asset-item id="tree_3-obj" src="/assets/models/Tree_4.obj"></a-asset-item>
+            <a-asset-item id="tree_3-mat" src="/assets/textures/Tree_4.mtl"></a-asset-item>
             <a-asset-item id="rock_01-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
             <a-asset-item id="rock_01-obj" src="/assets/models/rock_01.obj"></a-asset-item>
-            
-            
-        
 
         </a-assets>
         <!-- <a-entity id="rock" obj-model="obj:#rock_01-obj" material="#rock_01-mat" shadow="cast: true" shadow="receive: true" position="10 2.3 0" ></a-entity>
@@ -29,11 +30,10 @@
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">
         </a-entity>
-        <a-entity light="type:directional; 
-        castShadow:true; 
-        color:#D9FFFB; 
+        <a-entity id="Light SUN" light="type:directional; 
+        castShadow:true;
+        color:#e0d498; 
         intensity:1.5; 
-        shadowCameraVisible: true;
         shadowCameraLeft: -250;
         shadowCameraBottom: -250;
         shadowCameraRight: 250;
@@ -41,6 +41,37 @@
         shadowMapHeight: 8112;
         shadowMapWidth: 8112;" 
         scale="10 10 10" position="40 40 20"></a-entity>
+        <!-- shadowCameraVisible: true; -->
+        <a-entity id="LightBounce1 Side" light="type:directional;
+        
+        color:#e0d498; 
+        intensity:0.1; 
+      
+        "
+        scale="10 10 10" position="-40 0 -20" rotation="180 0 0"></a-entity>
+
+        <a-entity id="LightBounce1 Side2" light="type:directional;
+        
+        color:#e0d498; 
+        intensity:0.1; 
+      
+        "
+        scale="10 10 10" position="40 0 20" rotation="180 0 0"></a-entity>
+
+        <a-entity id="LightBounce2 Bottom" light="type:directional;
+        
+        color:#e0d498; 
+        intensity:0.1; 
+      
+        
+        "
+        scale="10 10 10" position="0 -0.025 0" rotation="90 0 0"></a-entity>
+
+        <a-entity light="type: ambient;  color:#e0d498;  intensity:0.2;"></a-entity>
+
+        
+
+        <!-- <a-entity light="type: hemisphere; color: #e0d498; groundColor: #1a1b1e"></a-entity> -->
 
         <a-box color="white" depth="100" height="1" width="100" shadow="receive: true"></a-box>
         <a-entity position="0 0 10">

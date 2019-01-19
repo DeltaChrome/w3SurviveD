@@ -18,5 +18,6 @@
   "homepage": "https://github.com/DeltaChrome/Lesson1WebVR#readme",
   "dependencies": {
     "express": "^4.16.4"
-  }
+  },
+  "keywords": []
 }

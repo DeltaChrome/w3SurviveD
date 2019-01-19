@@ -8,30 +8,65 @@ function generateNumber ()
   
 }
 
-function generatePositionVector()
+function generatePositionVector(off)
 {
-    return(generateNumber() + " " + 2.3 + " " + generateNumber());
+    return(generateNumber() + " " + off + " " + generateNumber());
 }
 
-document.addEventListener('keyup', function (k){
+//document.addEventListener('keyup', function (k){
 
-    if(k.keyCode == 32)
+    for(let i = 0; i < 15; i++)
     {
         let entity = document.createElement('a-entity');
-        entity.setAttribute('position', generatePositionVector());
+        entity.setAttribute('position', generatePositionVector(2.3));
         entity.setAttribute('obj-model', 'obj: #rock_01-obj');
         entity.setAttribute('material', 'mtl: #rock_01-mat');
         entity.setAttribute('shadow', 'cast:true');
         entity.setAttribute('shadow', 'receive:true');        
         
+        scene.appendChild(entity);
+        
+    }
     
+    for(let i = 0; i < 2; i++)
+    {
+        let entity = document.createElement('a-entity');
+        entity.setAttribute('position', generatePositionVector(0));
+        entity.setAttribute('obj-model', 'obj: #tree_1-obj');
+        entity.setAttribute('material', 'mtl: #tree_1-mat');
+        entity.setAttribute('shadow', 'cast:true');
+        entity.setAttribute('shadow', 'receive:true');        
+        entity.setAttribute('shader', 'standard');  
+        
+        scene.appendChild(entity);
+
+    }
+
+    for(let i = 0; i < 2; i++)
+    {
+        let entity = document.createElement('a-entity');
+        entity.setAttribute('position', generatePositionVector(0));
+        entity.setAttribute('obj-model', 'obj: #tree_2-obj');
+        entity.setAttribute('material', 'mtl: #tree_2-mat');
+        entity.setAttribute('shadow', 'cast:true');
+        entity.setAttribute('shadow', 'receive:true');          
+        entity.setAttribute('shader', 'standard');  
 
         scene.appendChild(entity);
 
-        console.log(generatePositionVector());
-        console.log("keypress");
     }
 
-});
+    for(let i = 0; i < 2; i++)
+    {
+        let entity = document.createElement('a-entity');
+        entity.setAttribute('position', generatePositionVector(0));
+        entity.setAttribute('obj-model', 'obj: #tree_3-obj');
+        entity.setAttribute('material', 'mtl: #tree_3-mat');
+        entity.setAttribute('shadow', 'cast:true');
+        entity.setAttribute('shadow', 'receive:true'); 
+        entity.setAttribute('scale', '4 5 4');           
+        entity.setAttribute('shader', 'standard');  
 
-//console.log(scene);
+        scene.appendChild(entity);
+
+    }
