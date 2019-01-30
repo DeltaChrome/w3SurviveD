@@ -4,10 +4,11 @@
 <head>
      <title>weSurviv3D</title>
      <script src = "/js/aframe-v0.8.2.min.js"></script>
-     <script src="js/component.js"></script>
+     <script src="js/component.js"></script>   
 
 </head>
 <body>
+ 
     <a-scene shadow="type: pcfsoft">
         <a-assets>
             <img id="skymap" src="/assets/textures/CloudySky.jpg">  
@@ -30,6 +31,8 @@
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">
         </a-entity>
+
+        <!-- Lights< -->
         <a-entity id="Light SUN" light="type:directional; 
         castShadow:true;
         color:#e0d498; 
@@ -42,47 +45,35 @@
         shadowMapWidth: 8112;" 
         scale="10 10 10" position="40 40 20"></a-entity>
         <!-- shadowCameraVisible: true; -->
-        <a-entity id="LightBounce1 Side" light="type:directional;
-        
-        color:#e0d498; 
-        intensity:0.1; 
-      
-        "
+        <a-entity id="LightBounce1 Side" light="type:directional; color:#e0d498; intensity:0.1;"
         scale="10 10 10" position="-40 0 -20" rotation="180 0 0"></a-entity>
 
-        <a-entity id="LightBounce1 Side2" light="type:directional;
-        
-        color:#e0d498; 
-        intensity:0.1; 
-      
-        "
+        <a-entity id="LightBounce1 Side2" light="type:directional; color:#e0d498; intensity:0.1;"
         scale="10 10 10" position="40 0 20" rotation="180 0 0"></a-entity>
 
-        <a-entity id="LightBounce2 Bottom" light="type:directional;
-        
-        color:#e0d498; 
-        intensity:0.1; 
-      
-        
-        "
+        <a-entity id="LightBounce2 Bottom" light="type:directional; color:#e0d498; intensity:0.1;"
         scale="10 10 10" position="0 -0.025 0" rotation="90 0 0"></a-entity>
 
         <a-entity light="type: ambient;  color:#e0d498;  intensity:0.2;"></a-entity>
+        <!-- Lights> -->
 
-        
-
-        <!-- <a-entity light="type: hemisphere; color: #e0d498; groundColor: #1a1b1e"></a-entity> -->
 
         <a-box color="white" depth="100" height="1" width="100" shadow="receive: true"></a-box>
         <a-entity position="0 0 10">
             <a-camera></a-camera>
         </a-entity>
-        <a-entity test-component="message: suh dude; name: Jacob"></a-entity>
+        <!-- <a-entity test-component="message: suh dude; name: Jacob"></a-entity> -->
 
     </a-scene>
 
 </body>
 
+<script src="js/genTerra.js"></script>  
 <script src="js/trees.js"></script>
 
 </html>
+
+
+
+
+
