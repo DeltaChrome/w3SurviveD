@@ -9,7 +9,7 @@
 </head>
 <body>
  
-    <a-scene shadow="type: pcfsoft">
+    <a-scene shadow="type: pcfsoft" stats>
         <a-assets>
             <img id="skymap" src="/assets/textures/CloudySky.jpg">  
             <img id="cowmap" src="/assets/textures/Cow.png">  
@@ -27,6 +27,7 @@
         <!-- <a-entity id="rock" obj-model="obj:#rock_01-obj" material="#rock_01-mat" shadow="cast: true" shadow="receive: true" position="10 2.3 0" ></a-entity>
         <a-entity id="tree" obj-model="obj: #tree_1-obj; mtl: #tree_1-mat;" shadow="cast: true" shadow="receive: true" position=" 0 0 10" ></a-entity>
          -->
+        <a-entity id="terrainGenerationObj" genterra-component gentrees-component position="0 0 0"></a-entity>
         <a-entity id="sky"
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">
@@ -57,12 +58,9 @@
         <a-entity light="type: ambient;  color:#e0d498;  intensity:0.2;"></a-entity>
         <!-- Lights> -->
 
-
-        <a-box color="white" depth="100" height="1" width="100" shadow="receive: true"></a-box>
         <a-entity position="0 0 10">
             <a-camera></a-camera>
         </a-entity>
-        <!-- <a-entity test-component="message: suh dude; name: Jacob"></a-entity> -->
 
     </a-scene>
 
