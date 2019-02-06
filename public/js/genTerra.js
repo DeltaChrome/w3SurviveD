@@ -4,46 +4,119 @@ AFRAME.registerComponent("genterra-component", {
     {
         // console.log("genTerra.js is running");
 
-        // scene = document.querySelector('a-scene');
+        scene = document.querySelector('a-scene');
 
-        // function generateNumber ()
-        // {
-        //     return(Math.floor(Math.random()* 3));
+        function generateNumber (max)
+        {
+            return(Math.floor(Math.random()* max));
         
-        // }
+        }
 
-        // var geometry = new THREE.BoxGeometry( 100, 100, 1, 10, 10, 1 );
-        // var material = new THREE.MeshStandardMaterial( {color: "#556b4a"} );
-        // // let material = new THREE.ShaderMaterial({
-        // //     vertexShader: document.getElementById('vertexShader').textContent,
-        // //     fragmentShader: document.getElementById('fragmentShader').textContent
-        // // });
-
-        // material.roughness = 0.8;
-        // material.metalness = 0.0;
-
-        // //console.log(geometry.faces);
-
-        // for (let i = 0; i < geometry.vertices.length; i++)
-        // {
-        //     //generateNumber
-        //     //geometry.vertices[i].x = generateNumber();
-        //     //console.log(geometry.vertices[i]);   
-        //     if(geometry.vertices[i].z == -0.5)
-        //     {
-        //         geometry.vertices[i].z = -generateNumber();
-        //     }
-        // //
-        //     console.log(geometry.vertices[i].z);
-        //     //console.log(geometry.vertices[i]);    
+        function getPerlinNoise(w, h, seed, octave, bias)//output was reference to an array for values
+        {
             
-        // }
+            for(let x = 0; x < w; x++)
+            {
+               
+                for(let y = 0; y < h; y++)
+                {
+                   // console.log("function perlin noise running...");
+                    let noise = 0.0;
+                    let scaleAcc = 0.0;
+                    let scale = 1.0;
+                    let sampleX1 = 0;
+                    let sampleY1 = 0;
+                    let sampleX2 = 0.0;
+                    let sampleY2 = 0.0;
+                    for(let o = 0; o < octave; o++)
+                    {
+                        //console.log("in octave for loop");
+                        let pitch = 0;
+                        if(o > 0)
+                        {
+                            pitch = w / (2 * o);
+                        }
+                        else
+                        {
+                            pitch = w;
+                        }
+                       
+                        sampleX1 = (x / pitch) * pitch;
+                        sampleY1 = (y / pitch) * pitch;
 
-        // console.log(geometry.vertices.length);
+                        sampleX2 = (sampleX1 + pitch) % w;
+                        sampleY2 = (sampleY1 + pitch) % w;
+                        console.log("samples X 1 and 2");
+                        console.log(sampleX1);
+                        console.log(sampleX2);
+                        let blendX = (x - sampleX1) / (pitch);//fix this, supposed to be float values
+                        let blendY = (y - sampleY1) / (pitch);
+                        //console.log("blend X and y");
+                        //console.log(blendX);
+                        //console.log(blendY);
+                       // let sampleT = (1.0 - blendX) * seed[]
+                    }
+                }
+            }
 
-        // //material.receiveShadow = true;
+           // let output[y * w + x] = noise / scaleAcc;
+           // return output;
 
-        // let plane = new THREE.Mesh( geometry, material );
+        }
+
+        var geometry = new THREE.BoxGeometry( 100, 100, 1, 10, 10, 1 );
+        var material = new THREE.MeshStandardMaterial( {color: "#556b4a"} );
+
+        let w = 100;
+        let h = 100;
+
+        let randSeed = [];
+        let octave = 1;
+        let scaleBias = 0;
+        let perlinNoiseValue = 0;
+
+        for (let i = 0; i < w * h; i++) 
+        {
+            randSeed[i] = generateNumber(5);
+        }
+        
+        // let material = new THREE.ShaderMaterial({
+        //     vertexShader: document.getElementById('vertexShader').textContent,
+        //     fragmentShader: document.getElementById('fragmentShader').textContent
+        // });
+
+        material.roughness = 0.8;
+        material.metalness = 0.0;
+
+        //console.log(geometry.faces);
+        getPerlinNoise(w, h, randSeed, octave, scaleBias);
+        for (let i = 0; i < geometry.vertices.length; i++)
+        {
+            //generateNumber
+            //geometry.vertices[i].x = generateNumber();
+            //console.log(geometry.vertices[i]);   
+
+
+            if(geometry.vertices[i].z == -0.5)
+            {
+                
+               // geometry.vertices[i].z = -perlinNoiseValue;
+               // perlinNoiseValue = getPerlinNoise(w, h, randSeed, scaleBias);
+               // console.log(perlinNoiseValue);
+                
+                geometry.vertices[i].z = -generateNumber(3);
+            }
+        //
+            console.log(geometry.vertices[i].z);
+            //console.log(geometry.vertices[i]);    
+            
+        }
+
+        console.log(geometry.vertices.length);
+
+        //material.receiveShadow = true;
+
+        let plane = new THREE.Mesh( geometry, material );
 
         // plane.castShadow = true;
         // plane.receiveShadow = true;
@@ -54,42 +127,35 @@ AFRAME.registerComponent("genterra-component", {
         // //var a = new THREE.Vector3( 0, 0, 1 );
         // //plane.translateY(2);
         // //plane.rotateOnWorldAxis(a,1.4)
-        // plane.rotateX(THREE.Math.degToRad(90));
+        plane.rotateX(THREE.Math.degToRad(90));
         // //console.log(plane.rotation.z);
 
         // //newObj.rotateZ(THREE.Math.degToRad(90));
 
         // scene.object3D.add( plane );
-        scene = document.querySelector('a-scene');
+        // let material = new THREE.ShaderMaterial( {
+        //     uniforms: { 
+        //       time: { // float initialized to 0
+        //           type: "f", 
+        //           value: 0.0 
+        //       }
+        //   },
+        //   vertexShader: document.getElementById( 'vertexShader' ).textContent,
+        //   fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+        // } );
+        //  // var geometry = new THREE.PlaneGeometry( 100, 100, 10, 10);
+        //   // create a sphere and assign the material
+        //   mesh = new THREE.Mesh(new THREE.IcosahedronGeometry( 20, 4 ),material);
 
-        let material = new THREE.ShaderMaterial( {
-            uniforms: { 
-              time: { // float initialized to 0
-                  type: "f", 
-                  value: 0.0 
-              }
-          },
-          vertexShader: document.getElementById( 'vertexShader' ).textContent,
-          fragmentShader: document.getElementById( 'fragmentShader' ).textContent
-        } );
-          var geometry = new THREE.BoxGeometry( 100, 100, 1, 10, 10, 1 );
-          // create a sphere and assign the material
-          //mesh = new THREE.Mesh(new THREE.IcosahedronGeometry( 20, 4 ),material);
+        //  // let plane = new THREE.Mesh( geometry, material );
 
-          let plane = new THREE.Mesh( geometry, material );
+        scene.object3D.add( plane );
 
-          scene.object3D.add( plane );
-          
-        
         // let uniforms = {
-        //     time: {
-        //         value: generateNumber()
-        //     }
+        //      time: {
+        //          value: generateNumber()
+        //      }
         // }
-
-
-
-
 
         // let landscape = new THREE.Mesh(
         //     new THREE.PlaneBufferGeometry(300, 300, 128, 128),
@@ -127,7 +193,8 @@ AFRAME.registerComponent("genterra-component", {
         //             }
         //             void main() {
         //                 vPos = position;
-        //                 vPos.z += 32.0 * SimplexPerlin2D(uv * 4.0 + time * 0.6);
+        //                 //vPos.z += 32.0 * SimplexPerlin2D(uv * 4.0 + time * 0.6);
+        //                 vPos.z += 32.0 * SimplexPerlin2D(uv * 4.0 + time * 0.6);                        
         //                 vPos.z += 32.0 * sin(18.0 * length(uv) + time * 2.0);
         //                 float smoothEdge = 0.1;
         //                 float edges = (
@@ -180,9 +247,9 @@ AFRAME.registerComponent("genterra-component", {
         // scene.object3D.add(landscape)
     },
 
-    tik: function()
+     tik: function()
     {
-       // material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+         material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
 
 
     }
