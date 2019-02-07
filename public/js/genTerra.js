@@ -14,54 +14,72 @@ AFRAME.registerComponent("genterra-component", {
 
         function getPerlinNoise(w, h, seed, octave, bias)//output was reference to an array for values
         {
-            
+            // for(let i = 0; i < seed.length; i++)
+            // {
+            //     console.log(seed[i]);
+            // }
+            let output = new Array();
             for(let x = 0; x < w; x++)
             {
                
                 for(let y = 0; y < h; y++)
                 {
-                   // console.log("function perlin noise running...");
+                 
                     let noise = 0.0;
                     let scaleAcc = 0.0;
                     let scale = 1.0;
                     let sampleX1 = 0;
                     let sampleY1 = 0;
                     let sampleX2 = 0.0;
-                    let sampleY2 = 0.0;
+                    let sampleY2 = 0.0; 
                     for(let o = 0; o < octave; o++)
                     {
-                        //console.log("in octave for loop");
-                        let pitch = 0;
-                        if(o > 0)
-                        {
-                            pitch = w / (2 * o);
-                        }
-                        else
-                        {
-                            pitch = w;
-                        }
                        
-                        sampleX1 = (x / pitch) * pitch;
-                        sampleY1 = (y / pitch) * pitch;
-
+                       if(o > 0)
+                       {
+                           pitch = w / 2 ^ o;
+                       }
+                        else
+                       {
+                           pitch = w;
+                       }
+                        
+                        sampleX1 = Math.floor((x / pitch)) * pitch;
+                        sampleY1 = Math.floor((y / pitch)) * pitch;
+                        
+                        // console.log("samples x,y 1");
+                        // console.log(sampleX1);
+                        // console.log(sampleY1);
                         sampleX2 = (sampleX1 + pitch) % w;
                         sampleY2 = (sampleY1 + pitch) % w;
-                        console.log("samples X 1 and 2");
-                        console.log(sampleX1);
-                        console.log(sampleX2);
+                        // console.log("samples x,y 2");
+                        // console.log(sampleX2);
+                        // console.log(sampleY2);
                         let blendX = (x - sampleX1) / (pitch);//fix this, supposed to be float values
                         let blendY = (y - sampleY1) / (pitch);
-                        //console.log("blend X and y");
-                        //console.log(blendX);
-                        //console.log(blendY);
-                       // let sampleT = (1.0 - blendX) * seed[]
+                        // console.log("blend X and y");
+                        // console.log(blendX);
+                        // console.log(blendY);
+                        let sampleT = (1.0 - blendX) * seed[sampleY1 * w + sampleX1] + blendX * seed[sampleY1 * w + sampleX2]
+                        let sampleB = (1.0 - blendX) * seed[sampleY2 * w + sampleX1] + blendX * seed[sampleY2 * w + sampleX2]
+                        // console.log("seed: ");
+                        // console.log(seed[sampleY1 * w + sampleX1]);
+                        // console.log(seed[sampleY1 * w + sampleX2]);
+                        // console.log("sampleT, sampleB");
+                        // console.log(sampleT);
+                        // console.log(sampleB);
+
+                        scaleAcc += scale;
+                        noise += (blendY * (sampleB - sampleT) + sampleT) * scale;
+                        scale = scale / bias;
                     }
+                    
+                    output[y * w + x] = noise / scaleAcc;
+                    
                 }
             }
-
-           // let output[y * w + x] = noise / scaleAcc;
-           // return output;
-
+            
+            return output;
         }
 
         var geometry = new THREE.BoxGeometry( 100, 100, 1, 10, 10, 1 );
@@ -71,15 +89,20 @@ AFRAME.registerComponent("genterra-component", {
         let h = 100;
 
         let randSeed = [];
-        let octave = 1;
-        let scaleBias = 0;
-        let perlinNoiseValue = 0;
+        let octave = 6;
+        let scaleBias = 0.2;
+        let perlinNoiseValues = [];
 
         for (let i = 0; i < w * h; i++) 
         {
-            randSeed[i] = generateNumber(5);
+            randSeed[i] = Math.random();
         }
         
+        // for(let i = 0; i < randSeed.length; i++)
+        // {
+        //     console.log(randSeed[i]);
+        // }
+
         // let material = new THREE.ShaderMaterial({
         //     vertexShader: document.getElementById('vertexShader').textContent,
         //     fragmentShader: document.getElementById('fragmentShader').textContent
@@ -88,8 +111,13 @@ AFRAME.registerComponent("genterra-component", {
         material.roughness = 0.8;
         material.metalness = 0.0;
 
-        //console.log(geometry.faces);
-        getPerlinNoise(w, h, randSeed, octave, scaleBias);
+        console.log(typeof randSeed);
+        
+        perlinNoiseValues = getPerlinNoise(w, h, randSeed, octave, scaleBias);
+        // for(let i = 0; i < perlinNoiseValues.length; i++)
+        // {
+        //     console.log("i: ", i, "pvalue: ", perlinNoiseValues[i]);
+        // }
         for (let i = 0; i < geometry.vertices.length; i++)
         {
             //generateNumber
@@ -102,12 +130,12 @@ AFRAME.registerComponent("genterra-component", {
                 
                // geometry.vertices[i].z = -perlinNoiseValue;
                // perlinNoiseValue = getPerlinNoise(w, h, randSeed, scaleBias);
-               // console.log(perlinNoiseValue);
+                console.log(perlinNoiseValues[i]);
                 
-                geometry.vertices[i].z = -generateNumber(3);
+                geometry.vertices[i].z = -(perlinNoiseValues[i]) * 10;
             }
         //
-            console.log(geometry.vertices[i].z);
+            //console.log(geometry.vertices[i].z);
             //console.log(geometry.vertices[i]);    
             
         }
