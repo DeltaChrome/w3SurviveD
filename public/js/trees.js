@@ -25,6 +25,7 @@ AFRAME.registerComponent("gentrees-component", {
             entity.setAttribute('position', generatePositionVector(2.3));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
+            entity.setAttribute('scale', '100 100 100');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
@@ -65,7 +66,6 @@ AFRAME.registerComponent("gentrees-component", {
             entity.setAttribute('material', 'mtl: #tree_3-mat');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('scale', '4 5 4');
             entity.setAttribute('shader', 'standard');
 
             scene.appendChild(entity);

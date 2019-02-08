@@ -101,7 +101,8 @@ AFRAME.registerComponent("genterra-component", {
 
         let randSeed = [];
         let octave = generateNumber(2) + 3;
-        let scaleBias = 1.8;
+        let scaleBias = 0.2 * generateNumber(8);
+        console.log("scale bias ",scaleBias);
         let perlinNoiseValues = [];
 
         for (let i = 0; i < w * h; i++) 
@@ -117,6 +118,34 @@ AFRAME.registerComponent("genterra-component", {
         
         perlinNoiseValues = getPerlinNoise(w, h, randSeed, octave, scaleBias);
   
+        for(let i = 0; i < 10; i++)
+        {
+           // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
+            perlinNoiseValues[i] = 0.1;
+        }
+        for(let i = 90; i < w + 90; i++)
+        {
+            perlinNoiseValues[i] = 0.1;
+            // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
+        }
+        perlinNoiseValues[10] = 0.1;
+        perlinNoiseValues[19] = 0.1;
+        perlinNoiseValues[20] = 0.1;
+        perlinNoiseValues[29] = 0.1;
+        perlinNoiseValues[30] = 0.1;
+        perlinNoiseValues[39] = 0.1;
+        perlinNoiseValues[40] = 0.1;
+        perlinNoiseValues[49] = 0.1;
+        perlinNoiseValues[50] = 0.1;
+        perlinNoiseValues[59] = 0.1;
+        perlinNoiseValues[60] = 0.1;
+        perlinNoiseValues[69] = 0.1;
+        perlinNoiseValues[70] = 0.1;
+        perlinNoiseValues[79] = 0.1;
+        perlinNoiseValues[80] = 0.1;
+        perlinNoiseValues[89] = 0.1;
+        perlinNoiseValues[90] = 0.1;
+
 
         for (let i = 0; i < geometry.vertices.length; i++)
         {
@@ -199,9 +228,17 @@ AFRAME.registerComponent("genterra-component", {
 
         scene.object3D.add( plane );
 
+        let waterGeo = new THREE.PlaneGeometry( 1000, 1000);
+        for (let i = 0; i < waterGeo.vertices.length; i++)
+        {
 
-
-       
+            waterGeo.vertices[i].z = -(generateNumber(20));
+            
+        }
+        let waterMaterial = new THREE.MeshStandardMaterial( {color: "#4d7fd1"} );
+        let waterPlane = new THREE.Mesh( waterGeo, waterMaterial );
+        waterPlane.rotateX(THREE.Math.degToRad(270));
+        scene.object3D.add( waterPlane );
      
     },
 
