@@ -5,7 +5,8 @@
      <title>weSurviv3D</title>
      <script src = "/js/aframe-v0.8.2.min.js"></script>
      <script src="js/component.js"></script>   
-
+     <script src="js/genTerra.js"></script>  
+     <script src="js/trees.js"></script>
 </head>
 <body>
  
@@ -27,7 +28,7 @@
         <!-- <a-entity id="rock" obj-model="obj:#rock_01-obj" material="#rock_01-mat" shadow="cast: true" shadow="receive: true" position="10 2.3 0" ></a-entity>
         <a-entity id="tree" obj-model="obj: #tree_1-obj; mtl: #tree_1-mat;" shadow="cast: true" shadow="receive: true" position=" 0 0 10" ></a-entity>
          -->
-        <a-entity id="terrainGenerationObj" genterra-component gentrees-component position="0 0 0"></a-entity>
+        <a-entity id="terrainGenerationObj" genterra-component position="0 0 0"></a-entity>
         <a-entity id="sky"
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">
@@ -58,7 +59,7 @@
         <a-entity light="type: ambient;  color:#e0d498;  intensity:0.2;"></a-entity>
         <!-- Lights> -->
 
-        <a-entity position="0 0 10">
+        <a-entity position="0 0 20">
             <a-camera></a-camera>
         </a-entity>
 
@@ -66,8 +67,7 @@
  
 </body>
 
-<script src="js/genTerra.js"></script>  
-<script src="js/trees.js"></script>
+
 <!-- <script type="x-shader/x-vertex" id="vertexShader">
     // Include the Ashima code here!
     
