@@ -1,9 +1,9 @@
 AFRAME.registerComponent("genterra-component", {
-   
+    
     init: function ()
     {
         // console.log("genTerra.js is running");
-
+        //var GEO_VERTICES;
         scene = document.querySelector('a-scene');
 
         function generateNumber (max)
@@ -65,16 +65,16 @@ AFRAME.registerComponent("genterra-component", {
                         // console.log(blendY);
                         let sampleT = (1.0 - blendX) * seed[sampleY1 * w + sampleX1] + blendX * seed[sampleY1 * w + sampleX2]
                         let sampleB = (1.0 - blendX) * seed[sampleY2 * w + sampleX1] + blendX * seed[sampleY2 * w + sampleX2]
-                        console.log("seed: ");
-                        console.log(sampleY1 * w + sampleX1);
-                        // console.log(seed[sampleY1 * w + sampleX1]);
-                        // console.log(seed[sampleY2 * w + sampleX2]);
-                        // console.log("samples x,y 2");
-                        // console.log(sampleX2);
-                        // console.log(sampleY2);
-                        console.log("sampleT, sampleB");
-                        console.log(sampleT);
-                        console.log(sampleB);
+                        // console.log("seed: ");
+                        // console.log(sampleY1 * w + sampleX1);
+                        // // console.log(seed[sampleY1 * w + sampleX1]);
+                        // // console.log(seed[sampleY2 * w + sampleX2]);
+                        // // console.log("samples x,y 2");
+                        // // console.log(sampleX2);
+                        // // console.log(sampleY2);
+                        // console.log("sampleT, sampleB");
+                        // console.log(sampleT);
+                        // console.log(sampleB);
 
                         scaleAcc += scale;
                         noise += (blendY * (sampleB - sampleT) + sampleT) * scale;
@@ -151,7 +151,7 @@ AFRAME.registerComponent("genterra-component", {
         {
 
             geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -50;
-            
+            console.log(geometry.vertices);
         }
 
         geometry.rotateX(THREE.Math.degToRad(270));
@@ -165,12 +165,14 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
+        GEO_VERTICES = geometry.vertices;
       
         for (let i = 0; i < 10; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
+            entity.setAttribute('scale', '5 5 5');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
@@ -195,7 +197,7 @@ AFRAME.registerComponent("genterra-component", {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #tree_2-obj');
-            entity.setAttribute('material', 'mtl: #tree_2-mat');
+            entity.setAttribute('material', 'src: #tree_2-mat');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
@@ -211,7 +213,6 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('material', 'mtl: #tree_3-mat');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('scale', '4 5 4');
             entity.setAttribute('shader', 'standard');
 
             scene.appendChild(entity);
@@ -242,10 +243,10 @@ AFRAME.registerComponent("genterra-component", {
      
     },
 
-     tik: function()
+     tick: function()
     {
-         material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
-
+         //material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+        //console.log(generateNumber(3));
 
     }
 });
