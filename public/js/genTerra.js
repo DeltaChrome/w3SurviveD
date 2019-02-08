@@ -100,7 +100,7 @@ AFRAME.registerComponent("genterra-component", {
         let h = 10;
 
         let randSeed = [];
-        let octave = 5;
+        let octave = generateNumber(2) + 3;
         let scaleBias = 1.8;
         let perlinNoiseValues = [];
 
@@ -137,9 +137,9 @@ AFRAME.registerComponent("genterra-component", {
         }
 
       
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 10; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(1.2));
+            entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
             entity.setAttribute('shadow', 'cast:true');
@@ -149,7 +149,7 @@ AFRAME.registerComponent("genterra-component", {
 
         } 
         
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 4; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #tree_1-obj');
@@ -162,7 +162,7 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 4; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #tree_2-obj');
@@ -175,7 +175,7 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 4; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #tree_3-obj');
