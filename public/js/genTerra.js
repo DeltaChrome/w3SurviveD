@@ -118,7 +118,7 @@ AFRAME.registerComponent("genterra-component", {
         
         perlinNoiseValues = getPerlinNoise(w, h, randSeed, octave, scaleBias);
   
-        for(let i = 0; i < 10; i++)
+        for(let i = 0; i < w; i++)
         {
            // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
             perlinNoiseValues[i] = 0.1;
@@ -168,7 +168,7 @@ AFRAME.registerComponent("genterra-component", {
       
         for (let i = 0; i < 10; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(0));
+            entity.setAttribute('position', generatePositionVector(-0.2));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
             entity.setAttribute('shadow', 'cast:true');
@@ -180,7 +180,7 @@ AFRAME.registerComponent("genterra-component", {
         
         for (let i = 0; i < 4; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(0));
+            entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_1-obj');
             entity.setAttribute('material', 'mtl: #tree_1-mat');
             entity.setAttribute('shadow', 'cast:true');
@@ -193,7 +193,7 @@ AFRAME.registerComponent("genterra-component", {
 
         for (let i = 0; i < 4; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(0));
+            entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_2-obj');
             entity.setAttribute('material', 'mtl: #tree_2-mat');
             entity.setAttribute('shadow', 'cast:true');
@@ -206,7 +206,7 @@ AFRAME.registerComponent("genterra-component", {
 
         for (let i = 0; i < 4; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(0));
+            entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_3-obj');
             entity.setAttribute('material', 'mtl: #tree_3-mat');
             entity.setAttribute('shadow', 'cast:true');
