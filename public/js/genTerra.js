@@ -169,13 +169,26 @@ AFRAME.registerComponent("genterra-component", {
 
         window.GEO_VERTICES = geometry.vertices;
       
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(-0.2));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
             entity.setAttribute('scale', '0.2 0.2 0.2');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+
+            scene.appendChild(entity);
+
+        } 
+        for (let i = 0; i < 5; i++) {
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('remove-component', {}); 
+            entity.setAttribute('position', generatePositionVector(-0.2));
+            entity.setAttribute('obj-model', 'obj: #rock_01-obj');
+            entity.setAttribute('material', 'mtl: #rock_01-mat');
+            entity.setAttribute('scale', '2 2 2');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
@@ -196,7 +209,7 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_2-obj');
@@ -209,18 +222,18 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 3; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-0.5));
-            entity.setAttribute('obj-model', 'obj: #tree_3-obj');
-            entity.setAttribute('material', 'mtl: #tree_3-mat');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
+        // for (let i = 0; i < 3; i++) {
+        //     let entity = document.createElement('a-entity');
+        //     entity.setAttribute('position', generatePositionVector(-0.5));
+        //     entity.setAttribute('obj-model', 'obj: #tree_3-obj');
+        //     entity.setAttribute('material', 'mtl: #tree_3-mat');
+        //     entity.setAttribute('shadow', 'cast:true');
+        //     entity.setAttribute('shadow', 'receive:true');
+        //     entity.setAttribute('shader', 'standard');
 
-            scene.appendChild(entity);
+        //     scene.appendChild(entity);
 
-        }
+        // }
 
         let plane = new THREE.Mesh( geometry, material );
 
