@@ -1,3 +1,5 @@
+window.GEO_VERTICES;
+
 AFRAME.registerComponent("genterra-component", {
     
     init: function ()
@@ -165,14 +167,15 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        GEO_VERTICES = geometry.vertices;
+        window.GEO_VERTICES = geometry.vertices;
       
         for (let i = 0; i < 10; i++) {
             let entity = document.createElement('a-entity');
+            entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(-0.2));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
-            entity.setAttribute('scale', '5 5 5');
+            entity.setAttribute('scale', '0.2 0.2 0.2');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
@@ -180,11 +183,11 @@ AFRAME.registerComponent("genterra-component", {
 
         } 
         
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_1-obj');
-            entity.setAttribute('material', 'mtl: #tree_1-mat');
+            entity.setAttribute('material', 'src: #popcornGreen');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
@@ -193,7 +196,7 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 2; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_2-obj');
@@ -206,7 +209,7 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 3; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_3-obj');
@@ -233,7 +236,7 @@ AFRAME.registerComponent("genterra-component", {
         for (let i = 0; i < waterGeo.vertices.length; i++)
         {
 
-            waterGeo.vertices[i].z = -(generateNumber(20));
+            waterGeo.vertices[i].z = -(generateNumber(10));
             
         }
         let waterMaterial = new THREE.MeshStandardMaterial( {color: "#4d7fd1"} );

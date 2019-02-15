@@ -8,6 +8,7 @@
      <script src="js/genTerra.js"></script>  
      <script src="js/trees.js"></script>
      <script src="js/runtime.js"></script>
+     <script src="js/remove-component.js"></script>
 </head>
 <body>
  
@@ -15,7 +16,8 @@
         <a-assets>
             <img id="skymap" src="/assets/textures/CloudySky.jpg"> 
             <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
-             
+            <img id="popcornGreen" src="/assets/textures/Popcorn_green.png"> 
+
             <a-asset-item id="tree_1-obj" src="/assets/models/tree_1_1.obj"></a-asset-item>
             <a-asset-item id="tree_1-mat" src="/assets/textures/tree_1_1.mtl"></a-asset-item>
             <a-asset-item id="tree_2-obj" src="/assets/models/IceCreme_tree.obj"></a-asset-item>
@@ -48,6 +50,7 @@
         shadowMapWidth: 8112;" 
         scale="10 10 10" position="40 40 20"></a-entity>
         <!-- shadowCameraVisible: true; -->
+
         <a-entity id="LightBounce1 Side" light="type:directional; color:#e0d498; intensity:0.1;"
         scale="10 10 10" position="-40 0 -20" rotation="180 0 0"></a-entity>
 
@@ -61,6 +64,8 @@
         <!-- Lights> -->
 
         <a-entity id="Player" position="0 10 0" runtime>
+            <a-entity   cursor="fuse:true; fuseTimeout:500; rayOrigin:mouse;"></a-entity>
+
             <a-camera></a-camera>
         </a-entity>
 
