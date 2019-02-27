@@ -92,18 +92,17 @@ AFRAME.registerComponent("genterra-component", {
             return output;
         }
 
-
-        var geometry = new THREE.PlaneGeometry( 300, 300, 9, 9);
+        var geometry = new THREE.PlaneGeometry( 150, 150, 9, 9);
 
         //var geometry = new THREE.BoxGeometry( 100, 100, 1, 99, 99, 0 );
-        var material = new THREE.MeshStandardMaterial( {color: "#556b4a"} );
+        var material = new THREE.MeshStandardMaterial( {color: "#26421f"} );
 
         let w = 10;
         let h = 10;
 
         let randSeed = [];
-        let octave = generateNumber(2) + 3;
-        let scaleBias = 0.2 * generateNumber(8);
+        let octave = generateNumber(2) + 2;
+        let scaleBias = (0.2 * generateNumber(7)) + 0.2;
         console.log("scale bias ",scaleBias);
         let perlinNoiseValues = [];
 
@@ -114,7 +113,7 @@ AFRAME.registerComponent("genterra-component", {
 
         material.roughness = 0.8;
         material.metalness = 0.0;
-
+w
         let oneFace = [];
         let noiseCounter = 0;
         
@@ -153,7 +152,7 @@ AFRAME.registerComponent("genterra-component", {
         {
 
             geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -50;
-            console.log(geometry.vertices);
+            // console.log(geometry.vertices);
         }
 
         geometry.rotateX(THREE.Math.degToRad(270));
@@ -178,6 +177,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('scale', '0.2 0.2 0.2');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
+            entity.setAttribute('grabbable',{}); 
 
             scene.appendChild(entity);
 
@@ -245,17 +245,7 @@ AFRAME.registerComponent("genterra-component", {
 
         scene.object3D.add( plane );
 
-        let waterGeo = new THREE.PlaneGeometry( 1000, 1000);
-        for (let i = 0; i < waterGeo.vertices.length; i++)
-        {
-
-            waterGeo.vertices[i].z = -(generateNumber(10));
-            
-        }
-        let waterMaterial = new THREE.MeshStandardMaterial( {color: "#4d7fd1"} );
-        let waterPlane = new THREE.Mesh( waterGeo, waterMaterial );
-        waterPlane.rotateX(THREE.Math.degToRad(270));
-        scene.object3D.add( waterPlane );
+       
      
     },
 

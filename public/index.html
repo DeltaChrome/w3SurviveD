@@ -9,14 +9,21 @@
      <script src="js/trees.js"></script>
      <script src="js/runtime.js"></script>
      <script src="js/remove-component.js"></script>
+     <script src="js/triggerdown-listener.js"></script>
+     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
 </head>
 <body>
  
-    <a-scene shadow="type: pcfsoft" stats>
+    <a-scene shadow="type: pcfbasic" stats>
         <a-assets>
             <img id="skymap" src="/assets/textures/CloudySky.jpg"> 
             <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
             <img id="popcornGreen" src="/assets/textures/Popcorn_green.png"> 
+
+            <a-asset-item id="leftController" src="/assets/models/oculus-touch-controller-left.obj"></a-asset-item>
+            <a-asset-item id="rightController" src="/assets/models/oculus-touch-controller-right.obj"></a-asset-item>
+            <a-asset-item id="rightController-mat" src="/assets/textures/oculus-touch-controller-right.mtl"></a-asset-item>
+            <a-asset-item id="leftController-mat" src="/assets/textures/oculus-touch-controller-left.mtl"></a-asset-item>
 
             <a-asset-item id="tree_1-obj" src="/assets/models/poptree.obj"></a-asset-item>
             <a-asset-item id="tree_1-mat" src="/assets/textures/tree_1_1.mtl"></a-asset-item>
@@ -31,7 +38,7 @@
         <!-- <a-entity id="rock" obj-model="obj:#rock_01-obj" material="#rock_01-mat" shadow="cast: true" shadow="receive: true" position="10 2.3 0" ></a-entity>
         <a-entity id="tree" obj-model="obj: #tree_1-obj; mtl: #tree_1-mat;" shadow="cast: true" shadow="receive: true" position=" 0 0 10" ></a-entity>
          -->
-        <a-entity id="terrainGenerationObj" genterra-component position="0 0 0"></a-entity>
+        <a-entity id="terrainGenerationObj" genterra-component genwater-component position="0 0 0"></a-entity>
         <a-entity id="sky"
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">
@@ -39,15 +46,15 @@
         
         <!-- Lights< -->
         <a-entity id="Light SUN" light="type:directional; 
-        castShadow:false;
+        castShadow:true;
         color:#e0d498; 
         intensity:1.2; 
         shadowCameraLeft: -250;
         shadowCameraBottom: -250;
         shadowCameraRight: 250;
         shadowCameraTop: 250;
-        shadowMapHeight: 8112;
-        shadowMapWidth: 8112;" 
+        shadowMapHeight: 512;
+        shadowMapWidth: 512;" 
         scale="10 10 10" position="40 40 20"></a-entity>
         <!-- shadowCameraVisible: true; -->
 
@@ -63,12 +70,25 @@
         <a-entity light="type: ambient;  color:#e0d498;  intensity:0.2;"></a-entity>
         <!-- Lights> -->
 
-        <a-entity oculus-touch-controls="hand: left"></a-entity>
-        <a-entity oculus-touch-controls="hand: right"></a-entity>
+     
 
         <a-entity id="Player" position="0 10 0" runtime>
             <!-- <a-entity   cursor="fuse:true; fuseTimeout:500; rayOrigin:mouse;"></a-entity> -->
-
+            <a-entity 
+            oculus-touch-controls="hand: left"
+            obj-model="obj:#leftController"
+            material="mtl:#leftController-mat"
+            
+            ></a-entity>
+    
+            <a-entity
+            id="rightHand" 
+            oculus-touch-controls="hand: right"
+            obj-model="obj:#rightController"
+            material="mtl:#rightController-mat"
+            triggerdown-listener
+            
+            ></a-entity>
             <a-camera></a-camera>
         </a-entity>
 
