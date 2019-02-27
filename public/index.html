@@ -39,7 +39,7 @@
         
         <!-- Lights< -->
         <a-entity id="Light SUN" light="type:directional; 
-        castShadow:true;
+        castShadow:false;
         color:#e0d498; 
         intensity:1.2; 
         shadowCameraLeft: -250;
@@ -63,8 +63,11 @@
         <a-entity light="type: ambient;  color:#e0d498;  intensity:0.2;"></a-entity>
         <!-- Lights> -->
 
+        <a-entity oculus-touch-controls="hand: left"></a-entity>
+        <a-entity oculus-touch-controls="hand: right"></a-entity>
+
         <a-entity id="Player" position="0 10 0" runtime>
-            <a-entity   cursor="fuse:true; fuseTimeout:500; rayOrigin:mouse;"></a-entity>
+            <!-- <a-entity   cursor="fuse:true; fuseTimeout:500; rayOrigin:mouse;"></a-entity> -->
 
             <a-camera></a-camera>
         </a-entity>
