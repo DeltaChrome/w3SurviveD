@@ -10,7 +10,7 @@ AFRAME.registerComponent("runtime", {
 
     init: function ()
     {
-
+        
     },
 
     tick: function()

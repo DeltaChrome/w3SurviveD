@@ -102,8 +102,11 @@ AFRAME.registerComponent("genterra-component", {
 
         let randSeed = [];
         let octave = generateNumber(2) + 2;
-        let scaleBias = (0.2 * generateNumber(7)) + 0.2;
+        let scaleBias = (0.2 * generateNumber(6)) + 1;
+
+      
         console.log("scale bias ",scaleBias);
+        console.log("octave ",octave);
         let perlinNoiseValues = [];
 
         for (let i = 0; i < w * h; i++) 
@@ -146,7 +149,6 @@ w
         perlinNoiseValues[80] = 0.1;
         perlinNoiseValues[89] = 0.1;
         perlinNoiseValues[90] = 0.1;
-
 
         for (let i = 0; i < geometry.vertices.length; i++)
         {
@@ -246,6 +248,17 @@ w
         scene.object3D.add( plane );
 
        
+        let waterGeo = new THREE.PlaneGeometry( 1000, 1000);
+        for (let i = 0; i < waterGeo.vertices.length; i++)
+        {
+
+            waterGeo.vertices[i].z = -(generateNumber(10));
+            
+        }
+        let waterMaterial = new THREE.MeshStandardMaterial( {color: "#4d7fd1"} );
+        let waterPlane = new THREE.Mesh( waterGeo, waterMaterial );
+        waterPlane.rotateX(THREE.Math.degToRad(270));
+        scene.object3D.add( waterPlane );
      
     },
 
