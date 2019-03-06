@@ -56,6 +56,11 @@ AFRAME.registerComponent("runtime", {
 
         //GET PLAYER X,Z POS
         //let p = document.querySelector('#Player').getAttribute("position");
+        let cam = document.querySelector('#head').getAttribute("position");
+        //console.log(cam);
+        
+        //THIS LINE OF CODE WORKS
+        //document.querySelector('#Camera').setAttribute('position', {x:20, y:200, z:20});
 
         //console.log(p.x," ",p.z)
 

@@ -92,19 +92,18 @@ AFRAME.registerComponent("genterra-component", {
             return output;
         }
 
-        var geometry = new THREE.PlaneGeometry( 150, 150, 9, 9);
+        var geometry = new THREE.PlaneGeometry( 150, 150, 99, 99);
 
         //var geometry = new THREE.BoxGeometry( 100, 100, 1, 99, 99, 0 );
         var material = new THREE.MeshStandardMaterial( {color: "#26421f"} );
 
-        let w = 10;
-        let h = 10;
+        let w = 100;
+        let h = 100;
 
         let randSeed = [];
-        let octave = generateNumber(2) + 2;
+        let octave = 3;
         let scaleBias = (0.2 * generateNumber(6)) + 1;
 
-      
         console.log("scale bias ",scaleBias);
         console.log("octave ",octave);
         let perlinNoiseValues = [];
@@ -116,7 +115,7 @@ AFRAME.registerComponent("genterra-component", {
 
         material.roughness = 0.8;
         material.metalness = 0.0;
-w
+
         let oneFace = [];
         let noiseCounter = 0;
         
@@ -124,36 +123,38 @@ w
   
         for(let i = 0; i < w; i++)
         {
-           // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
-            perlinNoiseValues[i] = 0.1;
+            perlinNoiseValues[i] = perlinNoiseValues[i] / 4;
+            //perlinNoiseValues[i] = 0.1;
         }
-        for(let i = 90; i < w + 90; i++)
-        {
-            perlinNoiseValues[i] = 0.1;
-            // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
-        }
-        perlinNoiseValues[10] = 0.1;
-        perlinNoiseValues[19] = 0.1;
-        perlinNoiseValues[20] = 0.1;
-        perlinNoiseValues[29] = 0.1;
-        perlinNoiseValues[30] = 0.1;
-        perlinNoiseValues[39] = 0.1;
-        perlinNoiseValues[40] = 0.1;
-        perlinNoiseValues[49] = 0.1;
-        perlinNoiseValues[50] = 0.1;
-        perlinNoiseValues[59] = 0.1;
-        perlinNoiseValues[60] = 0.1;
-        perlinNoiseValues[69] = 0.1;
-        perlinNoiseValues[70] = 0.1;
-        perlinNoiseValues[79] = 0.1;
-        perlinNoiseValues[80] = 0.1;
-        perlinNoiseValues[89] = 0.1;
-        perlinNoiseValues[90] = 0.1;
+  
+        // for(let i = 900; i < w + 900; i++)
+        // {
+        //     perlinNoiseValues[i] = 0.1;
+        //     // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
+        // }
+        // perlinNoiseValues[100] = 0.1;
+        // perlinNoiseValues[199] = 0.1;
+        // perlinNoiseValues[200] = 0.1;
+        // perlinNoiseValues[299] = 0.1;
+        // perlinNoiseValues[300] = 0.1;
+        // perlinNoiseValues[399] = 0.1;
+        // perlinNoiseValues[400] = 0.1;
+        // perlinNoiseValues[499] = 0.1;
+        // perlinNoiseValues[500] = 0.1;
+        // perlinNoiseValues[599] = 0.1;
+        // perlinNoiseValues[600] = 0.1;
+        // perlinNoiseValues[699] = 0.1;
+        // perlinNoiseValues[700] = 0.1;
+        // perlinNoiseValues[799] = 0.1;
+        // perlinNoiseValues[800] = 0.1;
+        // perlinNoiseValues[899] = 0.1;
+        // perlinNoiseValues[900] = 0.1;
 
         for (let i = 0; i < geometry.vertices.length; i++)
         {
 
-            geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -50;
+           // geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -35;
+            geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -60;
             // console.log(geometry.vertices);
         }
 
@@ -161,7 +162,7 @@ w
 
         function generatePositionVector(off)
         {
-            let vertexIndex = generateNumber(100);
+            let vertexIndex = generateNumber(10000);
             
            return(geometry.vertices[vertexIndex].x + " " + (geometry.vertices[vertexIndex].y + off) + " " + geometry.vertices[vertexIndex].z);
            //return(geometry.vertices[vertexIndex]);
@@ -169,7 +170,7 @@ w
         }
 
         window.GEO_VERTICES = geometry.vertices;
-      
+        
         for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
@@ -179,7 +180,9 @@ w
             entity.setAttribute('scale', '0.2 0.2 0.2');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('grabbable',{}); 
+            //entity.setAttribute('grabbable',{}); 
+            entity.setAttribute('class','collidable');
+            //entity.setAttribute('id','rock');
 
             scene.appendChild(entity);
 
@@ -244,9 +247,10 @@ w
 
         //plane.rotateX(THREE.Math.degToRad(270));
      
+      //  let entityTerra = document.createElement('a-entity');
+      //  entityTerra.setAttribute()
 
         scene.object3D.add( plane );
-
        
         let waterGeo = new THREE.PlaneGeometry( 1000, 1000);
         for (let i = 0; i < waterGeo.vertices.length; i++)
@@ -260,6 +264,8 @@ w
         waterPlane.rotateX(THREE.Math.degToRad(270));
         scene.object3D.add( waterPlane );
      
+        document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[5550]);
+
     },
 
      tick: function()
@@ -269,5 +275,3 @@ w
 
     }
 });
-
-

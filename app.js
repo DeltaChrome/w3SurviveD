@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
-
+require('aframe-teleport-controls');
  const LISTEN_PORT = 8080;
 
  app.use(express.static(__dirname + '/public'));

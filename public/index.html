@@ -8,9 +8,13 @@
      <script src="js/genTerra.js"></script>  
      <script src="js/trees.js"></script>
      <script src="js/runtime.js"></script>
+     <script src="js/collider-check.js"></script>
      <script src="js/remove-component.js"></script>
      <script src="js/triggerdown-listener.js"></script>
      <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+     <script src="https://unpkg.com/aframe-input-mapping-component/dist/aframe-input-mapping-component.min.js"></script>
+    
+     
 </head>
 <body>
  
@@ -74,32 +78,40 @@
         <a-entity light="type: ambient;  color:#e0d498;  intensity:0.2;"></a-entity>
         <!-- Lights> -->
 
-     
-
-        <a-entity id="Player" position="0 10 0" runtime>
+        <!-- <a-entity id="Player" collider-check position="0 10 0" raycaster="objects: .collidable" runtime> -->
             <!-- <a-entity   cursor="fuse:true; fuseTimeout:500; rayOrigin:mouse;"></a-entity> -->
-            <a-entity 
-            oculus-touch-controls="hand: left model:true"
+            <!-- <a-entity 
+            
             obj-model="obj:#leftController"
             material="mtl:#leftController-mat"
-            
+            teleport-controls="type: parabolic; landingMaxAngle: 80"
             model="false"
             
-            ></a-entity>
+            ></a-entity> 
     
             <a-entity
             id="rightHand" 
-            oculus-touch-controls="hand: right model:true"
+            
             obj-model="obj:#rightController"
             material="mtl:#rightController-mat"
-            triggerdown-listener
+            teleport-controls="type: parabolic; landingMaxAngle: 80"
            
-            
-            
-            ></a-entity>
-            <a-camera></a-camera>
-        </a-entity>
+                       
+            ></a-entity> -->
+            <!-- <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #Camera;"></a-entity>
+            <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #Camera;"></a-entity>
+            <a-camera id="Camera"></a-camera> -->
+        <!-- </a-entity> -->
+        <!-- triggerdown-listener -->
+        <!-- oculus-touch-controls="hand: right; model:true;" -->
 
+        <a-entity id="cameraRig">
+            <!-- camera -->
+            <a-entity id="head" camera wasd-controls look-controls></a-entity>
+            <!-- hand controls -->
+            <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger"></a-entity>
+            <a-entity id="right-hand"  oculus-touch-controls="hand: right" teleport-controls="startEvents: teleportstart; endEvents: teleportend; type: parabolic; button: trigger;"></a-entity>
+          </a-entity>
     </a-scene>
  
 </body>
