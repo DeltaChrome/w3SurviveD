@@ -7,8 +7,11 @@
 
         <!-- some very nice color buttons -->
         <button id="red" style="background-color:red; color:whitesmoke;">RED</button>
-        <button id="green" style="background-color:green; color:whitesmoke;">BLUE</button>
-        <button id="blue" style="background-color:blue; color:whitesmoke;">GREEN</button>
+        <button id="green" style="background-color:green; color:whitesmoke;">GREEN</button>
+        <button id="blue" style="background-color:blue; color:whitesmoke;">BLUE</button>
+        
+        <button id="black" style="background-color:black; color:whitesmoke;">BLACK</button>
+        
 
         <!-- scripts go to bottom if you want them to execute AFTER the rest of the web page renders -->
         <script src="/socket.io/socket.io.js"></script>
@@ -28,8 +31,8 @@
             //https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector 
             //note that querySelector can also be used on elements so that you only search for their children
             //instead of all elements within teh "document"
-            document.querySelector('#red').addEventListener('click', function() {
-                socket.emit('red');
+            document.querySelector('#black').addEventListener('click', function() {
+                socket.emit('black');
             });
 
             document.querySelector('#green').addEventListener('click', function() {
