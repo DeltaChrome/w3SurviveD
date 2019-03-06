@@ -10,7 +10,7 @@
         <button id="green" style="background-color:green; color:whitesmoke;">GREEN</button>
         <button id="blue" style="background-color:blue; color:whitesmoke;">BLUE</button>
         
-        <button id="aqua" style="background-color:aqua; color:whitesmoke;">aqua</button>
+        <button id="SpwnObj" style="background-color:aqua; color:whitesmoke;">Spawn an Object</button>
         
 
         <!-- scripts go to bottom if you want them to execute AFTER the rest of the web page renders -->
@@ -43,8 +43,9 @@
                 socket.emit('blue');
             });
 
-            document.querySelector('#aqua').addEventListener('click', function() {
-                socket.emit('aqua');
+            //spawn obj
+            document.querySelector('#SpwnObj').addEventListener('click', function() {
+                socket.emit('SpwnObj');
             });
         </script>
     </body>

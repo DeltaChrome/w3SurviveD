@@ -50,9 +50,9 @@ socketIO.on('connection', function(socket) {
         socketIO.sockets.emit('color_change', {r:0, g:0, b:255});
     });
 
-    socket.on('aqua', function(data) {
-        console.log('a event heard');
-        socketIO.sockets.emit('color_change', {r:0, g:255, b:255});
+    socket.on('SpwnObj', function(data) {
+        console.log('SpwnObj event heard');
+        socketIO.sockets.emit('Spawn_Object', {b:true});
     });
 });
 

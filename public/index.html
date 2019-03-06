@@ -12,6 +12,26 @@
 </head>
 <body>
  
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io();
+
+        //default connect event
+        socket.on('connect', function() {
+            console.log("connected!");
+        });
+        
+        //spawining an object
+        socket.on('Spawn_Object', function(data) {
+            //create rgb color string for css
+            let confirmationStr = 'boolean: ' + data.b + '.';
+            console.log("boolean received: " + confirmationStr);
+
+        });
+    </script>
+
+    <!-- YADADFAF  JSAL;DJFASJDFKLJASLKD FJSA;.DJFLK;ASJF  -->
+
     <a-scene shadow="type: pcfsoft" stats>
         <a-assets>
             <img id="skymap" src="/assets/textures/CloudySky.jpg"> 
@@ -71,6 +91,7 @@
 
     </a-scene>
  
+    
 </body>
 
 </html>
