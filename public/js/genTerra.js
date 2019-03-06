@@ -7,6 +7,8 @@ AFRAME.registerComponent("genterra-component", {
         // console.log("genTerra.js is running");
         //var GEO_VERTICES;
         scene = document.querySelector('a-scene');
+        let terraObj = this.el;
+
 
         function generateNumber (max)
         {
@@ -92,13 +94,16 @@ AFRAME.registerComponent("genterra-component", {
             return output;
         }
 
-        var geometry = new THREE.PlaneGeometry( 150, 150, 99, 99);
+
+        
+
+        var geometry = new THREE.PlaneGeometry( 150, 150, 9, 9);
 
         //var geometry = new THREE.BoxGeometry( 100, 100, 1, 99, 99, 0 );
         var material = new THREE.MeshStandardMaterial( {color: "#26421f"} );
-
-        let w = 100;
-        let h = 100;
+        
+        let w = 10;
+        let h = 10;
 
         let randSeed = [];
         let octave = 3;
@@ -162,7 +167,7 @@ AFRAME.registerComponent("genterra-component", {
 
         function generatePositionVector(off)
         {
-            let vertexIndex = generateNumber(10000);
+            let vertexIndex = generateNumber(100);
             
            return(geometry.vertices[vertexIndex].x + " " + (geometry.vertices[vertexIndex].y + off) + " " + geometry.vertices[vertexIndex].z);
            //return(geometry.vertices[vertexIndex]);
@@ -209,6 +214,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
+            entity.setAttribute('scale', '0.8 0.8 0.8');            
 
             scene.appendChild(entity);
 
@@ -245,13 +251,33 @@ AFRAME.registerComponent("genterra-component", {
         plane.castShadow = true;
         plane.receiveShadow = true;
 
-        //plane.rotateX(THREE.Math.degToRad(270));
-     
-      //  let entityTerra = document.createElement('a-entity');
-      //  entityTerra.setAttribute()
+        // let entityTerra = document.createElement('a-entity');
+        // //entityTerra.setAttribute('geometry' , 'primitive: plane; width: 150; height: 150; segmentsHeight: 99; segmentsWidth: 99;' );
+        // //entityTerra.setObject3D(plane);
+        // entityTerra.setAttribute('obj')
+        // entityTerra.setAttribute('material' ,  material);
+        // entityTerra.setAttribute('id' ,  'terrain');
+        // //plane.rotateX(THREE.Math.degToRad(270));
+        // test = document.querySelector('#terrain').getAttribute('geometry').getAttribute('vertices');
+        // console.log(test);
+        
+        // scene.appendChild(entityTerra);
+        let Context_AF = this;
+        this.el.addEventListener('object3dset', function(e){
+            console.log("mesh loaded");
+            const leftHand = document.querySelector("#left-hand");
+            const rightHand = document.querySelector("#right-hand");
+           // teleport-controls=""
+            leftHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
+           // rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
 
-        scene.object3D.add( plane );
+            console.log(Context_AF.el.getObject3D('mesh'));
+
+        });
+        terraObj.setObject3D('mesh', plane );
        
+        //console.log(document.querySelector('#terrainGenerationObj'));
+
         let waterGeo = new THREE.PlaneGeometry( 1000, 1000);
         for (let i = 0; i < waterGeo.vertices.length; i++)
         {
@@ -264,7 +290,7 @@ AFRAME.registerComponent("genterra-component", {
         waterPlane.rotateX(THREE.Math.degToRad(270));
         scene.object3D.add( waterPlane );
      
-        document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[5550]);
+        document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y + 1) + " " + window.GEO_VERTICES[55].z);
 
     },
 

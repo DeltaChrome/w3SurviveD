@@ -3,7 +3,7 @@
 <!-- control+alt+i opens dope editor in real time -->
 <head>
      <title>weSurviv3D</title>
-     <script src = "/js/aframe-v0.8.2.min.js"></script>
+     <script src ="/js/aframe-v0.8.2.min.js"></script>
      <script src="js/component.js"></script>   
      <script src="js/genTerra.js"></script>  
      <script src="js/trees.js"></script>
@@ -11,10 +11,9 @@
      <script src="js/collider-check.js"></script>
      <script src="js/remove-component.js"></script>
      <script src="js/triggerdown-listener.js"></script>
-     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
-     <script src="https://unpkg.com/aframe-input-mapping-component/dist/aframe-input-mapping-component.min.js"></script>
+     <script src="js/aframe-teleport-controls.js"></script>
+     <!-- <script src="js/aframe-teleport-controls.min.js"></script> -->
     
-     
 </head>
 <body>
  
@@ -32,8 +31,9 @@
             <a-asset-item id="leftController-mat" src="/assets/textures/left_hand.mtl"></a-asset-item> -->
             <a-asset-item id="rightController-mat" src="/assets/textures/oculus-touch-controller-right.mtl"></a-asset-item>
             <a-asset-item id="leftController-mat" src="/assets/textures/oculus-touch-controller-left.mtl"></a-asset-item>
-
+            
             <a-asset-item id="tree_1-obj" src="/assets/models/poptree.obj"></a-asset-item>
+            <a-asset-item id="water-obj" src="/assets/models/plue.obj"></a-asset-item>
             <a-asset-item id="tree_1-mat" src="/assets/textures/tree_1_1.mtl"></a-asset-item>
             <a-asset-item id="tree_2-obj" src="/assets/models/IceCreme_tree.obj"></a-asset-item>
             <!-- <a-asset-item id="tree_2-mat" src="/assets/textures/IceCreme_tree.png"></a-asset-item> -->
@@ -46,6 +46,7 @@
         <!-- <a-entity id="rock" obj-model="obj:#rock_01-obj" material="#rock_01-mat" shadow="cast: true" shadow="receive: true" position="10 2.3 0" ></a-entity>
         <a-entity id="tree" obj-model="obj: #tree_1-obj; mtl: #tree_1-mat;" shadow="cast: true" shadow="receive: true" position=" 0 0 10" ></a-entity>
          -->
+        <!-- <a-entity id="test" obj-model="obj: #water-obj"  material="color: green" rotation="0 0 0" scale="1000 1000 1000"></a-entity> -->
         <a-entity id="terrainGenerationObj" genterra-component genwater-component position="0 0 0"></a-entity>
         <a-entity id="sky"
                 geometry="primitive:sphere; radius:500"
@@ -88,7 +89,7 @@
             model="false"
             
             ></a-entity> 
-    
+            
             <a-entity
             id="rightHand" 
             
@@ -96,7 +97,7 @@
             material="mtl:#rightController-mat"
             teleport-controls="type: parabolic; landingMaxAngle: 80"
            
-                       
+            
             ></a-entity> -->
             <!-- <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #Camera;"></a-entity>
             <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #Camera;"></a-entity>
@@ -105,12 +106,12 @@
         <!-- triggerdown-listener -->
         <!-- oculus-touch-controls="hand: right; model:true;" -->
 
-        <a-entity id="cameraRig">
+        <a-entity id="cameraRig" position="0 0 0">
             <!-- camera -->
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <!-- hand controls -->
-            <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger"></a-entity>
-            <a-entity id="right-hand"  oculus-touch-controls="hand: right" teleport-controls="startEvents: teleportstart; endEvents: teleportend; type: parabolic; button: trigger;"></a-entity>
+            <a-entity id="left-hand" oculus-touch-controls="hand: left"></a-entity>
+            <a-entity id="right-hand"  oculus-touch-controls="hand: right"></a-entity>
           </a-entity>
     </a-scene>
  
