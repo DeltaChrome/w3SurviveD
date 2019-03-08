@@ -7,6 +7,8 @@ AFRAME.registerComponent("genterra-component", {
         // console.log("genTerra.js is running");
         //var GEO_VERTICES;
         scene = document.querySelector('a-scene');
+        let terraObj = this.el;
+
 
         function generateNumber (max)
         {
@@ -93,18 +95,22 @@ AFRAME.registerComponent("genterra-component", {
         }
 
 
-        var geometry = new THREE.PlaneGeometry( 300, 300, 9, 9);
+        
+
+        var geometry = new THREE.PlaneGeometry( 150, 150, 9, 9);
 
         //var geometry = new THREE.BoxGeometry( 100, 100, 1, 99, 99, 0 );
-        var material = new THREE.MeshStandardMaterial( {color: "#556b4a"} );
-
+        var material = new THREE.MeshStandardMaterial( {color: "#26421f"} );
+        
         let w = 10;
         let h = 10;
 
         let randSeed = [];
-        let octave = generateNumber(2) + 3;
-        let scaleBias = 0.2 * generateNumber(8);
+        let octave = 3;
+        let scaleBias = (0.2 * generateNumber(6)) + 1;
+
         console.log("scale bias ",scaleBias);
+        console.log("octave ",octave);
         let perlinNoiseValues = [];
 
         for (let i = 0; i < w * h; i++) 
@@ -120,40 +126,41 @@ AFRAME.registerComponent("genterra-component", {
         
         perlinNoiseValues = getPerlinNoise(w, h, randSeed, octave, scaleBias);
   
-        for(let i = 0; i < w; i++)
-        {
-           // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
-            perlinNoiseValues[i] = 0.1;
-        }
-        for(let i = 90; i < w + 90; i++)
-        {
-            perlinNoiseValues[i] = 0.1;
-            // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
-        }
-        perlinNoiseValues[10] = 0.1;
-        perlinNoiseValues[19] = 0.1;
-        perlinNoiseValues[20] = 0.1;
-        perlinNoiseValues[29] = 0.1;
-        perlinNoiseValues[30] = 0.1;
-        perlinNoiseValues[39] = 0.1;
-        perlinNoiseValues[40] = 0.1;
-        perlinNoiseValues[49] = 0.1;
-        perlinNoiseValues[50] = 0.1;
-        perlinNoiseValues[59] = 0.1;
-        perlinNoiseValues[60] = 0.1;
-        perlinNoiseValues[69] = 0.1;
-        perlinNoiseValues[70] = 0.1;
-        perlinNoiseValues[79] = 0.1;
-        perlinNoiseValues[80] = 0.1;
-        perlinNoiseValues[89] = 0.1;
-        perlinNoiseValues[90] = 0.1;
-
+        // for(let i = 0; i < w; i++)
+        // {
+        //     perlinNoiseValues[i] = perlinNoiseValues[i] / 4;
+        //     //perlinNoiseValues[i] = 0.1;
+        // }
+  
+        // for(let i = 900; i < w + 900; i++)
+        // {
+        //     perlinNoiseValues[i] = 0.1;
+        //     // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
+        // }
+        // perlinNoiseValues[100] = 0.1;
+        // perlinNoiseValues[199] = 0.1;
+        // perlinNoiseValues[200] = 0.1;
+        // perlinNoiseValues[299] = 0.1;
+        // perlinNoiseValues[300] = 0.1;
+        // perlinNoiseValues[399] = 0.1;
+        // perlinNoiseValues[400] = 0.1;
+        // perlinNoiseValues[499] = 0.1;
+        // perlinNoiseValues[500] = 0.1;
+        // perlinNoiseValues[599] = 0.1;
+        // perlinNoiseValues[600] = 0.1;
+        // perlinNoiseValues[699] = 0.1;
+        // perlinNoiseValues[700] = 0.1;
+        // perlinNoiseValues[799] = 0.1;
+        // perlinNoiseValues[800] = 0.1;
+        // perlinNoiseValues[899] = 0.1;
+        // perlinNoiseValues[900] = 0.1;
 
         for (let i = 0; i < geometry.vertices.length; i++)
         {
 
-            geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -50;
-            console.log(geometry.vertices);
+           // geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -35;
+            geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -60;
+            // console.log(geometry.vertices);
         }
 
         geometry.rotateX(THREE.Math.degToRad(270));
@@ -168,16 +175,21 @@ AFRAME.registerComponent("genterra-component", {
         }
 
         window.GEO_VERTICES = geometry.vertices;
-      
+        
         for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
-            entity.setAttribute('position', generatePositionVector(-0.2));
+            entity.setAttribute('position', generatePositionVector(2));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
             entity.setAttribute('scale', '0.2 0.2 0.2');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
+            
+            //entity.setAttribute('grabbable',{}); 
+            //entity.setAttribute('class','collidable');
+            entity.setAttribute('static-body', 'shape: box; mass: 5;');
+            //entity.setAttribute('id','rock');
 
             scene.appendChild(entity);
 
@@ -198,12 +210,13 @@ AFRAME.registerComponent("genterra-component", {
         
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-0.5));
+            entity.setAttribute('position', generatePositionVector(-1.5));
             entity.setAttribute('obj-model', 'obj: #tree_1-obj');
             entity.setAttribute('material', 'src: #popcornGreen');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
+            entity.setAttribute('scale', '0.8 0.8 0.8');            
 
             scene.appendChild(entity);
 
@@ -222,28 +235,31 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        // for (let i = 0; i < 3; i++) {
-        //     let entity = document.createElement('a-entity');
-        //     entity.setAttribute('position', generatePositionVector(-0.5));
-        //     entity.setAttribute('obj-model', 'obj: #tree_3-obj');
-        //     entity.setAttribute('material', 'mtl: #tree_3-mat');
-        //     entity.setAttribute('shadow', 'cast:true');
-        //     entity.setAttribute('shadow', 'receive:true');
-        //     entity.setAttribute('shader', 'standard');
-
-        //     scene.appendChild(entity);
-
-        // }
-
         let plane = new THREE.Mesh( geometry, material );
 
         plane.castShadow = true;
         plane.receiveShadow = true;
 
-        //plane.rotateX(THREE.Math.degToRad(270));
-     
+        let Context_AF = this;
+        this.el.addEventListener('object3dset', function(e){
+            console.log("mesh loaded");
+            const leftHand = document.querySelector("#left-hand");
+            const rightHand = document.querySelector("#right-hand");
+           // teleport-controls=""
+            //leftHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
+           rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj; curveShootingSpeed: 20; ");
+           rightHand.setAttribute('collide-listener',{});
 
-        scene.object3D.add( plane );
+            console.log(Context_AF.el.getObject3D('mesh'));
+
+        });
+        terraObj.setObject3D('mesh', plane );
+       
+        let helper = new THREE.VertexNormalsHelper( plane, 2, 0x00ff00, 1 );
+        scene.object3D.add(helper);
+
+
+        //console.log(document.querySelector('#terrainGenerationObj'));
 
         let waterGeo = new THREE.PlaneGeometry( 1000, 1000);
         for (let i = 0; i < waterGeo.vertices.length; i++)
@@ -257,6 +273,8 @@ AFRAME.registerComponent("genterra-component", {
         waterPlane.rotateX(THREE.Math.degToRad(270));
         scene.object3D.add( waterPlane );
      
+        document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y + 1) + " " + window.GEO_VERTICES[55].z);
+
     },
 
      tick: function()
@@ -266,5 +284,3 @@ AFRAME.registerComponent("genterra-component", {
 
     }
 });
-
-
