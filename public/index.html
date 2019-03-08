@@ -10,14 +10,16 @@
      <script src="js/runtime.js"></script>
      <script src="js/collider-check.js"></script>
      <script src="js/remove-component.js"></script>
-     <script src="js/triggerdown-listener.js"></script>
+     <script src="js/collide-listener.js"></script>
      <script src="js/aframe-teleport-controls.js"></script>
+     <script src="js/aframe-physics-system.js"></script>
+     <script src="js/mesh-smooth.js"></script>
      <!-- <script src="js/aframe-teleport-controls.min.js"></script> -->
     
 </head>
 <body>
- 
-    <a-scene shadow="type: pcfbasic" stats>
+    
+    <a-scene shadow="type: pcfbasic" stats physcics="friction: 0.2; gravity: -9.8; workerFps: 60; debug: true;">
         <a-assets>
             <img id="skymap" src="/assets/textures/CloudySky.jpg"> 
             <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
@@ -47,7 +49,7 @@
         <a-entity id="tree" obj-model="obj: #tree_1-obj; mtl: #tree_1-mat;" shadow="cast: true" shadow="receive: true" position=" 0 0 10" ></a-entity>
          -->
         <!-- <a-entity id="test" obj-model="obj: #water-obj"  material="color: green" rotation="0 0 0" scale="1000 1000 1000"></a-entity> -->
-        <a-entity id="terrainGenerationObj" genterra-component genwater-component position="0 0 0"></a-entity>
+        <a-entity id="terrainGenerationObj" mesh-smooth static-body="shape: hull;" genterra-component genwater-component position="0 0 0"></a-entity>
         <a-entity id="sky"
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">
@@ -76,7 +78,7 @@
         <a-entity id="LightBounce2 Bottom" light="type:directional; color:#e0d498; intensity:0.1;"
         scale="10 10 10" position="0 -0.025 0" rotation="90 0 0"></a-entity>
 
-        <a-entity light="type: ambient;  color:#e0d498;  intensity:0.2;"></a-entity>
+        <a-entity light="type: ambient;  color:#e0d498;  intensity:0.5;"></a-entity>
         <!-- Lights> -->
 
         <!-- <a-entity id="Player" collider-check position="0 10 0" raycaster="objects: .collidable" runtime> -->
@@ -110,8 +112,8 @@
             <!-- camera -->
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <!-- hand controls -->
-            <a-entity id="left-hand" oculus-touch-controls="hand: left"></a-entity>
-            <a-entity id="right-hand"  oculus-touch-controls="hand: right"></a-entity>
+            <a-entity id="left-hand" dynamic-body="shape: box;" oculus-touch-controls="hand: left"></a-entity>
+            <a-entity id="right-hand" static-body="shape: box;" oculus-touch-controls="hand: right"></a-entity>
           </a-entity>
     </a-scene>
  

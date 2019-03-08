@@ -126,11 +126,11 @@ AFRAME.registerComponent("genterra-component", {
         
         perlinNoiseValues = getPerlinNoise(w, h, randSeed, octave, scaleBias);
   
-        for(let i = 0; i < w; i++)
-        {
-            perlinNoiseValues[i] = perlinNoiseValues[i] / 4;
-            //perlinNoiseValues[i] = 0.1;
-        }
+        // for(let i = 0; i < w; i++)
+        // {
+        //     perlinNoiseValues[i] = perlinNoiseValues[i] / 4;
+        //     //perlinNoiseValues[i] = 0.1;
+        // }
   
         // for(let i = 900; i < w + 900; i++)
         // {
@@ -179,14 +179,16 @@ AFRAME.registerComponent("genterra-component", {
         for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
-            entity.setAttribute('position', generatePositionVector(-0.2));
+            entity.setAttribute('position', generatePositionVector(2));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
             entity.setAttribute('scale', '0.2 0.2 0.2');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
+            
             //entity.setAttribute('grabbable',{}); 
-            entity.setAttribute('class','collidable');
+            //entity.setAttribute('class','collidable');
+            entity.setAttribute('static-body', 'shape: box; mass: 5;');
             //entity.setAttribute('id','rock');
 
             scene.appendChild(entity);
@@ -208,7 +210,7 @@ AFRAME.registerComponent("genterra-component", {
         
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-0.5));
+            entity.setAttribute('position', generatePositionVector(-1.5));
             entity.setAttribute('obj-model', 'obj: #tree_1-obj');
             entity.setAttribute('material', 'src: #popcornGreen');
             entity.setAttribute('shadow', 'cast:true');
@@ -233,49 +235,30 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        // for (let i = 0; i < 3; i++) {
-        //     let entity = document.createElement('a-entity');
-        //     entity.setAttribute('position', generatePositionVector(-0.5));
-        //     entity.setAttribute('obj-model', 'obj: #tree_3-obj');
-        //     entity.setAttribute('material', 'mtl: #tree_3-mat');
-        //     entity.setAttribute('shadow', 'cast:true');
-        //     entity.setAttribute('shadow', 'receive:true');
-        //     entity.setAttribute('shader', 'standard');
-
-        //     scene.appendChild(entity);
-
-        // }
-
         let plane = new THREE.Mesh( geometry, material );
 
         plane.castShadow = true;
         plane.receiveShadow = true;
 
-        // let entityTerra = document.createElement('a-entity');
-        // //entityTerra.setAttribute('geometry' , 'primitive: plane; width: 150; height: 150; segmentsHeight: 99; segmentsWidth: 99;' );
-        // //entityTerra.setObject3D(plane);
-        // entityTerra.setAttribute('obj')
-        // entityTerra.setAttribute('material' ,  material);
-        // entityTerra.setAttribute('id' ,  'terrain');
-        // //plane.rotateX(THREE.Math.degToRad(270));
-        // test = document.querySelector('#terrain').getAttribute('geometry').getAttribute('vertices');
-        // console.log(test);
-        
-        // scene.appendChild(entityTerra);
         let Context_AF = this;
         this.el.addEventListener('object3dset', function(e){
             console.log("mesh loaded");
             const leftHand = document.querySelector("#left-hand");
             const rightHand = document.querySelector("#right-hand");
            // teleport-controls=""
-            leftHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
-           // rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
+            //leftHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
+           rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj; curveShootingSpeed: 20; ");
+           rightHand.setAttribute('collide-listener',{});
 
             console.log(Context_AF.el.getObject3D('mesh'));
 
         });
         terraObj.setObject3D('mesh', plane );
        
+        let helper = new THREE.VertexNormalsHelper( plane, 2, 0x00ff00, 1 );
+        scene.object3D.add(helper);
+
+
         //console.log(document.querySelector('#terrainGenerationObj'));
 
         let waterGeo = new THREE.PlaneGeometry( 1000, 1000);
