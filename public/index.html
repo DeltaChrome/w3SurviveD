@@ -33,7 +33,7 @@
             let entity = document.createElement('a-entity');
                 entity.setAttribute('position', {x:0,y:0,z:0});
                 entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
-                entity.setAttribute('material', 'mtl: #Axe_1-mat');
+                entity.setAttribute('material', 'mtl: #Axe_1-mtl');
                 entity.setAttribute('scale', '100 100 100');
 
                 scene.appendChild(entity);
@@ -60,6 +60,10 @@
             <a-asset-item id="tree_3-mat" src="/assets/textures/tree_2_2.mtl"></a-asset-item>
             <a-asset-item id="rock_01-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
             <a-asset-item id="rock_01-obj" src="/assets/models/rock_01.obj"></a-asset-item>
+
+            <!-- adding our own models -->
+            <a-asset-item id="Axe_1-obj" src="/assets/models/Axe_1.obj"></a-asset-item>
+            <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item>
 
         </a-assets>
         <!-- <a-entity id="rock" obj-model="obj:#rock_01-obj" material="#rock_01-mat" shadow="cast: true" shadow="receive: true" position="10 2.3 0" ></a-entity>
@@ -103,6 +107,8 @@
             <a-camera></a-camera>
         </a-entity>
 
+
+        <a-entity id="axe" position="0,0,0" scale="100,100,100" geometry="#Axe_1-obj" material="#Axe_1-mtl"></a-entity>
     </a-scene>
  
     

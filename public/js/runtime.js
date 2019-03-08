@@ -2,8 +2,8 @@ AFRAME.registerComponent("runtime", {
     schema:
     {
 
-    PlayerGX: {type: int, default: 5},
-    PlayerGY: {type: int, default: 5}
+    PlayerGX: {type: 'number', default: 5},
+    PlayerGY: {type: 'number', default: 5}
 
 
     },
