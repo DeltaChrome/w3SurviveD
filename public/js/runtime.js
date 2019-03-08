@@ -6,6 +6,7 @@ AFRAME.registerComponent("runtime", {
     // PlayerGY: {type: int, default: 5}
 
 
+
     },
 
     init: function ()
