@@ -34,7 +34,8 @@
                 entity.setAttribute('position', {x:0,y:0,z:0});
                 entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
                 entity.setAttribute('material', 'mtl: #Axe_1-mtl');
-                entity.setAttribute('scale', '100 100 100');
+                entity.setAttribute('scale', '0.2, 0.2, 0.2,');
+                
 
                 scene.appendChild(entity);
 
@@ -48,7 +49,7 @@
 
     <a-scene shadow="type: pcfsoft" stats>
         <a-assets>
-            <img id="skymap" src="/assets/textures/CloudySky.jpg"> 
+            <img id="skymap" src="/assets/textures/SynthSet.png"> 
             <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
             <img id="popcornGreen" src="/assets/textures/Popcorn_green.png"> 
 
@@ -108,7 +109,7 @@
         </a-entity>
 
 
-        <a-entity id="axe" position="0,0,0" scale="100,100,100" geometry="#Axe_1-obj" material="#Axe_1-mtl"></a-entity>
+        <a-entity id="axe" position="0,0,0" scale="0.2,0.2,0.2" geometry="#Axe_1-obj" material="#Axe_1-mtl"></a-entity>
     </a-scene>
  
     
