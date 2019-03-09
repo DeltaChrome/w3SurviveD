@@ -14,6 +14,7 @@
      <script src="js/aframe-teleport-controls.js"></script>
      <script src="js/aframe-physics-system.js"></script>
      <script src="js/mesh-smooth.js"></script>
+     <script src="js/Water.js"></script>
      <!-- <script src="js/aframe-teleport-controls.min.js"></script> -->
      <script src="/socket.io/socket.io.js"></script>
      <script>
@@ -27,7 +28,6 @@
         //spawining an object
         socket.on('Spawn_Object', function(data) {
             //make the object visible
-            // sdlfjal;sdjf  sadfjksd-->
             let scene = document.querySelector('a-scene');
 
             let entity = document.createElement('a-entity');
@@ -36,7 +36,6 @@
                 entity.setAttribute('material', 'mtl: #Axe_1-mtl');
                 entity.setAttribute('scale', '0.2, 0.2, 0.2,');
                 
-
                 scene.appendChild(entity);
 
             //create rgb color string for css
@@ -55,12 +54,8 @@
             <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
             <img id="popcornGreen" src="/assets/textures/Popcorn_green.png"> 
 
-            <!-- <a-asset-item id="leftController" src="/assets/models/left_hand.obj"></a-asset-item> -->
             <a-asset-item id="leftController" src="/assets/models/oculus-touch-controller-left.obj"></a-asset-item>
-            <!-- <a-asset-item id="rightController" src="/assets/models/right_hand.obj"></a-asset-item> -->
             <a-asset-item id="rightController" src="/assets/models/oculus-touch-controller-right.obj"></a-asset-item>
-            <!-- <a-asset-item id="rightController-mat" src="/assets/textures/right_hand.mtl"></a-asset-item>
-            <a-asset-item id="leftController-mat" src="/assets/textures/left_hand.mtl"></a-asset-item> -->
             <a-asset-item id="rightController-mat" src="/assets/textures/oculus-touch-controller-right.mtl"></a-asset-item>
             <a-asset-item id="leftController-mat" src="/assets/textures/oculus-touch-controller-left.mtl"></a-asset-item>
             
@@ -68,21 +63,27 @@
             <a-asset-item id="water-obj" src="/assets/models/plue.obj"></a-asset-item>
             <a-asset-item id="tree_1-mat" src="/assets/textures/tree_1_1.mtl"></a-asset-item>
             <a-asset-item id="tree_2-obj" src="/assets/models/IceCreme_tree.obj"></a-asset-item>
-            <!-- <a-asset-item id="tree_2-mat" src="/assets/textures/IceCreme_tree.png"></a-asset-item> -->
             <a-asset-item id="tree_3-obj" src="/assets/models/tree_2_2.obj"></a-asset-item>
             <a-asset-item id="tree_3-mat" src="/assets/textures/tree_2_2.mtl"></a-asset-item>
             <a-asset-item id="rock_01-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
             <a-asset-item id="rock_01-obj" src="/assets/models/rock_01.obj"></a-asset-item>
 
+            <a-asset-item id="rock1-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock1-obj" src="/assets/models/rock1.obj"></a-asset-item>
+            <a-asset-item id="rock2-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock2-obj" src="/assets/models/rock2.obj"></a-asset-item>
+            <a-asset-item id="rock3-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock3-obj" src="/assets/models/rock3.obj"></a-asset-item>
+            <a-asset-item id="rock4-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock4-obj" src="/assets/models/rock4.obj"></a-asset-item>
+            <a-asset-item id="rock5-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock5-obj" src="/assets/models/rock5.obj"></a-asset-item>
             <!-- adding our own models -->
             <a-asset-item id="Axe_1-obj" src="/assets/models/Axe_1.obj"></a-asset-item>
             <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item>
 
         </a-assets>
-        <!-- <a-entity id="rock" obj-model="obj:#rock_01-obj" material="#rock_01-mat" shadow="cast: true" shadow="receive: true" position="10 2.3 0" ></a-entity>
-        <a-entity id="tree" obj-model="obj: #tree_1-obj; mtl: #tree_1-mat;" shadow="cast: true" shadow="receive: true" position=" 0 0 10" ></a-entity>
-         -->
-        <!-- <a-entity id="test" obj-model="obj: #water-obj"  material="color: green" rotation="0 0 0" scale="1000 1000 1000"></a-entity> -->
+
         <a-entity id="terrainGenerationObj" mesh-smooth static-body="shape: hull;" genterra-component genwater-component position="0 0 0"></a-entity>
         <a-entity id="sky"
                 geometry="primitive:sphere; radius:500"
@@ -90,9 +91,9 @@
         </a-entity>
         
         <!-- Lights< -->
-        <a-entity id="Light SUN" light="type:directional; 
+        <a-entity id="LightSUN" light="type:directional; 
         castShadow:true;
-        color:#e0d498; 
+        color:#e5971b; 
         intensity:1.2; 
         shadowCameraLeft: -250;
         shadowCameraBottom: -250;
@@ -112,36 +113,8 @@
         <a-entity id="LightBounce2 Bottom" light="type:directional; color:#e0d498; intensity:0.1;"
         scale="10 10 10" position="0 -0.025 0" rotation="90 0 0"></a-entity>
 
-        <a-entity light="type: ambient;  color:#e0d498;  intensity:0.5;"></a-entity>
+        <a-entity light="type: ambient;  color:#e0d498;  intensity:0.3;"></a-entity>
         <!-- Lights> -->
-
-        <!-- <a-entity id="Player" collider-check position="0 10 0" raycaster="objects: .collidable" runtime> -->
-            <!-- <a-entity   cursor="fuse:true; fuseTimeout:500; rayOrigin:mouse;"></a-entity> -->
-            <!-- <a-entity 
-            
-            obj-model="obj:#leftController"
-            material="mtl:#leftController-mat"
-            teleport-controls="type: parabolic; landingMaxAngle: 80"
-            model="false"
-            
-            ></a-entity> 
-            
-            <a-entity
-            id="rightHand" 
-            
-            obj-model="obj:#rightController"
-            material="mtl:#rightController-mat"
-            teleport-controls="type: parabolic; landingMaxAngle: 80"
-           
-            
-            ></a-entity> -->
-            <!-- <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #Camera;"></a-entity>
-            <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #Camera;"></a-entity>
-            <a-camera id="Camera"></a-camera> -->
-        <!-- </a-entity> -->
-        <!-- triggerdown-listener -->
-        <!-- oculus-touch-controls="hand: right; model:true;" -->
-
 
         <a-entity id="cameraRig" position="0 0 0">
             <!-- camera -->

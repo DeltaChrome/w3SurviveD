@@ -4,11 +4,9 @@ AFRAME.registerComponent("genterra-component", {
     
     init: function ()
     {
-        // console.log("genTerra.js is running");
-        //var GEO_VERTICES;
+
         scene = document.querySelector('a-scene');
         let terraObj = this.el;
-
 
         function generateNumber (max)
         {
@@ -18,10 +16,7 @@ AFRAME.registerComponent("genterra-component", {
 
         function getPerlinNoise(w, h, seed, octave, bias)//output was reference to an array for values
         {
-            // for(let i = 0; i < seed.length; i++)
-            // {
-            //     console.log(seed[i]);
-            // }
+
             let output = new Array();
             for(let x = 0; x < w; x++)
             {
@@ -49,36 +44,20 @@ AFRAME.registerComponent("genterra-component", {
                            pitch = w;
                        }
                         
-                        //console.log(Math.floor((x / pitch)), " x,y: ", x,y, " pitch: ", pitch);
-                        
+
                         sampleX1 = Math.floor(Math.floor((x / pitch)) * pitch);
                         sampleY1 = Math.floor(Math.floor((y / pitch)) * pitch);
                         
-                        //  console.log("samples x,y 1", o);
-                        //  console.log(sampleX1);
-                        //  console.log(sampleY1);
+
                         sampleX2 = Math.floor((sampleX1 + pitch) % w);
                         sampleY2 = Math.floor((sampleY1 + pitch) % w);
-                        // console.log("samples x,y 2");
-                        // console.log(sampleX2);
-                        // console.log(sampleY2);
+
                         let blendX = (x - sampleX1) / (pitch);//fix this, supposed to be float values
                         let blendY = (y - sampleY1) / (pitch);
-                        // console.log("blend X and y");
-                        // console.log(blendX);
-                        // console.log(blendY);
+
                         let sampleT = (1.0 - blendX) * seed[sampleY1 * w + sampleX1] + blendX * seed[sampleY1 * w + sampleX2]
                         let sampleB = (1.0 - blendX) * seed[sampleY2 * w + sampleX1] + blendX * seed[sampleY2 * w + sampleX2]
-                        // console.log("seed: ");
-                        // console.log(sampleY1 * w + sampleX1);
-                        // // console.log(seed[sampleY1 * w + sampleX1]);
-                        // // console.log(seed[sampleY2 * w + sampleX2]);
-                        // // console.log("samples x,y 2");
-                        // // console.log(sampleX2);
-                        // // console.log(sampleY2);
-                        // console.log("sampleT, sampleB");
-                        // console.log(sampleT);
-                        // console.log(sampleB);
+
 
                         scaleAcc += scale;
                         noise += (blendY * (sampleB - sampleT) + sampleT) * scale;
@@ -86,16 +65,12 @@ AFRAME.registerComponent("genterra-component", {
                     }
                     
                     output[y * w + x] = noise / scaleAcc;
-                    //console.log(output[y * w + x], "number at: ", x);
-                    
+
                 }
             }
             
             return output;
         }
-
-
-        
 
         var geometry = new THREE.PlaneGeometry( 150, 150, 9, 9);
 
@@ -118,49 +93,65 @@ AFRAME.registerComponent("genterra-component", {
             randSeed[i] = Math.random();
         }
 
-        material.roughness = 0.8;
+        material.roughness = 0.9;
         material.metalness = 0.0;
 
         let oneFace = [];
         let noiseCounter = 0;
         
         perlinNoiseValues = getPerlinNoise(w, h, randSeed, octave, scaleBias);
-  
-        // for(let i = 0; i < w; i++)
-        // {
-        //     perlinNoiseValues[i] = perlinNoiseValues[i] / 4;
-        //     //perlinNoiseValues[i] = 0.1;
-        // }
-  
-        // for(let i = 900; i < w + 900; i++)
-        // {
-        //     perlinNoiseValues[i] = 0.1;
-        //     // perlinNoiseValues[i] = perlinNoiseValues[i] / 2;
-        // }
-        // perlinNoiseValues[100] = 0.1;
-        // perlinNoiseValues[199] = 0.1;
-        // perlinNoiseValues[200] = 0.1;
-        // perlinNoiseValues[299] = 0.1;
-        // perlinNoiseValues[300] = 0.1;
-        // perlinNoiseValues[399] = 0.1;
-        // perlinNoiseValues[400] = 0.1;
-        // perlinNoiseValues[499] = 0.1;
-        // perlinNoiseValues[500] = 0.1;
-        // perlinNoiseValues[599] = 0.1;
-        // perlinNoiseValues[600] = 0.1;
-        // perlinNoiseValues[699] = 0.1;
-        // perlinNoiseValues[700] = 0.1;
-        // perlinNoiseValues[799] = 0.1;
-        // perlinNoiseValues[800] = 0.1;
-        // perlinNoiseValues[899] = 0.1;
-        // perlinNoiseValues[900] = 0.1;
 
+        let sum = 0;
         for (let i = 0; i < geometry.vertices.length; i++)
         {
-
+           
            // geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -35;
             geometry.vertices[i].z = ((perlinNoiseValues[i]) *100) -60;
+            sum += geometry.vertices[i].z;
             // console.log(geometry.vertices);
+        }
+
+        let avg = sum / geometry.vertices.length;
+
+        console.log("Before average: ", avg, "Before sum: ", sum);
+
+        sum = 0;
+
+        //subtract the avg and move it to a better height
+        if(avg > 0)
+        {
+            for (let i = 0; i < geometry.vertices.length; i++)
+            {
+                geometry.vertices[i].z -= Math.abs(avg) + 3;
+                sum +=  geometry.vertices[i].z;
+            }
+        }
+        if(avg < 0)
+        {
+            for (let i = 0; i < geometry.vertices.length; i++)
+            {
+                geometry.vertices[i].z += Math.abs(avg) - 3;
+                sum +=  geometry.vertices[i].z;
+            }
+        
+        }    
+        
+        avg = sum / geometry.vertices.length;
+
+        console.log("After average: ", avg, "After sum: ", sum);
+
+
+        for (let i = 0; i < 10; i++)//frontside adjust
+        {
+            
+            geometry.vertices[i].z = -9;//front
+            geometry.vertices[i * 10].z = -9;//left
+            geometry.vertices[i + 90].z = -9;//back
+            if(i > 1)
+            {
+                geometry.vertices[(i * 10) - 1].z = -9;//right
+            }
+            
         }
 
         geometry.rotateX(THREE.Math.degToRad(270));
@@ -179,36 +170,86 @@ AFRAME.registerComponent("genterra-component", {
         for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
-            entity.setAttribute('position', generatePositionVector(2));
+            entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
             entity.setAttribute('scale', '0.2 0.2 0.2');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             
-            //entity.setAttribute('grabbable',{}); 
-            //entity.setAttribute('class','collidable');
             entity.setAttribute('static-body', 'shape: box; mass: 5;');
             //entity.setAttribute('id','rock');
 
             scene.appendChild(entity);
 
         } 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 3; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
-            entity.setAttribute('position', generatePositionVector(-0.2));
-            entity.setAttribute('obj-model', 'obj: #rock_01-obj');
-            entity.setAttribute('material', 'mtl: #rock_01-mat');
-            entity.setAttribute('scale', '2 2 2');
+            entity.setAttribute('position', generatePositionVector(-0.5));
+            entity.setAttribute('obj-model', 'obj: #rock1-obj');
+            entity.setAttribute('material', 'mtl: #rock1-mat');
+            entity.setAttribute('scale', '4 4 4');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
             scene.appendChild(entity);
 
         } 
-        
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 3; i++) {
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('remove-component', {}); 
+            entity.setAttribute('position', generatePositionVector(0));
+            entity.setAttribute('obj-model', 'obj: #rock2-obj');
+            entity.setAttribute('material', 'mtl: #rock2-mat');
+            entity.setAttribute('scale', '4 4 4');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+
+            scene.appendChild(entity);
+
+        } 
+        for (let i = 0; i < 3; i++) {
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('remove-component', {}); 
+            entity.setAttribute('position', generatePositionVector(-0.5));
+            entity.setAttribute('obj-model', 'obj: #rock3-obj');
+            entity.setAttribute('material', 'mtl: #rock3-mat');
+            entity.setAttribute('scale', '5 5 5');            
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+
+            scene.appendChild(entity);
+
+        } 
+        for (let i = 0; i < 3; i++) {
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('remove-component', {}); 
+            entity.setAttribute('position', generatePositionVector(-0.5));
+            entity.setAttribute('obj-model', 'obj: #rock4-obj');
+            entity.setAttribute('material', 'mtl: #rock4-mat');
+            entity.setAttribute('scale', '4 4 4');            
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+
+            scene.appendChild(entity);
+
+        } 
+        for (let i = 0; i < 3; i++) {
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('remove-component', {}); 
+            entity.setAttribute('position', generatePositionVector(0));
+            entity.setAttribute('obj-model', 'obj: #rock5-obj');
+            entity.setAttribute('material', 'mtl: #rock5-mat');
+            entity.setAttribute('scale', '4 4 4');          
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+
+            scene.appendChild(entity);
+
+        } 
+
+        for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-1.5));
             entity.setAttribute('obj-model', 'obj: #tree_1-obj');
@@ -222,7 +263,7 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 8; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_2-obj');
@@ -250,35 +291,62 @@ AFRAME.registerComponent("genterra-component", {
            rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj; curveShootingSpeed: 20; ");
            rightHand.setAttribute('collide-listener',{});
 
-            console.log(Context_AF.el.getObject3D('mesh'));
+           //console.log(Context_AF.el.getObject3D('mesh'));
 
         });
         terraObj.setObject3D('mesh', plane );
        
-        let helper = new THREE.VertexNormalsHelper( plane, 2, 0x00ff00, 1 );
-        scene.object3D.add(helper);
-
+        // let helper = new THREE.VertexNormalsHelper( plane, 2, 0x00ff00, 1 );
+        // scene.object3D.add(helper);
 
         //console.log(document.querySelector('#terrainGenerationObj'));
 
-        let waterGeo = new THREE.PlaneGeometry( 1000, 1000);
-        for (let i = 0; i < waterGeo.vertices.length; i++)
-        {
+       // let sun = document.querySelector("#LightSUN");
+        // var waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
+		// 		water = new THREE.Water(waterGeometry,
+		// 			{
+		// 				textureWidth: 512,
+		// 				textureHeight: 512,
+		// 				waterNormals: new THREE.TextureLoader().load( '/assets/textures/WaterNormal.jpg', function ( texture ) {
+		// 					texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+		// 				} ),
+        //                 alpha: 1.0,
+                        
+        //                 //sunDirection: sun.position.clone().normalize(),
+        //                 sunDirection: '0 40 0',
+		// 				sunColor: 0xffffff,
+		// 				waterColor: new THREE.Color(0x001e0f),
+		// 				distortionScale: 3.7,
+		// 				fog: scene.fog !== undefined
+		// 			}
+		// 		);
+        // var uniforms = water.material.uniforms;           
+        let waterGeo = new THREE.PlaneGeometry(1000, 1000);
+        for (let i = 0; i < waterGeo.vertices.length; i++) {
 
-            waterGeo.vertices[i].z = -(generateNumber(10));
-            
+            waterGeo.vertices[i].z = -8;
+
         }
-        let waterMaterial = new THREE.MeshStandardMaterial( {color: "#4d7fd1"} );
-        let waterPlane = new THREE.Mesh( waterGeo, waterMaterial );
+        let waterMaterial = new THREE.MeshStandardMaterial({ shader: 'ocean', color: "#2759aa" });
+        let waterPlane = new THREE.Mesh(waterGeo, waterMaterial);
         waterPlane.rotateX(THREE.Math.degToRad(270));
-        scene.object3D.add( waterPlane );
-     
+
+        scene.object3D.add(waterPlane);
+        for (let i = 0; i < waterGeo.vertices.length; i++) {
+
+            console.log(waterGeo.vertices[i].z);
+
+        }
+            // water.rotation.x = - Math.PI / 2;
+            // scene.object3D.add( water );
         document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y + 1) + " " + window.GEO_VERTICES[55].z);
 
     },
 
      tick: function()
     {
+        // var time = performance.now() * 0.001;
+        // water.material.uniforms[ "time" ].value += 1.0 / 60.0;
          //material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
         //console.log(generateNumber(3));
 
