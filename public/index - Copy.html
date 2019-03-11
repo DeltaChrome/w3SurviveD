@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" 
+        content="width=device-width, 
+        initial-scale=1.0, 
+        user-scalable=no" />
+  <title>Drag/Drop/Bounce</title>
+  <style>
+    #MainContainer {
+      width: 100%;
+      height: 400px;
+      background-color: #333;
+      display: flex;
+      align-items:center;
+      justify-content: center;
+      touch-action: none;
+    }
+    #LeftContainer {
+      width: 100%;
+      height: 400px;
+      display: block;
+      touch-action: none;
+      position: relative;
+    }
+    #MiddleContainer {
+      width: 100%;
+      height: 400px;
+      display: flex;
+      align-items:center;
+      justify-content: center;
+      background-color: #333;
+      opacity: 0.25;
+      touch-action: none;
+    }
+    #MiddleContainerIn {
+      width: 100%;
+      height: 400px;
+      display: flex;
+      align-items:center;
+      justify-content: center;
+      touch-action: none;
+    }
+    #RightContainer {
+      width: 100%;
+      height: 400px;
+      display: flex;
+      align-items:center;
+      justify-content: center;
+
+      touch-action: none;
+    }
+    #item {
+    width: 50%;
+    position:absolute;
+    margin:auto;
+    top:0;right:0;bottom:0;left:0;
+    }
+    #item:active {
+      border-width: 125%;
+    }
+    #item:hover {
+      cursor: pointer;
+    }
+
+    .In {
+      
+      opacity: 0.5;
+    }
+    .Out {
+      opacity: 1;
+
+
+    }
+  </style>
+</head>
+
+<!-- <body>
+  <h1 id="hi">Hello</h1>
+  <div id="outerContainer">
+    <div id="container">
+        <img id="item" src="images/rock_colour.png">
+    </div>
+    <input id="test" type="text"/>
+  </div>
+</body> -->
+<body>
+  <h1 ID="hi">
+Q
+  </h1>
+  <div id="MainContainer">
+      <div id="LeftContainer">
+          <img id="item" src="images/rock_colour.png">  
+      </div>
+      <div id="MiddleContainer" class="Out">
+
+      </div>
+      <div id="RightContainer">
+
+      </div>
+  </div>
+</body>
+
+  <script>
+
+
+    var rightPressed = false;
+    var leftPressed = false;
+    var upPressed = false;
+    var downPressed = false;
+
+    var dragItem = document.querySelector("#item");
+    var container = document.querySelector("#MainContainer");
+    var dropContainerMiddle = document.querySelector("#MiddleContainer");
+    let active = false;
+    let currentX = 0;
+    let currentY = 0;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+    let score = 0;
+    let isOnDiv = false;
+    let ItemIn = false;
+
+    var myVar = setInterval(checkTest, 100);
+
+    var MidConInfo = dropContainerMiddle.getBoundingClientRect();
+
+    document.getElementById("MiddleContainer").onmouseover = function() {mouseOver()};
+    document.getElementById("MiddleContainer").onmouseout = function() {mouseOut()};
+
+    container.addEventListener("touchstart", dragStart, false);
+    container.addEventListener("touchend", dragEnd, false); 
+    container.addEventListener("touchmove", drag, false);
+    container.addEventListener("mousedown", dragStart, false);
+    container.addEventListener("mouseup", dragEnd, false);
+    container.addEventListener("mousemove", drag, false);
+
+
+    document.addEventListener('keydown', keyDownHandler, false);
+
+
+
+    function mouseOver() {
+      ItemIn = true;
+    }
+
+    function mouseOut() {
+      ItemIn = false;
+
+    }
+
+    function keyDownHandler(event) {  
+    //   if(event.keyCode == 32) {
+    //     if(active && currentX < 10)
+    //     {
+    //     }
+    //     console.log(currentX,currentY);
+    //     console.log(active);
+    // }    
+}
+function checkTest()
+{
+  console.log("Works");
+  if(!active)
+  {
+    dragItem.className = "In";
+    console.log("In");
+  }
+  else{
+    dragItem.className = "Out";
+    console.log(MidConInfo);
+
+  }
+}
+
+    function getPostition()
+    {
+      document.getElementById("hi").innerHTML = "No u";
+    }
+
+    function dragStart(e) {
+      if (e.type === "touchstart") {
+        initialX = e.touches[0].clientX - xOffset;
+        initialY = e.touches[0].clientY - yOffset;
+      } else {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+      }
+
+      if (e.target === dragItem) {
+        active = true;
+      }
+
+      return initialX, initialY;
+    }
+
+    function dragEnd(e) {
+      initialX = currentX;
+      initialY = currentY;
+
+      active = false;
+    }
+
+    function drag(e) {
+      if (active) {
+      
+        e.preventDefault();
+      
+        if (e.type === "touchmove") {
+          currentX = e.touches[0].clientX - initialX;
+          currentY = e.touches[0].clientY - initialY;
+        } else {
+          currentX = e.clientX - initialX;
+          currentY = e.clientY - initialY;
+        }
+
+        xOffset = currentX;
+        yOffset = currentY;
+
+        setTranslate(currentX, currentY, dragItem);
+      }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+      document.getElementById("hi").innerHTML = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</html>

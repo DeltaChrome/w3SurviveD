@@ -1,0 +1,278 @@
+@font-face {
+    font-family: SubTilteFont;
+    src: url('BEBAS.ttf') format('OpenType');
+  }
+
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+
+header{
+    margin:0;
+    padding:0;
+    background-color: #1a1a1a;
+    width: 100%;
+    height: 100px;
+}
+
+body{
+    margin:0;
+    height: 100vh;
+    display: block;
+    background-image: url("Blueprint_1.png");
+    background-color: whitesmoke;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+#MainArea{
+
+    height: 90%;
+    display: flex;
+
+}
+
+#TitleArea{
+    height: 10%;
+    display: flex;
+    background-color: #0d0d0d;
+
+}
+#T1{
+    height: 100%;
+    width: 25%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#T2{
+    height: 100%;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#T3{
+    height: 100%;
+    width: 25%; 
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+
+#MaterialArea{
+    width: 25%;
+    height: 100%;
+    display: block; 
+}
+#Bar{
+    width: 100%;
+    background-color: whitesmoke;
+    height: 100%;
+    margin-right: 100%;
+    transition: margin-right 1.0s;
+}
+#progressText{
+    position:absolute;
+    color: #1a1a1a;
+    font-family: 'Oswald';
+    bottom: 100px;
+}
+
+#SlotA{
+
+    width: 100%;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+    display: flex;    
+    overflow: hidden;
+    background-color: #1a1a1a;
+    
+}
+
+#SlotB{
+    width: 100%;
+    height: 25%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+    
+}
+
+#SlotC{
+
+    width: 100%;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+    display: flex;    
+    overflow: hidden;
+    background-color: #1a1a1a;
+    
+}
+
+#SlotD{
+    background-color: blue;
+
+    width: 100%;
+    height: 25%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    
+}
+
+#SlotE{
+    width: 100%;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: #262626;
+    
+}
+
+#SlotF{
+    background-color: whitesmoke;
+    width: 100%;
+    height: 25%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+    background-color: #0e0e0e;
+    
+}
+
+#ToolArea{
+    height: 100%;
+    width: 25%;
+    overflow: hidden;
+}
+
+#CraftingArea{
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: block;
+}
+
+#SlotTitle{
+    width: 100%;
+    color: white;
+    height: 10%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#SlotMain{
+    width: 100%;
+    height: 70%;
+}
+
+#SlotFinal{
+    width: 100%;
+    height:30%;
+    
+}
+
+h1{
+    color: whitesmoke;
+    font-family: 'Oswald';
+
+}
+#ToolA{
+    position:absolute;
+    z-index: 2;
+}
+#ToolB{
+    position:absolute;
+    z-index: 3;
+}
+#ToolC{
+    position:absolute;
+    z-index: 4;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+.show{
+    visibility: visible;
+}
+
+button{
+    background-color: #0d0d0d;
+    color: 001B32;
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    font-size: 30px;
+    overflow: hidden;
+    outline: none; 
+    font-family: 'Oswald';
+}
+
+#Material_A{
+    transform: scale(1);
+    transition: transform 0.25s;
+    overflow: hidden;
+    position: absolute;
+    bottom: 125px;
+}
+
+#Material_A:active{
+    transform: scale(1.5);
+    transition: transform 0.25s;
+    overflow: hidden;
+}
+
+#Material_B{
+    transform: scale(1);
+    transition: transform 0.25s;
+    overflow: hidden;
+    position: absolute;
+    bottom: 225px;
+
+}
+
+#Material_B:active{
+    transform: scale(1.5);
+    transition: transform 0.25s;
+    overflow: hidden;
+
+}
+
+button:active
+{
+    background-color: whitesmoke; 
+    color: black;
+}
+
+.Ready{
+    background-color: #0d0d0d;
+    transition: background-color 0.25s;
+    color: whitesmoke;
+
+}
+
+.NotReady{
+    background-color: #0d0d0d;
+    transition: background-color 0.25s;
+    color: #1a1a1a;
+}
+
+.Clicked:active{
+    transform: scale(1.5);
+    transition: transform 0.25s;
+}
+
+.Clicked{
+    transform: scale(1);
+    transition: transform 0.25s;
+
+}
