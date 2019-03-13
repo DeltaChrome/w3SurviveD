@@ -8,11 +8,11 @@
      <script src="js/genTerra.js"></script>  
      <script src="js/trees.js"></script>
      <script src="js/runtime.js"></script>
-     <script src="js/collider-check.js"></script>
      <script src="js/remove-component.js"></script>
      <script src="js/collide-listener.js"></script>
      <script src="js/aframe-teleport-controls.js"></script>
      <script src="js/aframe-physics-system.js"></script>
+     <script src="js/grab-listener.js"></script>
      <script src="js/mesh-smooth.js"></script>
      <script src="js/Water.js"></script>
      <!-- <script src="js/aframe-teleport-controls.min.js"></script> -->
@@ -47,9 +47,10 @@
 </head>
 <body>
     
-    <a-scene shadow="type: pcfbasic" stats physcics="friction: 0.2; gravity: -9.8; workerFps: 60; debug: true;">
+    <a-scene shadow="type: pcfbasic" stats physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: true;">
 
         <a-assets>
+
             <img id="skymap" src="/assets/textures/SynthSet.png"> 
             <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
             <img id="popcornGreen" src="/assets/textures/Popcorn_green.png"> 
@@ -78,13 +79,17 @@
             <a-asset-item id="rock4-obj" src="/assets/models/rock4.obj"></a-asset-item>
             <a-asset-item id="rock5-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
             <a-asset-item id="rock5-obj" src="/assets/models/rock5.obj"></a-asset-item>
+
+            <a-asset-item id="bush-obj" src=/assets/models/Bush_1.obj></a-asset-item>
+            <a-asset-item id="branch-obj" src=/assets/models/branch_1.obj></a-asset-item>
+
             <!-- adding our own models -->
             <a-asset-item id="Axe_1-obj" src="/assets/models/Axe_1.obj"></a-asset-item>
             <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item>
 
         </a-assets>
 
-        <a-entity id="terrainGenerationObj" mesh-smooth static-body="shape: hull;" genterra-component genwater-component position="0 0 0"></a-entity>
+        <a-entity id="terrainGenerationObj" mesh-smooth genterra-component genwater-component position="0 0 0"></a-entity>
         <a-entity id="sky"
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">
@@ -120,16 +125,22 @@
             <!-- camera -->
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <!-- hand controls -->
-            <a-entity id="left-hand" dynamic-body="shape: box;" oculus-touch-controls="hand: left"></a-entity>
-            <a-entity id="right-hand" dynamic-body="shape: box;" oculus-touch-controls="hand: right"></a-entity>
+            <!-- <a-entity id="left-hand" static-body="shape: box;" grab-listener constraint="type: lock" oculus-touch-controls="hand: left"></a-entity> -->
+            <a-entity id="right-hand" static-body="shape: box;" grab-listener oculus-touch-controls="hand: right"></a-entity>
+            <a-box 
+            scale="0.2 0.2 0.2"
+            
+            id="hand"
+            dynamic-body="shape: box;"
+            constraint="target: #right-hand; type: pointToPoint; targetPivot: 0 0 0; axis: 0 0 0;"
+            visible="false"
+                    ></a-box>
           </a-entity>
-
 
         <a-entity id="axe" position="0,0,0" scale="0.2,0.2,0.2" geometry="#Axe_1-obj" material="#Axe_1-mtl"></a-entity>
 
     </a-scene>
  
-    
 </body>
 
 </html>

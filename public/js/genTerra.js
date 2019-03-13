@@ -1,5 +1,6 @@
 window.GEO_VERTICES;
 
+
 AFRAME.registerComponent("genterra-component", {
     
     init: function ()
@@ -140,7 +141,6 @@ AFRAME.registerComponent("genterra-component", {
 
         console.log("After average: ", avg, "After sum: ", sum);
 
-
         for (let i = 0; i < 10; i++)//frontside adjust
         {
             
@@ -159,43 +159,75 @@ AFRAME.registerComponent("genterra-component", {
         function generatePositionVector(off)
         {
             let vertexIndex = generateNumber(100);
-            
+
            return(geometry.vertices[vertexIndex].x + " " + (geometry.vertices[vertexIndex].y + off) + " " + geometry.vertices[vertexIndex].z);
            //return(geometry.vertices[vertexIndex]);
 
         }
 
         window.GEO_VERTICES = geometry.vertices;
-        
-        for (let i = 0; i < 5; i++) {
+
+        for (let i = 0; i < 8; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #rock_01-obj');
             entity.setAttribute('material', 'mtl: #rock_01-mat');
+            entity.setAttribute('scale', '0.1 0.1 0.1');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+
+            entity.setAttribute('static-body', 'shape: box;');
+            entity.setAttribute('id','rock' + i);
+
+            scene.appendChild(entity);
+
+        } 
+        for (let i = 0; i < 8; i++) {
+            let entity = document.createElement('a-entity');
+            let branch = new THREE.MeshStandardMaterial({ color: "#44340d" });
+            entity.setAttribute('remove-component', {}); 
+            entity.setAttribute('position', generatePositionVector(0.3));
+            entity.setAttribute('obj-model', 'obj: #branch-obj');
+            entity.setAttribute('material', branch);
+            entity.setAttribute('scale', '0.1 0.1 0.1');
+            entity.setAttribute('rotation', '0 0 90');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+
+            entity.setAttribute('static-body', 'shape: box; offset: 100 0 0;');
+            entity.setAttribute('id','branch' + i);
+
+            scene.appendChild(entity);
+
+        } 
+        for (let i = 0; i < 5; i++) {
+            let bush = new THREE.MeshStandardMaterial({ color: "#304f11" });
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('remove-component', {}); 
+            entity.setAttribute('position', generatePositionVector(0));
+            entity.setAttribute('obj-model', 'obj: #bush-obj');
+            entity.setAttribute('material', bush);
             entity.setAttribute('scale', '0.2 0.2 0.2');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
-            
-            entity.setAttribute('static-body', 'shape: box; mass: 5;');
-            //entity.setAttribute('id','rock');
 
             scene.appendChild(entity);
 
         } 
-        for (let i = 0; i < 3; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('remove-component', {}); 
-            entity.setAttribute('position', generatePositionVector(-0.5));
-            entity.setAttribute('obj-model', 'obj: #rock1-obj');
-            entity.setAttribute('material', 'mtl: #rock1-mat');
-            entity.setAttribute('scale', '4 4 4');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
+        // for (let i = 0; i < 3; i++) {
+        //     let entity = document.createElement('a-entity');
+        //     entity.setAttribute('remove-component', {}); 
+        //     entity.setAttribute('position', generatePositionVector(-0.5));
+        //     entity.setAttribute('obj-model', 'obj: #rock1-obj');
+        //     entity.setAttribute('material', 'mtl: #rock1-mat');
+        //     entity.setAttribute('scale', '6 6 6');
+        //     entity.setAttribute('shadow', 'cast:true');
+        //     entity.setAttribute('shadow', 'receive:true');
+        //     entity.setAttribute('id', 'largeRock')
+        //     scene.appendChild(entity);
 
-            scene.appendChild(entity);
-
-        } 
+        // } 
         for (let i = 0; i < 3; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
@@ -215,7 +247,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #rock3-obj');
             entity.setAttribute('material', 'mtl: #rock3-mat');
-            entity.setAttribute('scale', '5 5 5');            
+            entity.setAttribute('scale', '8 8 8');            
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
@@ -288,7 +320,7 @@ AFRAME.registerComponent("genterra-component", {
             const rightHand = document.querySelector("#right-hand");
            // teleport-controls=""
             //leftHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
-           rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj; curveShootingSpeed: 20; ");
+           rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj, #largeRock; curveShootingSpeed: 20; ");
            rightHand.setAttribute('collide-listener',{});
 
            //console.log(Context_AF.el.getObject3D('mesh'));
@@ -322,7 +354,8 @@ AFRAME.registerComponent("genterra-component", {
 		// 		);
         // var uniforms = water.material.uniforms;           
         let waterGeo = new THREE.PlaneGeometry(1000, 1000);
-        for (let i = 0; i < waterGeo.vertices.length; i++) {
+        for (let i = 0; i < waterGeo.vertices.length; i++) 
+        {
 
             waterGeo.vertices[i].z = -8;
 
@@ -332,7 +365,8 @@ AFRAME.registerComponent("genterra-component", {
         waterPlane.rotateX(THREE.Math.degToRad(270));
 
         scene.object3D.add(waterPlane);
-        for (let i = 0; i < waterGeo.vertices.length; i++) {
+        for (let i = 0; i < waterGeo.vertices.length; i++)
+        {
 
             console.log(waterGeo.vertices[i].z);
 
