@@ -16,7 +16,11 @@ AFRAME.registerComponent('collide-listener', {
     {
       console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
       console.log(window.IS_GRABBING);
-      if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand')) 
+      if(e.detail.body.el.getAttribute('id') == 'axe')
+      {
+        //e.detail.body.el.setAttribute('', 'false');
+      }
+      else if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand')) 
       {
         e.detail.body.el.setAttribute('visible', 'false');
       }

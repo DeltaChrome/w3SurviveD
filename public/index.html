@@ -29,14 +29,30 @@
         socket.on('Spawn_Object', function(data) {
             //make the object visible
             let scene = document.querySelector('a-scene');
+            let hand = document.querySelector('#hand');
+            let rHand =  document.querySelector('#right-hand');
 
             let entity = document.createElement('a-entity');
-                entity.setAttribute('position', {x:0,y:0,z:0});
+                entity.setAttribute('position', '10 10 10');
+                //console.log("axe position at time of spawn: ", entity.getAttribute('position'));
                 entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
                 entity.setAttribute('material', 'mtl: #Axe_1-mtl');
-                entity.setAttribute('scale', '0.2, 0.2, 0.2,');
-                
+                entity.setAttribute('scale', '0.05, 0.05, 0.05,');
+                entity.setAttribute('shadow', 'cast:true');
+                entity.setAttribute('shadow', 'receive:true');
+
+               // entity.setAttribute('dynamic-body', 'shape: box;');
+               // entity.setAttribute('constraint','target: #right-hand; type: distance;');
+               // entity.setAttribute('collideConnected','false');
+                entity.setAttribute('id','axe');
                 scene.appendChild(entity);
+
+
+            let axe = document.querySelector('#axe');
+                console.log("Hand position at time of spawn: ", hand.getAttribute('position'));
+                console.log("axe position at time of spawn: ", axe.getAttribute('position'));
+            // hand.setAttribute('constraint', 'target: none');
+            // hand.setAttribute('visible', 'true');
 
             //create rgb color string for css
             let confirmationStr = 'boolean: ' + data.b + '.';
@@ -137,7 +153,9 @@
                     ></a-box>
           </a-entity>
 
-        <a-entity id="axe" position="0,0,0" scale="0.2,0.2,0.2" geometry="#Axe_1-obj" material="#Axe_1-mtl"></a-entity>
+        <!-- <a-entity id="axe" position="0,0,0" scale="0.2,0.2,0.2" geometry="#Axe_1-obj" material="#Axe_1-mtl" dynamic-body="shape: box;"
+        constraint="target: #right-hand; type: pointToPoint; targetPivot: 0 0 0; axis: 0 0 0;"
+        ></a-entity> -->
 
     </a-scene>
  
