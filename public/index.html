@@ -28,29 +28,46 @@
         //spawining an object
         socket.on('Spawn_Object', function(data) {
             //make the object visible
-            let scene = document.querySelector('a-scene');
+            //let scene = document.querySelector('a-scene');
             let hand = document.querySelector('#hand');
             let rHand =  document.querySelector('#right-hand');
+            let head =  document.querySelector('#head');
 
             let entity = document.createElement('a-entity');
-                entity.setAttribute('position', '10 10 10');
+            //entity.setAttribute('position', '10 10 10');
                 //console.log("axe position at time of spawn: ", entity.getAttribute('position'));
-                entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
-                entity.setAttribute('material', 'mtl: #Axe_1-mtl');
-                entity.setAttribute('scale', '0.05, 0.05, 0.05,');
-                entity.setAttribute('shadow', 'cast:true');
-                entity.setAttribute('shadow', 'receive:true');
 
-               // entity.setAttribute('dynamic-body', 'shape: box;');
-               // entity.setAttribute('constraint','target: #right-hand; type: distance;');
-               // entity.setAttribute('collideConnected','false');
-                entity.setAttribute('id','axe');
-                scene.appendChild(entity);
+            // let x = (rHand.getAttribute('position').x) + (head.getAttribute('position').x);
+            // let y = (rHand.getAttribute('position').y) + (head.getAttribute('position').y);
+            // let z = (rHand.getAttribute('position').z) + (head.getAttribute('position').z);
+         
+            //entity.setAttribute('position', x + ' ' + y + ' ' + z ) ;
+            entity.setAttribute('position',rHand.getAttribute('position'));
+            //entity.setAttribute('position', '0 0 0');
+            entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
+            entity.setAttribute('material', 'mtl: #Axe_1-mtl');
+            entity.setAttribute('scale', '0.05, 0.05, 0.05,');
+            entity.setAttribute('rotation','0 0 0');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+            // console.log("axe position at time of spawn: ", entity.getAttribute('position'));
 
-
-            let axe = document.querySelector('#axe');
-                console.log("Hand position at time of spawn: ", hand.getAttribute('position'));
-                console.log("axe position at time of spawn: ", axe.getAttribute('position'));
+            //entity.setAttribute('static-body', 'shape: box;');
+            //entity.setAttribute('constraint','target: #hand; type: hinge; axis: 1 1 1; distance: 0; collideConnected: false');
+            //entity.setAttribute('','false');
+            //entity.setAttribute()
+            entity.setAttribute('id','axe');
+            //entity.setAttribute('visible', 'false');
+            
+            scene.appendChild(entity);
+     
+            //entity.setAttribute('scale', '0.05, 0.05, 0.05,');
+            // console.log("axe position at time of spawn: ", entity.getAttribute('position'));
+            rHand.appendChild(entity);            
+            //entity.setAttribute('scale', '0.05, 0.05, 0.05,');
+            // let axe = document.querySelector('#axe');
+            //    console.log("Hand position at time of spawn: ", rHand.getAttribute('position'));
+            //    console.log("axe position at time of spawn: ", entity.getAttribute('position'));
             // hand.setAttribute('constraint', 'target: none');
             // hand.setAttribute('visible', 'true');
 
@@ -60,10 +77,11 @@
         });
      </script>
     
+
 </head>
 <body>
-    
-    <a-scene shadow="type: pcfbasic" stats physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: true;">
+    <!-- stats -->
+    <a-scene shadow="type: pcfbasic"  physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: true;">
 
         <a-assets>
 
@@ -142,14 +160,15 @@
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <!-- hand controls -->
             <!-- <a-entity id="left-hand" static-body="shape: box;" grab-listener constraint="type: lock" oculus-touch-controls="hand: left"></a-entity> -->
-            <a-entity id="right-hand" static-body="shape: box;" grab-listener oculus-touch-controls="hand: right"></a-entity>
+            <a-entity id="right-hand" static-body="shape: box;" constraint="collideConnected: false" grab-listener oculus-touch-controls="hand: right"></a-entity>
             <a-box 
             scale="0.2 0.2 0.2"
             
             id="hand"
             dynamic-body="shape: box;"
-            constraint="target: #right-hand; type: pointToPoint; targetPivot: 0 0 0; axis: 0 0 0;"
+            constraint="target: #right-hand; type: pointToPoint; targetPivot: 0 0 0; axis: 0 0 0; collideConnected: false"
             visible="false"
+            
                     ></a-box>
           </a-entity>
 
