@@ -16,9 +16,11 @@ AFRAME.registerComponent('collide-listener', {
     {
       console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
       console.log(window.IS_GRABBING);
-      if(e.detail.body.el.getAttribute('id') == 'axe')
+      if(e.detail.body.el.getAttribute('id') == 'popTreeH0')
       {
         //e.detail.body.el.setAttribute('', 'false');
+        e.detail.body.el.setAttribute('rotation', '0 0 0');
+
       }
       else if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand')) 
       {

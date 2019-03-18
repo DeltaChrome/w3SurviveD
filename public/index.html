@@ -35,7 +35,7 @@
 
             let entity = document.createElement('a-entity');
             //entity.setAttribute('position', '10 10 10');
-                //console.log("axe position at time of spawn: ", entity.getAttribute('position'));
+            //console.log("axe position at time of spawn: ", entity.getAttribute('position'));
 
             // let x = (rHand.getAttribute('position').x) + (head.getAttribute('position').x);
             // let y = (rHand.getAttribute('position').y) + (head.getAttribute('position').y);
@@ -45,8 +45,8 @@
             entity.setAttribute('position',rHand.getAttribute('position'));
             //entity.setAttribute('position', '0 0 0');
             entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
-            entity.setAttribute('material', 'mtl: #Axe_1-mtl');
-            entity.setAttribute('scale', '0.05, 0.05, 0.05,');
+            entity.setAttribute('material', 'src: #Axe_1-mtl');
+            entity.setAttribute('scale', '0.01, 0.01, 0.01,');
             entity.setAttribute('rotation','0 0 0');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
@@ -88,6 +88,7 @@
             <img id="skymap" src="/assets/textures/SynthSet.png"> 
             <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
             <img id="popcornGreen" src="/assets/textures/Popcorn_green.png"> 
+            <img id="Axe_1-mtl" src="/assets/textures/axe_sc.png"> 
 
             <a-asset-item id="leftController" src="/assets/models/oculus-touch-controller-left.obj"></a-asset-item>
             <a-asset-item id="rightController" src="/assets/models/oculus-touch-controller-right.obj"></a-asset-item>
@@ -118,8 +119,8 @@
             <a-asset-item id="branch-obj" src=/assets/models/branch_1.obj></a-asset-item>
 
             <!-- adding our own models -->
-            <a-asset-item id="Axe_1-obj" src="/assets/models/Axe_1.obj"></a-asset-item>
-            <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item>
+            <a-asset-item id="Axe_1-obj" src="/assets/models/Axe_v4.obj"></a-asset-item>
+            <!-- <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item> -->
 
         </a-assets>
 
@@ -160,7 +161,7 @@
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <!-- hand controls -->
             <!-- <a-entity id="left-hand" static-body="shape: box;" grab-listener constraint="type: lock" oculus-touch-controls="hand: left"></a-entity> -->
-            <a-entity id="right-hand" static-body="shape: box;" constraint="collideConnected: false" grab-listener oculus-touch-controls="hand: right"></a-entity>
+            <a-entity id="right-hand" static-body="shape: box;" runtime constraint="collideConnected: false" grab-listener oculus-touch-controls="hand: right"></a-entity>
             <a-box 
             scale="0.2 0.2 0.2"
             

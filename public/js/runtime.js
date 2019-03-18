@@ -70,6 +70,20 @@ AFRAME.registerComponent("runtime", {
         //     console.log(i);
         // }
 
+
+        let tree = document.querySelector('#popTreeH0');
+        tree.setAttribute('rotation','0 0 0');
+        //tree.setAttribute('position',)
+        tree = document.querySelector('#popTreeH1');
+        tree.setAttribute('rotation','0 0 0');
+        tree = document.querySelector('#popTreeH2');
+        tree.setAttribute('rotation','0 0 0');
+        tree = document.querySelector('#popTreeH3');
+        tree.setAttribute('rotation','0 0 0');
+        tree = document.querySelector('#popTreeH4');
+        tree.setAttribute('rotation','0 0 0');
+
+        console.log('running');
     }
 
 });

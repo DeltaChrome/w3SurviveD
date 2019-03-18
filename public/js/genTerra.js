@@ -160,7 +160,7 @@ AFRAME.registerComponent("genterra-component", {
         {
             let vertexIndex = generateNumber(100);
 
-           return(geometry.vertices[vertexIndex].x + " " + (geometry.vertices[vertexIndex].y + off) + " " + geometry.vertices[vertexIndex].z);
+            return(geometry.vertices[vertexIndex].x + " " + (geometry.vertices[vertexIndex].y + off) + " " + geometry.vertices[vertexIndex].z);
            //return(geometry.vertices[vertexIndex]);
 
         }
@@ -290,9 +290,18 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
             entity.setAttribute('scale', '0.8 0.8 0.8');            
-
+            entity.setAttribute('static-body','shape: box;');
+            entity.setAttribute('constraint','collideConnected: false;');
+            entity.setAttribute('id','popTree' + i);
             scene.appendChild(entity);
-
+            let box = document.createElement('a-box');
+            box.setAttribute('dynamic-body','shape: box; linearDamping: 1.0; angularDamping: 1.0;');
+            box.setAttribute('scale','1.4 20 1.4');
+            box.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #popTree' + i +';');
+            box.setAttribute('id','popTreeH' + i);
+            //box.setAttribute('visible', 'false');
+            entity.appendChild(box);
+            
         }
 
         for (let i = 0; i < 8; i++) {
@@ -303,7 +312,8 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
-
+            entity.setAttribute('static-body','shape: box;');
+            entity.setAttribute('id','iceTree' + i);
             scene.appendChild(entity);
 
         }
@@ -365,12 +375,7 @@ AFRAME.registerComponent("genterra-component", {
         waterPlane.rotateX(THREE.Math.degToRad(270));
 
         scene.object3D.add(waterPlane);
-        for (let i = 0; i < waterGeo.vertices.length; i++)
-        {
-
-            console.log(waterGeo.vertices[i].z);
-
-        }
+  
             // water.rotation.x = - Math.PI / 2;
             // scene.object3D.add( water );
         document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y + 1) + " " + window.GEO_VERTICES[55].z);
