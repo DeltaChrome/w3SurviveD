@@ -100,7 +100,7 @@ AFRAME.registerComponent("genterra-component", {
         var geometry = new THREE.PlaneGeometry( 150, 150, 9, 9);
 
         //var geometry = new THREE.BoxGeometry( 100, 100, 1, 99, 99, 0 );
-        var material = new THREE.MeshStandardMaterial( {color: "#26421f"} );
+        var material = new THREE.MeshStandardMaterial( {color: "#154182"} );
         
         let w = 10;
         let h = 10;
@@ -268,7 +268,7 @@ AFRAME.registerComponent("genterra-component", {
             waterGeo.vertices[i].z = -(generateNumber(10));
             
         }
-        let waterMaterial = new THREE.MeshStandardMaterial( {color: "#4d7fd1"} );
+        let waterMaterial = new THREE.MeshStandardMaterial( {color: "#9ce0f3"} ); //////////////water colour
         let waterPlane = new THREE.Mesh( waterGeo, waterMaterial );
         waterPlane.rotateX(THREE.Math.degToRad(270));
         scene.object3D.add( waterPlane );
