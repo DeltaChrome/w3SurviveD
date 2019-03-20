@@ -12,7 +12,7 @@ const socketIO  = require('socket.io')(server);
 
  app.get('/' , function(req, res)
 {
-    res.sendFile(__dirname + 'public/index.html');
+    res.sendFile(__dirname + '/public/VR.html');
 })
 
 //-----------------------------------
