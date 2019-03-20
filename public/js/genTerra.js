@@ -298,8 +298,9 @@ AFRAME.registerComponent("genterra-component", {
             box.setAttribute('dynamic-body','shape: box; linearDamping: 1.0; angularDamping: 1.0;');
             box.setAttribute('scale','1.4 20 1.4');
             box.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #popTree' + i +';');
-            box.setAttribute('id','popTreeH' + i);
-            //box.setAttribute('visible', 'false');
+            box.setAttribute('objectStatus','hitPoints: 5;');
+            box.setAttribute('id','popTreeH' + i);// + i
+            box.setAttribute('visible', 'false');
             entity.appendChild(box);
             
         }

@@ -4,6 +4,7 @@ AFRAME.registerComponent('collide-listener', {
     let el = this.el;
     // let leftHand = document.querySelector('#left-hand');
     let rightHand = document.querySelector('#hand');
+    //let axe = document.querySelector('#axe');
     // leftHand.addEventListener('collide', function (e) {
     //   console.log('left hand collided' + e.detail.body.id);
 
@@ -12,14 +13,31 @@ AFRAME.registerComponent('collide-listener', {
     //   e.detail.contact;    // Stats about the collision (CANNON.ContactEquation).
     //   e.detail.contact.ni; // Normal (direction) of the collision (CANNON.Vec3).
     // });
+
+    
+
     rightHand.addEventListener('collide', function (e) 
     {
       console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
       console.log(window.IS_GRABBING);
-      if(e.detail.body.el.getAttribute('id') == 'popTreeH0')
+      for(let i = 0; i < 5; i++)
       {
+          if(e.detail.body.el.getAttribute('id') == ('popTreeH' + i))
+          {
+            console.log("for loop checking");
+            console.log("hitpoints: "+e.detail.body.el.getAttribute('object-status'));
+          }
+      }
+      if(e.detail.target.el.getAttribute('id') == 'axe')
+      {
+
+      
+       
         //e.detail.body.el.setAttribute('', 'false');
-        e.detail.body.el.setAttribute('rotation', '0 0 0');
+        //e.detail.body.el.setAttribute('rotation', '0 0 0');
+
+        //play chop sound
+        //subtract health from tree
 
       }
       else if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand')) 
@@ -27,10 +45,10 @@ AFRAME.registerComponent('collide-listener', {
         e.detail.body.el.setAttribute('visible', 'false');
       }
 
-      e.detail.target.el;  // Original entity (playerEl).
-      e.detail.body.el;    // Other entity, which playerEl touched.
-      e.detail.contact;    // Stats about the collision (CANNON.ContactEquation).
-      e.detail.contact.ni; // Normal (direction) of the collision (CANNON.Vec3).
+      // e.detail.target.el;  // Original entity (playerEl).
+      // e.detail.body.el;    // Other entity, which playerEl touched.
+      // e.detail.contact;    // Stats about the collision (CANNON.ContactEquation).
+      // e.detail.contact.ni; // Normal (direction) of the collision (CANNON.Vec3).
     });
   }
 });
