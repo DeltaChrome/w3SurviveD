@@ -4,7 +4,7 @@ AFRAME.registerComponent('collide-listener', {
     let el = this.el;
     // let leftHand = document.querySelector('#left-hand');
     let rightHand = document.querySelector('#hand');
-    //let axe = document.querySelector('#axe');
+    let axe = document.querySelector('#axe');
     // leftHand.addEventListener('collide', function (e) {
     //   console.log('left hand collided' + e.detail.body.id);
 
@@ -14,25 +14,33 @@ AFRAME.registerComponent('collide-listener', {
     //   e.detail.contact.ni; // Normal (direction) of the collision (CANNON.Vec3).
     // });
 
-    
-
     rightHand.addEventListener('collide', function (e) 
     {
       console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
       console.log(window.IS_GRABBING);
       for(let i = 0; i < 5; i++)
       {
-          if(e.detail.body.el.getAttribute('id') == ('popTreeH' + i))
+          if(e.detail.body.el.getAttribute('id') == ('popTreeH' + i) && e.detail.body.el.components['object-status'].data.dtSinceLastHit <= 0)
           {
-            console.log("for loop checking");
-            console.log("hitpoints: "+e.detail.body.el.getAttribute('object-status'));
+            if(e.detail.body.el.components['object-status'].data.hitPoints > 0)
+            {
+              let hp = e.detail.body.el.components['object-status'].data.hitPoints;
+              hp = hp - 1;
+              //console.log(hp);
+              e.detail.body.el.setAttribute('object-status','hitPoints: ' + hp + ';');
+              e.detail.body.el.setAttribute('object-status','dtSinceLastHit: ' + 2.0 + ';');  
+              if(hp == 0)
+              {
+                let currentTree = document.querySelector('#popTree' + i);
+                currentTree.setAttribute('visible','false');  
+              }
+            }
+            
           }
       }
       if(e.detail.target.el.getAttribute('id') == 'axe')
       {
-
-      
-       
+     
         //e.detail.body.el.setAttribute('', 'false');
         //e.detail.body.el.setAttribute('rotation', '0 0 0');
 
@@ -40,7 +48,7 @@ AFRAME.registerComponent('collide-listener', {
         //subtract health from tree
 
       }
-      else if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand')) 
+      else if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand') ) 
       {
         e.detail.body.el.setAttribute('visible', 'false');
       }

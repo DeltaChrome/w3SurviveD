@@ -298,7 +298,7 @@ AFRAME.registerComponent("genterra-component", {
             box.setAttribute('dynamic-body','shape: box; linearDamping: 1.0; angularDamping: 1.0;');
             box.setAttribute('scale','1.4 20 1.4');
             box.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #popTree' + i +';');
-            box.setAttribute('objectStatus','hitPoints: 5;');
+            box.setAttribute('object-status','hitPoints: 5;');
             box.setAttribute('id','popTreeH' + i);// + i
             box.setAttribute('visible', 'false');
             entity.appendChild(box);
@@ -325,20 +325,56 @@ AFRAME.registerComponent("genterra-component", {
         plane.receiveShadow = true;
 
         let Context_AF = this;
-        this.el.addEventListener('object3dset', function(e){
+        this.el.addEventListener('object3dset', function (e) {
             console.log("mesh loaded");
             const leftHand = document.querySelector("#left-hand");
             const rightHand = document.querySelector("#right-hand");
-           // teleport-controls=""
+            // teleport-controls=""
             //leftHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
-           rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj, #largeRock; curveShootingSpeed: 20; ");
-           rightHand.setAttribute('collide-listener',{});
+            rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj, #largeRock; curveShootingSpeed: 20; ");
+            rightHand.setAttribute('collide-listener', {});
 
-           //console.log(Context_AF.el.getObject3D('mesh'));
+            let hand = document.querySelector('#hand');
+            let rHand = document.querySelector('#right-hand');
+            let head = document.querySelector('#head');
+
+
+
+            let currentHandRotation = rHand.getAttribute('rotation');
+            let currentHandPosition = rHand.getAttribute('position');
+
+            //console.log(currentHandRotation);
+         
+            // let entity = document.createElement('a-entity');
+
+            // // entity.setAttribute('position', rHand.getAttribute('position'));
+            // // entity.setAttribute('rotation', rHand.getAttribute('rotation'));
+
+            // entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
+            // entity.setAttribute('material', 'src: #Axe_1-mtl');
+            // entity.setAttribute('scale', '0.2 0.2 0.2');
+            // entity.setAttribute('position','0 0 0');
+            // entity.setAttribute('rotation', '0 0 0');
+            // entity.setAttribute('shadow', 'cast:true');
+            // entity.setAttribute('shadow', 'receive:true');
+            // entity.setAttribute('dynamic-body','shape: box; angularDamping: 1.0;');
+            // entity.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #right-hand');
+            // entity.setAttribute('id', 'axe');
+
+            // scene.appendChild(entity);
+            //entity.setAttribute('rotation', currentHandRotation);
+            //rHand.appendChild(entity);
+
+            // axeHB = document.createElement('a-box');
+            // axeHB.setAttribute('dynamic-body','shape: box; linearDamping: 1.0; angularDamping: 1.0;');
+            // axeHB.setAttribute('scale','1 1 1');
+            // axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #hand');
+            // entity.appendChild(axeHB)
+            //console.log(Context_AF.el.getObject3D('mesh'));
 
         });
-        terraObj.setObject3D('mesh', plane );
-       
+        terraObj.setObject3D('mesh', plane);
+
         // let helper = new THREE.VertexNormalsHelper( plane, 2, 0x00ff00, 1 );
         // scene.object3D.add(helper);
 
@@ -380,6 +416,7 @@ AFRAME.registerComponent("genterra-component", {
             // water.rotation.x = - Math.PI / 2;
             // scene.object3D.add( water );
         document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y + 1) + " " + window.GEO_VERTICES[55].z);
+        //document.querySelector('#head').setAttribute('position', '0 0 0');
 
     },
 
