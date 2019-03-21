@@ -176,7 +176,7 @@ AFRAME.registerComponent("genterra-component", {
 
         window.GEO_VERTICES = geometry.vertices;
         
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 8; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(2));
@@ -194,7 +194,7 @@ AFRAME.registerComponent("genterra-component", {
             scene.appendChild(entity);
 
         } 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 10; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(-0.2));
@@ -208,7 +208,7 @@ AFRAME.registerComponent("genterra-component", {
 
         } 
         
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 15; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-1.5));
             entity.setAttribute('obj-model', 'obj: #tree_1-obj');
@@ -222,7 +222,7 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 15; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_2-obj');
