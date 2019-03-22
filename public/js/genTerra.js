@@ -222,6 +222,34 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
+        for (let i = 0; i < 1; i++) {
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('position', generatePositionVector(-1.5));
+            entity.setAttribute('obj-model', 'obj: #tree_1-obj');
+            entity.setAttribute('material', 'src: #popcornYellow');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+            entity.setAttribute('shader', 'standard');
+            entity.setAttribute('scale', '0.8 0.8 0.8');            
+
+            scene.appendChild(entity);
+
+        }
+
+        for (let i = 0; i < 1; i++) {
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('position', generatePositionVector(-1.5));
+            entity.setAttribute('obj-model', 'obj: #tree_1-obj');
+            entity.setAttribute('material', 'src: #popcornRed');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+            entity.setAttribute('shader', 'standard');
+            entity.setAttribute('scale', '0.8 0.8 0.8');            
+
+            scene.appendChild(entity);
+
+        }
+
         for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-0.5));
