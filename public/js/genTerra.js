@@ -176,8 +176,9 @@ AFRAME.registerComponent("genterra-component", {
 
         window.GEO_VERTICES = geometry.vertices;
         ///////////////////////////////////////Pointy trees///////////////////////////////////////////
-        /*
+        
         for (let i = 0; i < 1; i++) {
+            console.log("created Tree");
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-1.5));
             entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
@@ -185,7 +186,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
+            entity.setAttribute('scale', '1 1 1');            
 
             scene.appendChild(entity);
 
@@ -232,12 +233,12 @@ AFRAME.registerComponent("genterra-component", {
             scene.appendChild(entity);
 
         }
-*/
+
 
 
 
 ////////////////////////////////////////////Rocks///////////////////////////////////////////////
-
+/*
         for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
@@ -307,7 +308,7 @@ AFRAME.registerComponent("genterra-component", {
             scene.appendChild(entity);
 
         }
-        
+        */
         /////////////////////////////////popcorn trees/////////////////////////////////////////
 
         for (let i = 0; i < 10; i++) {
@@ -367,18 +368,20 @@ AFRAME.registerComponent("genterra-component", {
         }
       
         //////////////////////////////////Thicc Tree////////////////////////////////////
+        
         for (let i = 0; i < 1; i++) {
+            
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-1.5));
             entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
             entity.setAttribute('material', 'src: #pointyGreen');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
+            // entity.setAttribute('shadow', 'cast:true');
+            // entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
+            entity.setAttribute('scale', '1 1 1');            
 
             scene.appendChild(entity);
-
+            console.log("wy");
         }
 
         for (let i = 0; i < 1; i++) {
@@ -389,7 +392,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
+            entity.setAttribute('scale', '1 1 1');            
 
             scene.appendChild(entity);
 
@@ -403,7 +406,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
+            entity.setAttribute('scale', '1 1 1');            
 
             scene.appendChild(entity);
 
@@ -417,7 +420,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
+            entity.setAttribute('scale', '1 1 1');            
 
             scene.appendChild(entity);
 
