@@ -370,7 +370,7 @@ AFRAME.registerComponent("genterra-component", {
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
+            entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
             entity.setAttribute('material', 'src: #pointyGreen');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
@@ -384,7 +384,7 @@ AFRAME.registerComponent("genterra-component", {
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
+            entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
             entity.setAttribute('material', 'src: #pointylight');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
@@ -398,7 +398,7 @@ AFRAME.registerComponent("genterra-component", {
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
+            entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
             entity.setAttribute('material', 'src: #pointyBrown');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
@@ -412,7 +412,7 @@ AFRAME.registerComponent("genterra-component", {
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
+            entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
             entity.setAttribute('material', 'src: #pointyPurple');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
