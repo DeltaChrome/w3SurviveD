@@ -176,6 +176,28 @@ AFRAME.registerComponent("genterra-component", {
 
         window.GEO_VERTICES = geometry.vertices;
         
+        //pointy tree
+        for (let i = 0; i < 8; i++) {
+            let entity = document.createElement('a-entity');
+            entity.setAttribute('remove-component', {}); 
+            entity.setAttribute('position', generatePositionVector(2));
+            entity.setAttribute('obj-model', 'obj: #pointy_tree-obj');
+            entity.setAttribute('material', 'mtl: #pointy_tree-mat');
+            entity.setAttribute('scale', '0.2 0.2 0.2');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+            
+            //entity.setAttribute('grabbable',{}); 
+            //entity.setAttribute('class','collidable');
+            entity.setAttribute('static-body', 'shape: box; mass: 5;');
+            //entity.setAttribute('id','rock');
+
+            scene.appendChild(entity);
+
+        } 
+
+
+
         for (let i = 0; i < 8; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
@@ -226,7 +248,7 @@ AFRAME.registerComponent("genterra-component", {
             let entity = document.createElement('a-entity');
             entity.setAttribute('position', generatePositionVector(-0.5));
             entity.setAttribute('obj-model', 'obj: #tree_2-obj');
-            entity.setAttribute('material', 'src: #tree_2-mat');
+            entity.setAttribute('material', 'src: #brownPointy');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
