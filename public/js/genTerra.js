@@ -343,33 +343,36 @@ AFRAME.registerComponent("genterra-component", {
             let currentHandRotation = rHand.getAttribute('rotation');
             let currentHandPosition = rHand.getAttribute('position');
 
-            //console.log(currentHandRotation);
+            console.log(currentHandRotation);
          
-            // let entity = document.createElement('a-entity');
+            let entity = document.createElement('a-entity');
 
-            // // entity.setAttribute('position', rHand.getAttribute('position'));
-            // // entity.setAttribute('rotation', rHand.getAttribute('rotation'));
+            // entity.setAttribute('position', rHand.getAttribute('position'));
+            // entity.setAttribute('rotation', rHand.getAttribute('rotation'));
 
-            // entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
-            // entity.setAttribute('material', 'src: #Axe_1-mtl');
-            // entity.setAttribute('scale', '0.2 0.2 0.2');
-            // entity.setAttribute('position','0 0 0');
-            // entity.setAttribute('rotation', '0 0 0');
-            // entity.setAttribute('shadow', 'cast:true');
-            // entity.setAttribute('shadow', 'receive:true');
-            // entity.setAttribute('dynamic-body','shape: box; angularDamping: 1.0;');
-            // entity.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #right-hand');
-            // entity.setAttribute('id', 'axe');
+            entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
+            entity.setAttribute('material', 'src: #Axe_1-mtl');
+            entity.setAttribute('scale', '0.2 0.2 0.2');
+            entity.setAttribute('position','0 0 0');
+            entity.setAttribute('rotation', '0 0 0');
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
+            entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
+            entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
+            entity.setAttribute('id', 'axe');
 
-            // scene.appendChild(entity);
+            scene.appendChild(entity);
             //entity.setAttribute('rotation', currentHandRotation);
             //rHand.appendChild(entity);
 
-            // axeHB = document.createElement('a-box');
-            // axeHB.setAttribute('dynamic-body','shape: box; linearDamping: 1.0; angularDamping: 1.0;');
-            // axeHB.setAttribute('scale','1 1 1');
-            // axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #hand');
-            // entity.appendChild(axeHB)
+            axeHB = document.createElement('a-box');
+            axeHB.setAttribute('static-body','shape: box; angularDamping: 1.0;');
+            axeHB.setAttribute('scale','0.5 0.5 1.5');
+            
+           // axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
+            axeHB.setAttribute('id','axeHB');
+            axeHB.setAttribute('visible', 'false');
+            scene.appendChild(axeHB)
             //console.log(Context_AF.el.getObject3D('mesh'));
 
         });
@@ -410,7 +413,7 @@ AFRAME.registerComponent("genterra-component", {
         let waterMaterial = new THREE.MeshStandardMaterial({ shader: 'ocean', color: "#2759aa" });
         let waterPlane = new THREE.Mesh(waterGeo, waterMaterial);
         waterPlane.rotateX(THREE.Math.degToRad(270));
-
+        
         scene.object3D.add(waterPlane);
   
             // water.rotation.x = - Math.PI / 2;

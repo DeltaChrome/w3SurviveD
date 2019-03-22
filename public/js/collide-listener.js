@@ -14,10 +14,10 @@ AFRAME.registerComponent('collide-listener', {
     //   e.detail.contact.ni; // Normal (direction) of the collision (CANNON.Vec3).
     // });
 
-    rightHand.addEventListener('collide', function (e) 
-    {
-      console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
-      console.log(window.IS_GRABBING);
+
+
+    axe.addEventListener('collide', function (e) {
+
       for(let i = 0; i < 5; i++)
       {
           if(e.detail.body.el.getAttribute('id') == ('popTreeH' + i) && e.detail.body.el.components['object-status'].data.dtSinceLastHit <= 0)
@@ -38,6 +38,16 @@ AFRAME.registerComponent('collide-listener', {
             
           }
       }
+
+
+    });
+
+
+    rightHand.addEventListener('collide', function (e) 
+    {
+      console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
+      console.log(window.IS_GRABBING);
+      
       if(e.detail.target.el.getAttribute('id') == 'axe')
       {
      
@@ -46,9 +56,10 @@ AFRAME.registerComponent('collide-listener', {
 
         //play chop sound
         //subtract health from tree
+        
 
       }
-      else if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand') ) 
+      else if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand') && (e.detail.body.el.getAttribute('id') != 'axe') ) 
       {
         e.detail.body.el.setAttribute('visible', 'false');
       }
