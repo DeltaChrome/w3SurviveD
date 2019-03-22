@@ -177,13 +177,14 @@ AFRAME.registerComponent("genterra-component", {
         window.GEO_VERTICES = geometry.vertices;
         
         //pointy tree
+
         for (let i = 0; i < 8; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(2));
             entity.setAttribute('obj-model', 'obj: #pointy_tree-obj');
-            entity.setAttribute('material', 'mtl: #pointy_tree-mat');
-            entity.setAttribute('scale', '0.2 0.2 0.2');
+            entity.setAttribute('material', 'src: #brown_Pointy');
+            entity.setAttribute('scale', '1 1 1');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             
@@ -195,8 +196,6 @@ AFRAME.registerComponent("genterra-component", {
             scene.appendChild(entity);
 
         } 
-
-
 
         for (let i = 0; i < 8; i++) {
             let entity = document.createElement('a-entity');
@@ -244,18 +243,7 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
-        for (let i = 0; i < 15; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-0.5));
-            entity.setAttribute('obj-model', 'obj: #tree_2-obj');
-            entity.setAttribute('material', 'src: #brownPointy');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-
-            scene.appendChild(entity);
-
-        }
+      
 
         let plane = new THREE.Mesh( geometry, material );
 
