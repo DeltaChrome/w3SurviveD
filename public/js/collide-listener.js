@@ -5,6 +5,7 @@ AFRAME.registerComponent('collide-listener', {
     // let leftHand = document.querySelector('#left-hand');
     let rightHand = document.querySelector('#hand');
     let rightHandActual = document.querySelector('#right-hand');
+    axeSound = document.querySelector('#createAxeSound');
     
     let axe = document.querySelector('#axeHB');
     // leftHand.addEventListener('collide', function (e) {
@@ -31,6 +32,8 @@ AFRAME.registerComponent('collide-listener', {
               console.log(hp);
 
               rightHandActual.components['haptics'].pulse(1.0, 200);
+              axeSound.setAttribute('sound', 'volume: 200');
+              axeSound.components['sound'].playSound();
 
               e.detail.body.el.setAttribute('object-status','hitPoints: ' + hp + ';');
               e.detail.body.el.setAttribute('object-status','dtSinceLastHit: ' + 2.0 + ';');  
