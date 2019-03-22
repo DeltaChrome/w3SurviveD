@@ -333,6 +333,7 @@ AFRAME.registerComponent("genterra-component", {
             //leftHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
             rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj, #largeRock; curveShootingSpeed: 20; ");
             rightHand.setAttribute('collide-listener', {});
+            //rightHand.setAttribute('haptics',{})
 
             let hand = document.querySelector('#hand');
             let rHand = document.querySelector('#right-hand');
@@ -357,17 +358,18 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('rotation', '0 0 0');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
-            entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
+           // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
+          //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
             entity.setAttribute('id', 'axe');
 
             scene.appendChild(entity);
             //entity.setAttribute('rotation', currentHandRotation);
             //rHand.appendChild(entity);
-
+            
             axeHB = document.createElement('a-box');
-            axeHB.setAttribute('static-body','shape: box; angularDamping: 1.0;');
-            axeHB.setAttribute('scale','0.5 0.5 1.5');
+            axeHB.setAttribute('static-body','shape: none; angularDamping: 1.0;');
+            axeHB.setAttribute('shape__axehead','shape: box; angularDamping: 1.0; halfExtents: 0.8 0.8 0.8; offset: 0 -1.5 -5.5;');
+            axeHB.setAttribute('scale','0.1 0.1 0.1');
             
            // axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
             axeHB.setAttribute('id','axeHB');

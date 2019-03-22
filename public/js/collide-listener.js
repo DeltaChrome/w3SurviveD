@@ -4,7 +4,9 @@ AFRAME.registerComponent('collide-listener', {
     let el = this.el;
     // let leftHand = document.querySelector('#left-hand');
     let rightHand = document.querySelector('#hand');
-    let axe = document.querySelector('#axe');
+    let rightHandActual = document.querySelector('#right-hand');
+    
+    let axe = document.querySelector('#axeHB');
     // leftHand.addEventListener('collide', function (e) {
     //   console.log('left hand collided' + e.detail.body.id);
 
@@ -26,7 +28,10 @@ AFRAME.registerComponent('collide-listener', {
             {
               let hp = e.detail.body.el.components['object-status'].data.hitPoints;
               hp = hp - 1;
-              //console.log(hp);
+              console.log(hp);
+
+              rightHandActual.components['haptics'].pulse(1.0, 200);
+
               e.detail.body.el.setAttribute('object-status','hitPoints: ' + hp + ';');
               e.detail.body.el.setAttribute('object-status','dtSinceLastHit: ' + 2.0 + ';');  
               if(hp == 0)
@@ -39,9 +44,7 @@ AFRAME.registerComponent('collide-listener', {
           }
       }
 
-
     });
-
 
     rightHand.addEventListener('collide', function (e) 
     {
