@@ -179,6 +179,7 @@ AFRAME.registerComponent("genterra-component", {
 
             entity.setAttribute('static-body', 'shape: box;');
             entity.setAttribute('id','rock' + i);
+            entity.setAttribute('class','Rock');
 
             scene.appendChild(entity);
 
@@ -197,6 +198,7 @@ AFRAME.registerComponent("genterra-component", {
 
             entity.setAttribute('static-body', 'shape: box; offset: 100 0 0;');
             entity.setAttribute('id','branch' + i);
+            entity.setAttribute('class','Branch');
 
             scene.appendChild(entity);
 
@@ -301,7 +303,9 @@ AFRAME.registerComponent("genterra-component", {
             box.setAttribute('object-status','hitPoints: 5;');
             box.setAttribute('id','popTreeH' + i);// + i
             box.setAttribute('visible', 'false');
+            box.setAttribute('class','ground');
             entity.appendChild(box);
+
             
         }
 
@@ -331,15 +335,13 @@ AFRAME.registerComponent("genterra-component", {
             const rightHand = document.querySelector("#right-hand");
             // teleport-controls=""
             //leftHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj;");
-            rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: #terrainGenerationObj, #largeRock; curveShootingSpeed: 20; ");
+            rightHand.setAttribute('teleport-controls', "cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; type: parabolic; collisionEntities: .ground; curveShootingSpeed: 10; ");
             rightHand.setAttribute('collide-listener', {});
             //rightHand.setAttribute('haptics',{})
 
             let hand = document.querySelector('#hand');
             let rHand = document.querySelector('#right-hand');
             let head = document.querySelector('#head');
-
-
 
             let currentHandRotation = rHand.getAttribute('rotation');
             let currentHandPosition = rHand.getAttribute('position');
@@ -357,6 +359,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('position','0 0 0');
             entity.setAttribute('rotation', '0 0 0');
             entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('visible', 'false');
             entity.setAttribute('shadow', 'receive:true');
            // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
           //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
@@ -379,44 +382,29 @@ AFRAME.registerComponent("genterra-component", {
 
         });
         terraObj.setObject3D('mesh', plane);
+        terraObj.setAttribute('class','ground');
 
-        // let helper = new THREE.VertexNormalsHelper( plane, 2, 0x00ff00, 1 );
-        // scene.object3D.add(helper);
+        // let waterGeo = new THREE.PlaneGeometry(1000, 1000);
+        // for (let i = 0; i < waterGeo.vertices.length; i++) 
+        // {
 
-        //console.log(document.querySelector('#terrainGenerationObj'));
+        //     waterGeo.vertices[i].z = -8;
 
-       // let sun = document.querySelector("#LightSUN");
-        // var waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
-		// 		water = new THREE.Water(waterGeometry,
-		// 			{
-		// 				textureWidth: 512,
-		// 				textureHeight: 512,
-		// 				waterNormals: new THREE.TextureLoader().load( '/assets/textures/WaterNormal.jpg', function ( texture ) {
-		// 					texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-		// 				} ),
-        //                 alpha: 1.0,
-                        
-        //                 //sunDirection: sun.position.clone().normalize(),
-        //                 sunDirection: '0 40 0',
-		// 				sunColor: 0xffffff,
-		// 				waterColor: new THREE.Color(0x001e0f),
-		// 				distortionScale: 3.7,
-		// 				fog: scene.fog !== undefined
-		// 			}
-		// 		);
-        // var uniforms = water.material.uniforms;           
-        let waterGeo = new THREE.PlaneGeometry(1000, 1000);
-        for (let i = 0; i < waterGeo.vertices.length; i++) 
-        {
-
-            waterGeo.vertices[i].z = -8;
-
-        }
+        // }
         let waterMaterial = new THREE.MeshStandardMaterial({ shader: 'ocean', color: "#2759aa" });
-        let waterPlane = new THREE.Mesh(waterGeo, waterMaterial);
-        waterPlane.rotateX(THREE.Math.degToRad(270));
+        //let waterPlane = new THREE.Mesh(waterGeo, waterMaterial);
+       // waterPlane.rotateX(THREE.Math.degToRad(270));
         
-        scene.object3D.add(waterPlane);
+        let waterEntity = document.createElement('a-entity');
+        waterEntity.setAttribute('geometry', 'primitive: plane; width: 1000; height: 1000;');
+        waterEntity.setAttribute('material', waterMaterial);
+        waterEntity.setAttribute('rotation','-90 0 0');
+        waterEntity.setAttribute('position','0 -8 0');
+        waterEntity.setAttribute('id','waterFloor');
+        waterEntity.setAttribute('class','ground');
+        scene.appendChild(waterEntity);
+
+       // scene.object3D.add(waterPlane);
   
             // water.rotation.x = - Math.PI / 2;
             // scene.object3D.add( water );

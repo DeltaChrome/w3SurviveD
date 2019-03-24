@@ -12,14 +12,5 @@ AFRAME.registerComponent("SpawnItems-component", {
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
-        //     entity.setAttribute('static-body', 'shape: box;');
-        //     entity.setAttribute('constraint','target: #right-hand; type: pointToPoint; targetPivot: 0 0 0; axis: 0 0 0;')
-        //     entity.setAttribute('id','axe');
-
-        //     scene.appendChild(entity);
-
-        // let hand = document.querySelector('#hand');
-        // hand.setAttribute('constraint', 'target: #LightSUN');
-        // hand.setAttribute('visible', 'true');
     }
 });

@@ -8,20 +8,14 @@ AFRAME.registerComponent('collide-listener', {
     axeSound = document.querySelector('#createAxeSound');
     
     let axe = document.querySelector('#axeHB');
-    // leftHand.addEventListener('collide', function (e) {
-    //   console.log('left hand collided' + e.detail.body.id);
-
-    //   e.detail.target.el;  // Original entity (playerEl).
-    //   e.detail.body.el;    // Other entity, which playerEl touched.
-    //   e.detail.contact;    // Stats about the collision (CANNON.ContactEquation).
-    //   e.detail.contact.ni; // Normal (direction) of the collision (CANNON.Vec3).
-    // });
-
-
 
     axe.addEventListener('collide', function (e) {
 
-      for(let i = 0; i < 5; i++)
+      if(window.TOOL_TYPE == 1)//might be good to reduce collision checks when we add a lot of trees
+      {
+
+      }
+      for(let i = 0; i < 5; i++)//change to select as i doesnt actually do anything here, i think
       {
           if(e.detail.body.el.getAttribute('id') == ('popTreeH' + i) && e.detail.body.el.components['object-status'].data.dtSinceLastHit <= 0)
           {
@@ -32,6 +26,7 @@ AFRAME.registerComponent('collide-listener', {
               console.log(hp);
 
               rightHandActual.components['haptics'].pulse(1.0, 200);
+              axeSound.setAttribute('position',axe.getAttribute('position'));
               axeSound.setAttribute('sound', 'volume: 200');
               axeSound.components['sound'].playSound();
 
@@ -43,10 +38,8 @@ AFRAME.registerComponent('collide-listener', {
                 currentTree.setAttribute('visible','false');  
               }
             }
-            
           }
       }
-
     });
 
     rightHand.addEventListener('collide', function (e) 
@@ -54,20 +47,26 @@ AFRAME.registerComponent('collide-listener', {
       console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
       console.log(window.IS_GRABBING);
       
-      if(e.detail.target.el.getAttribute('id') == 'axe')
+     if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand') && (e.detail.body.el.getAttribute('id') != 'axe') ) 
       {
-     
-        //e.detail.body.el.setAttribute('', 'false');
-        //e.detail.body.el.setAttribute('rotation', '0 0 0');
+        if (e.detail.body.el.getAttribute('visible'))
+        {
 
-        //play chop sound
-        //subtract health from tree
-        
+          e.detail.body.el.setAttribute('visible', 'false');
 
-      }
-      else if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand') && (e.detail.body.el.getAttribute('id') != 'axe') ) 
-      {
-        e.detail.body.el.setAttribute('visible', 'false');
+          if (e.detail.body.el.getAttribute('class') == 'Rock') 
+          {
+              window.NUM_ROCKS += 1;
+          }
+          else if (e.detail.body.el.getAttribute('class') == 'Branch')
+          {
+              window.NUM_TWIGS += 1;
+          }
+          else if (e.detail.body.el.getAttribute('class') == 'Leaves')
+          {
+              window.NUM_LEAVES += 1;
+          }
+        }
       }
 
       // e.detail.target.el;  // Original entity (playerEl).
