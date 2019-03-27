@@ -157,12 +157,22 @@ AFRAME.registerComponent("genterra-component", {
         geometry.rotateX(THREE.Math.degToRad(270));
 
         var locationStack = [];
+        var tryAgain = false;
         //locations of the objects
         function generatePositionVector(off)
         {
             let vertexIndex = generateNumber(100);
 
-            
+            console.log("------------" + locationStack[0]);
+
+                for (let i = 0; i < locationStack.length; i++){
+                    if(vertexIndex = locationStack[i]){
+                        vertexIndex = generateNumber(100);
+                        i=0;
+                    }
+                }
+
+
             locationStack.push(vertexIndex);
             console.log("------------" + locationStack[0]);
 
