@@ -586,7 +586,7 @@ AFRAME.registerComponent("genterra-component", {
   
             // water.rotation.x = - Math.PI / 2;
             // scene.object3D.add( water );
-        document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y + 1) + " " + window.GEO_VERTICES[55].z);
+        document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y + 1.7) + " " + window.GEO_VERTICES[55].z);
         //document.querySelector('#head').setAttribute('position', '0 0 0');
 
     },
