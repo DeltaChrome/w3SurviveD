@@ -31,10 +31,13 @@
         //spawining an object
         socket.on('Spawn_Object', function(data) {
                      
+
+            //need to create switch statement for data
+            //check to see what tool to spawn
             window.TOOL_TYPE = 1;
             document.querySelector('axe').setAttribute('visible','true');
             //NEED EVENT LISTERN TO DETECT WHICH TOOL IS SELECTED//
-      
+        
             //create rgb color string for css
             let confirmationStr = 'boolean: ' + data.b + '.';
             console.log("boolean received: " + confirmationStr);
