@@ -29,7 +29,7 @@ AFRAME.registerComponent('collide-listener', {
               axeSound.setAttribute('position',axe.getAttribute('position'));
               axeSound.setAttribute('sound', 'volume: 200');
               axeSound.components['sound'].playSound();
-
+              
               e.detail.body.el.setAttribute('object-status','hitPoints: ' + hp + ';');
               e.detail.body.el.setAttribute('object-status','dtSinceLastHit: ' + 2.0 + ';');  
               if(hp == 0)

@@ -53,6 +53,20 @@ AFRAME.registerComponent("runtime", {
             axeHB.setAttribute('rotation', axe.getAttribute('rotation'));
             
         }
+
+
+
+
+        //update server with players inventory
+        let inv = 
+        {
+            rocks: window.NUM_ROCKS,
+            twigs: window.NUM_TWIGS,
+            leaves: window.NUM_LEAVES
+        }
+        //call event updateInventory
+
+
      
         // console.log(axe.getAttribute('position'));
         // console.log('running');

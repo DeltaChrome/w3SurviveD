@@ -66,7 +66,13 @@ socketIO.on('connection', function(socket) {
 
     socket.on('SpwnObj', function(data) {
         console.log('SpwnObj event heard');
-        socketIO.sockets.emit('Spawn_Object', {b:true});
+        socketIO.sockets.emit('Spawn_Object', data);
+    });
+
+    socket.on('createObject', function(data) {
+        console.log('create event heard');
+
+        socketIO.sockets.emit('SpwnObj', data);
     });
 });
 

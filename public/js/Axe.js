@@ -37,7 +37,6 @@ Material_B.onclick = function(){MaterialButton_B()};
 ButtonMaterial.onclick = function(){myFunction()};
 ButtonTool.onclick = function(){AddtoGame()};
 
-
 window.setInterval(function(){
     progress();
 }, 100);
@@ -139,7 +138,6 @@ function MaterialButton_A(){
             {
                 console.log("Gasolin3");
             }
-
 
             if(touchCount_Rock === 6)
             {

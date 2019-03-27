@@ -37,18 +37,17 @@
             //spawn object
             window.TOOL_TYPE = 1;
             document.querySelector('axe').setAttribute('visible','true');
-            //NEED EVENT LISTERN TO DETECT WHICH TOOL IS SELECTED//
         
             //create rgb color string for css
-            let confirmationStr = 'boolean: ' + data.b + '.';
-            console.log("boolean received: " + confirmationStr);
+            // let confirmationStr = 'boolean: ' + data.b + '.';
+            // console.log("boolean received: " + confirmationStr);
         });
      </script>
     
 </head>
 <body>
     <!-- stats -->
-    <a-scene shadow="type: pcfbasic"  physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100;">
+    <a-scene shadow="type: pcfbasic"  stats physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: true;">
 
         <a-assets>
           
@@ -67,12 +66,13 @@
             <img id="pointylight" src="/assets/textures/LightGreenPointyTree.png">
             <img id="pointyBrown" src="/assets/textures/BrownPointyTree.png"> 
             <img id="pointyPurple" src="/assets/textures/PurplePointyTree.png">
+            <img id="Axe_1-mtl" src="/assets/textures/axesc.png"> 
 
             <img id="rock" src="/assets/textures/rock.png"> 
 
 
             <a-asset-item id="thicc-tree-obj" src="/assets/models/ThiccTree.obj"></a-asset-item>
-            <img id="Axe_1-mtl" src="/assets/textures/axesc.png"> 
+            
 
             <a-asset-item id="leftController" src="/assets/models/oculus-touch-controller-left.obj"></a-asset-item>
             <a-asset-item id="rightController" src="/assets/models/oculus-touch-controller-right.obj"></a-asset-item>
@@ -111,7 +111,7 @@
             <a-asset-item id="branch-obj" src=/assets/models/branch_1.obj></a-asset-item>
 
             <!-- adding our own models -->
-            <a-asset-item id="Axe_1-obj" src="/assets/models/axetest.obj"></a-asset-item>
+            <a-asset-item id="Axe_1-obj" src="/assets/models/Axe_v4.obj"></a-asset-item>
             <!-- <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item> -->
 
         </a-assets>
