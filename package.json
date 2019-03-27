@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/DeltaChrome/Lesson1WebVR#readme",
   "dependencies": {
+    "aframe-extras": "^6.0.0",
     "aframe-teleport-controls": "^0.3.1",
     "express": "^4.16.4",
     "socket.io": "^2.2.0"

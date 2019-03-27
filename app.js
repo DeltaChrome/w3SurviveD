@@ -72,7 +72,7 @@ socketIO.on('connection', function(socket) {
     socket.on('createObject', function(data) {
         console.log('create event heard');
 
-        socketIO.sockets.emit('SpwnObj', data);
+        socketIO.sockets.emit('Spawn_Object', data);
     });
 });
 

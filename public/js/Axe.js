@@ -265,10 +265,24 @@ function myFunction(){
 }
 
 function AddtoGame(){
-    
+
+    let socket = io();
+        
+        //default connect event
+        socket.on('connect', function() {
+            console.log("connected!");
+        });
 
     if(ToolComplete)
     {
+        let toolType =
+        {
+            tool: 1
+        }
+
+        let toolTypeJSON = JSON.stringify(toolType);
+
+        socket.emit('createObject', toolTypeJSON);
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";

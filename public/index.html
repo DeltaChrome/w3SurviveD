@@ -13,11 +13,11 @@
      <script src="js/aframe-teleport-controls.js"></script>
      <script src="js/aframe-physics-system.js"></script>
      <script src="js/grab-listener.js"></script>
-     <script src="js/mesh-smooth.js"></script>
+     <!-- <script src="js/mesh-smooth.js"></script> -->
      <script src="js/Water.js"></script>
      <script src="js/object-status.js"></script>
      <script src="https://unpkg.com/aframe-haptics-component/dist/aframe-haptics-component.min.js"></script>
-    
+     <script src= "https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
      <!-- <script src="js/aframe-teleport-controls.min.js"></script> -->
      <script src="/socket.io/socket.io.js"></script>
      <script>
@@ -29,15 +29,33 @@
         });
         
         //spawining an object
-        socket.on('Spawn_Object', function(data) {
+        socket.on('Spawn_Object', function(toolTypeJSON) {
                      
-
+            let toolType = JSON.parse(toolTypeJSON);
+            let a = document.querySelector('#axe'); 
+            console.log(toolType.tool);
+            switch(toolType.tool)
+            {
+                case 0:
+                    window.TOOL_TYPE = 0;
+                    a.setAttribute('visible','false');   
+                break;
+                case 1:
+                    window.TOOL_TYPE = 1;
+                    a.setAttribute('visible','true');   
+                    console.log("added axe");
+                break;
+                case 2:
+                
+                break;
+                case 3:
+                
+                break;
+            }
             //need to create switch statement for data
             //check to see what tool to spawn
             //spawn object
-            window.TOOL_TYPE = 1;
-            document.querySelector('axe').setAttribute('visible','true');
-        
+               
             //create rgb color string for css
             // let confirmationStr = 'boolean: ' + data.b + '.';
             // console.log("boolean received: " + confirmationStr);
@@ -79,6 +97,8 @@
             <a-asset-item id="rightController-mat" src="/assets/textures/oculus-touch-controller-right.mtl"></a-asset-item>
             <a-asset-item id="leftController-mat" src="/assets/textures/oculus-touch-controller-left.mtl"></a-asset-item>
             
+            <a-asset-item id="log-obj" src="/assets/models/Log_1.obj"></a-asset-item>
+
             <a-asset-item id="tree_1-obj" src="/assets/models/poptree.obj"></a-asset-item>
             <a-asset-item id="water-obj" src="/assets/models/plue.obj"></a-asset-item>
             <a-asset-item id="tree_1-mat" src="/assets/textures/tree_1_1.mtl"></a-asset-item>
@@ -111,7 +131,7 @@
             <a-asset-item id="branch-obj" src=/assets/models/branch_1.obj></a-asset-item>
 
             <!-- adding our own models -->
-            <a-asset-item id="Axe_1-obj" src="/assets/models/Axe_v4.obj"></a-asset-item>
+            <a-asset-item id="Axe_1-obj" src="/assets/models/axetest.obj"></a-asset-item>
             <!-- <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item> -->
 
         </a-assets>
@@ -123,7 +143,7 @@
         </a-entity>
         
         <!-- SOUNDS -->
-        <a-entity id="createAxeSound" sound="src: #axeSound; poolSize: 5"></a-entity>
+        <a-entity id="createAxeSound" sound="src: #axeSound;"></a-entity>
 
         <!-- Lights< -->
         <a-entity id="LightSUN" light="type:directional; 
@@ -150,7 +170,7 @@
 
         <a-entity light="type: ambient;  color:#e0d498;  intensity:0.3;"></a-entity>
         <!-- Lights> -->
-
+        <a-ocean position="0 -8 0" color="#2759aa" depth="200" width="200" opacity="1" density="0.00025"></a-ocean>
         <a-entity id="cameraRig" position="0 0 0">
             <!-- camera -->
             <a-entity id="head" camera wasd-controls look-controls></a-entity>

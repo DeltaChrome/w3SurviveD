@@ -1,6 +1,5 @@
 window.GEO_VERTICES;
 
-
 AFRAME.registerComponent("genterra-component", {
     
     init: function ()
@@ -45,7 +44,6 @@ AFRAME.registerComponent("genterra-component", {
                            pitch = w;
                        }
                         
-
                         sampleX1 = Math.floor(Math.floor((x / pitch)) * pitch);
                         sampleY1 = Math.floor(Math.floor((y / pitch)) * pitch);
                         
@@ -229,7 +227,7 @@ AFRAME.registerComponent("genterra-component", {
 
 
 ////////////////////////////////////////////Rocks///////////////////////////////////////////////
-/*
+
         for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
@@ -354,8 +352,11 @@ AFRAME.registerComponent("genterra-component", {
             scene.appendChild(entity);
 
         }
-        */
+        
         /////////////////////////////////popcorn trees/////////////////////////////////////////
+        //let treePositions = {};
+        
+        let numTrees = 0;
 
         for (let i = 0; i < 10; i++) {
             let entity = document.createElement('a-entity');
@@ -369,6 +370,16 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('static-body','shape: box;');
             entity.setAttribute('constraint','collideConnected: false;');
             entity.setAttribute('id','popTree' + i);
+           // treepositions[numTrees] = entity.getAttribute('position');
+            //numTrees += 1;
+
+
+            let tree =
+            {
+            position: entity.getAttribute('position')
+            }
+
+            //console.log("created tree with id: " + entity.getAttribute('id'));
             scene.appendChild(entity);
             let box = document.createElement('a-box');
             box.setAttribute('dynamic-body','shape: box; linearDamping: 1.0; angularDamping: 1.0;');
@@ -379,7 +390,6 @@ AFRAME.registerComponent("genterra-component", {
             box.setAttribute('visible', 'false');
             box.setAttribute('class','ground');
             entity.appendChild(box);
-
             
         }
 
@@ -392,7 +402,8 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
             entity.setAttribute('scale', '0.8 0.8 0.8');            
-
+           // treepositions[numTrees] = entity.getAttribute('position');
+          //  numTrees += 1;
             scene.appendChild(entity);
 
         }
@@ -406,7 +417,8 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
             entity.setAttribute('scale', '0.8 0.8 0.8');            
-
+          //  treepositions[numTrees] = entity.getAttribute('position');
+          //  numTrees += 1;
             scene.appendChild(entity);
 
         }
@@ -420,7 +432,8 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
             entity.setAttribute('scale', '0.8 0.8 0.8');            
-
+           // treepositions[numTrees] = entity.getAttribute('position');
+           // numTrees += 1;
             scene.appendChild(entity);
 
         }
@@ -501,6 +514,30 @@ AFRAME.registerComponent("genterra-component", {
         }
         */
 
+
+        //CHECK ALL POSITIONS OF TREES TO AVOID STACKING
+        // for(let i = 0; i < numTrees; i++)
+        // {
+        //    // if(i != (numTrees-1))
+        //    // {
+        //         for(let j = 0; j < numTrees; j++)
+        //         {
+        //             while(treePositions[i] == treePositions[j] && i != j)
+        //             {
+        //                 //colliding and need to be moved to a different vertex
+                        
+        //             }
+        //         }
+        //   //  }
+        //   //  else
+        //   //  {
+
+        //   //  }
+        //     //move tree to new location
+        //     //update tree array for new location
+        // }
+            
+
         let plane = new THREE.Mesh( geometry, material );
 
         plane.castShadow = true;
@@ -556,6 +593,36 @@ AFRAME.registerComponent("genterra-component", {
             axeHB.setAttribute('id','axeHB');
             axeHB.setAttribute('visible', 'false');
             scene.appendChild(axeHB)
+
+
+            //********************************* CODE FOR NEXT TOOL ********************************/
+        //     entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
+        //     entity.setAttribute('material', 'src: #Axe_1-mtl');
+        //     entity.setAttribute('scale', '0.2 0.2 0.2');
+        //     entity.setAttribute('position','0 0 0');
+        //     entity.setAttribute('rotation', '0 0 0');
+        //     entity.setAttribute('shadow', 'cast:true');
+        //     entity.setAttribute('visible', 'false');
+        //     entity.setAttribute('shadow', 'receive:true');
+        //    // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
+        //   //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
+        //     entity.setAttribute('id', 'axe');
+
+        //     scene.appendChild(entity);
+        //     //entity.setAttribute('rotation', currentHandRotation);
+        //     //rHand.appendChild(entity);
+            
+        //     axeHB = document.createElement('a-box');
+        //     axeHB.setAttribute('static-body','shape: none; angularDamping: 1.0;');
+        //     axeHB.setAttribute('shape__axehead','shape: box; angularDamping: 1.0; halfExtents: 0.8 0.8 0.8; offset: 0 -1.5 -5.5;');
+        //     axeHB.setAttribute('scale','0.1 0.1 0.1');
+            
+        //    // axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
+        //     axeHB.setAttribute('id','axeHB');
+        //     axeHB.setAttribute('visible', 'false');
+        //     scene.appendChild(axeHB)
+            //********************************* CODE FOR NEXT TOOL ********************************/
+
             //console.log(Context_AF.el.getObject3D('mesh'));
 
         });
@@ -569,15 +636,16 @@ AFRAME.registerComponent("genterra-component", {
         //     waterGeo.vertices[i].z = -8;
 
         // }
-        let waterMaterial = new THREE.MeshStandardMaterial({ shader: 'ocean', color: "#2759aa" });
+        let waterMaterial = new THREE.MeshStandardMaterial({ shader: 'ocean', color: "#24529e" });
         //let waterPlane = new THREE.Mesh(waterGeo, waterMaterial);
        // waterPlane.rotateX(THREE.Math.degToRad(270));
-        
+        waterMaterial.roughness = 0.9;
+        waterMaterial.metalness = 0.0;
         let waterEntity = document.createElement('a-entity');
         waterEntity.setAttribute('geometry', 'primitive: plane; width: 1000; height: 1000;');
         waterEntity.setAttribute('material', waterMaterial);
         waterEntity.setAttribute('rotation','-90 0 0');
-        waterEntity.setAttribute('position','0 -8 0');
+        waterEntity.setAttribute('position','0 -9 0');
         waterEntity.setAttribute('id','waterFloor');
         waterEntity.setAttribute('class','ground');
         scene.appendChild(waterEntity);
@@ -586,7 +654,13 @@ AFRAME.registerComponent("genterra-component", {
   
             // water.rotation.x = - Math.PI / 2;
             // scene.object3D.add( water );
-        document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y + 1.7) + " " + window.GEO_VERTICES[55].z);
+        //let headthing = document.querySelector('#head');
+        //document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[55].x + " " + (window.GEO_VERTICES[55].y) + " " + window.GEO_VERTICES[55].z);
+        //console.log("position before: "+ headthing.getAttribute('position').y);
+        //document.querySelector('#head').setAttribute('position', window.GEO_VERTICES[0].x + " " + (window.GEO_VERTICES[0].y) + " " + window.GEO_VERTICES[0].z);
+        //console.log("position before: "+ headthing.getAttribute('position').y);        
+
+        //document.querySelector('#cameraRig').setAttribute('position',  {x:cameraRig.x,y:cameraRig.y,z:cameraRig.z});
         //document.querySelector('#head').setAttribute('position', '0 0 0');
 
     },

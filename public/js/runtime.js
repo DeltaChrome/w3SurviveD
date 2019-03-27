@@ -51,6 +51,7 @@ AFRAME.registerComponent("runtime", {
     
             axeHB.setAttribute('position', {x:axeHBX, y:axeHBY ,z:axeHBZ});
             axeHB.setAttribute('rotation', axe.getAttribute('rotation'));
+            //console.log('setting position');
             
         }
 
