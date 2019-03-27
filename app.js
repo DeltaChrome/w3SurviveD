@@ -26,6 +26,18 @@ app.get('/controller', function(req,res) {
     res.sendFile(__dirname + '/public/controller.html');
 });
 
+app.get('/axe', function(req,res) {
+    res.sendFile(__dirname + '/public/axe.html');
+});
+
+app.get('/firebow', function(req,res) {
+    res.sendFile(__dirname + '/public/firebow.html');
+});
+
+app.get('/hammer', function(req,res) {
+    res.sendFile(__dirname + '/public/hammer.html');
+});
+
 //websocket stuff
 socketIO.on('connection', function(socket) {
     console.log(socket.id + ' has connected!');
