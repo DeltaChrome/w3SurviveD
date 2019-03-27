@@ -25,10 +25,10 @@ let ToolA = document.getElementById("ToolA");
 let ToolB = document.getElementById("ToolB");
 let ToolC = document.getElementById("ToolC");
 let progressBar = document.getElementById("Bar");
-let progressText = document.getElementById("progressText");
+let progressText = document.getElementById("Hint");
 let ButtonMaterial = document.getElementById("MatButton");
 let ButtonTool = document.getElementById("ToolButton");
-let hint = document.getElementById("Hint");
+let hint = document.getElementById("progressText");
 hint.className = 'hide';
 
 //OnClicks
@@ -60,8 +60,8 @@ function progress()
     {
     rockProgress = (touchCount_Rock/5)* 100;
     progressBar.style.marginRight = (1 - (touchCount_Rock/5))* 100 + "%";
-    Material_A.style.width = '250px';
-    Material_A.style.height = '150px';
+    // Material_A.style.width = '250px';
+    // Material_A.style.height = '150px';
     progressText.innerHTML = "CRAFTING PROGRESS " + rockProgress + "%";
     }
 
@@ -69,8 +69,8 @@ function progress()
     {
     stickProgress = (touchCount_Stick/5)* 100;
     progressBar.style.marginRight = (1 - (touchCount_Stick/5))* 100 + "%";
-    Material_B.style.width = '100px';
-    Material_B.style.height = '150px';
+    // Material_B.style.width = '100px';
+    // Material_B.style.height = '150px';
     progressText.innerHTML = "CRAFTING PROGRESS " + (stickProgress) + "%";
     }
     else{
@@ -247,7 +247,7 @@ function myFunction(){
         stickActive = false;
         active = true;
         console.log("RockAdded");
-        Material_A.style.bottom = "50%";
+        // Material_A.style.bottom = "50%";
         return;
     }
     if(SelectedItem === "Stick" && !craftDone_Stick)
@@ -259,7 +259,7 @@ function myFunction(){
         rockActive = false;
         active = true;
         console.log("StickAdded");
-        Material_B.style.bottom = "40%";
+        // Material_B.style.bottom = "40%";
         return;
     }
 }

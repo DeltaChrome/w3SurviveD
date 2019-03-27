@@ -25,7 +25,7 @@ let ToolA = document.getElementById("ToolA");
 let ToolB = document.getElementById("ToolB");
 let ToolC = document.getElementById("ToolC");
 let progressBar = document.getElementById("Bar");
-let progressText = document.getElementById("progressText");
+let progressText = document.getElementById("Hint");
 let ButtonMaterial = document.getElementById("MatButton");
 let ButtonTool = document.getElementById("ToolButton");
 
@@ -35,7 +35,7 @@ Material_B.onclick = function(){MaterialButton_B()};
 ButtonMaterial.onclick = function(){myFunction()};
 ButtonTool.onclick = function(){AddtoGame()};
 
-let hint = document.getElementById("Hint");
+let hint = document.getElementById("progressText");
 hint.className = 'hide';
 
 window.setInterval(function(){
@@ -238,7 +238,7 @@ function myFunction(){
         stickActive = false;
         active = true;
         console.log("RockAdded");
-        Material_A.style.bottom = "50%";
+        // Material_A.style.bottom = "50%";
         return;
     }
     if(SelectedItem === "Stick" && !craftDone_Stick)
@@ -250,7 +250,7 @@ function myFunction(){
         rockActive = false;
         active = true;
         console.log("StickAdded");
-        Material_B.style.bottom = "40%";
+        // Material_B.style.bottom = "40%";
         return;
     }
 }
