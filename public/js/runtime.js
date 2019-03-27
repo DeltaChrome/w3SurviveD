@@ -1,3 +1,10 @@
+window.LAST_TIME;
+window.DELTA_TIME;
+window.NUM_ROCKS;
+window.NUM_TWIGS;
+window.NUM_LEAVES;
+window.TOOL_TYPE;//hands(0), axe(1), firebow(2), hammer(3)
+
 AFRAME.registerComponent("runtime", {
     schema:
     {
@@ -5,71 +12,50 @@ AFRAME.registerComponent("runtime", {
     // PlayerGX: {type: int, default: 5},
     // PlayerGY: {type: int, default: 5}
 
-
-
     },
 
     init: function ()
     {
-        
+        window.LAST_TIME = Date.now();
+        window.TOOL_TYPE = 0;
     },
 
     tick: function()
     {
-        //console.log("running...");
- 
-        //𝐴𝑥 + 𝐵𝑦 + 𝐶𝑧 + 𝐷 = 0
-        //-D = 𝐴𝑥 + 𝐵𝑦 + 𝐶𝑧
-        //x = player.x etc.
-        //list of 100, every 10 is the edge every two plus 10 is the point underneath
-        //vertex 1(i = 1) vertex 2(j = 2)
-        //vertex 3(i + 10) vertex 4(j + 10)
+       
+        let currentTime = Date.now();
+        window.DELTA_TIME = currentTime - window.LAST_TIME;
+        window.LAST_TIME  = currentTime;
 
-
-
-        // this.data.PlayerGX;
-        // this.data.PlayerGY;
-        // //9 rows/9 loops
-
-        // lastPos = 0;//get camera position
-        // nextPos = 0;//get camera position
-
-        // VectorLN = lastPos - nextPos;
-        // MagLN = sqrt((VectorLN.x ^ 2) + (VectorLN.y ^ 2) + (VectorLN.z ^ 2));
-
-        // if(!(MagLN.x == 0 && MagLN.y == 0 && MagLN.z == 0))
-        // {
-
-        //     console.log("vector: ", VectorLN);
-        //     console.log("magnitude: ", MagLN);
-
-        // }
-
-
-
-        //make a box that the player is in, then find all the coords of terrain geo that fit inside said box
-        //then take those and check to see which triangle of the possible planes in that box
-        //take vertices from that triangle to make plane equation
+        let hand = document.querySelector('#right-hand').getAttribute('rotation');
+        let handpos = document.querySelector('#right-hand').getAttribute('position');
+        let cameraRigPos = document.querySelector('#cameraRig').getAttribute('position');
         
+        let actualHandX = handpos.x + cameraRigPos.x;
+        let actualHandY = handpos.y + cameraRigPos.y;
+        let actualHandZ = handpos.z + cameraRigPos.z;
+        //console.log(cameraRigPos);
+        //console.log("positions added: ", actualHandX);
+        //let actualHand = cameraRigPos + handpos;
 
-
-        //console.log(window.GEO_VERTICES[0].z);
-
-        //GET PLAYER X,Z POS
-        //let p = document.querySelector('#Player').getAttribute("position");
-        let cam = document.querySelector('#head').getAttribute("position");
-        //console.log(cam);
-        
-        //THIS LINE OF CODE WORKS
-        //document.querySelector('#Camera').setAttribute('position', {x:20, y:200, z:20});
-
-        //console.log(p.x," ",p.z)
-
-        // for(let i = 0; i < window.GEO_VERTICES; i++)
-        // {
-        //     console.log(i);
-        // }
-
+        if(window.TOOL_TYPE == 1)
+        {
+            let axe = document.querySelector('#axe');
+            let axeHB = document.querySelector('#axeHB');
+            axe.setAttribute('rotation', hand);
+            axe.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
+    
+            let axeHBX = axe.getAttribute('position').x;
+            let axeHBY = axe.getAttribute('position').y;
+            let axeHBZ = axe.getAttribute('position').z;
+    
+            axeHB.setAttribute('position', {x:axeHBX, y:axeHBY ,z:axeHBZ});
+            axeHB.setAttribute('rotation', axe.getAttribute('rotation'));
+            
+        }
+     
+        // console.log(axe.getAttribute('position'));
+        // console.log('running');
     }
 
 });

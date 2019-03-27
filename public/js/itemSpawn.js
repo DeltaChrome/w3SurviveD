@@ -9,8 +9,8 @@ AFRAME.registerComponent("SpawnItems-component", {
             entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
             entity.setAttribute('material', 'mtl: #Axe_1-mat');
             entity.setAttribute('scale', '100 100 100');
-
-            scene.appendChild(entity);
+            entity.setAttribute('shadow', 'cast:true');
+            entity.setAttribute('shadow', 'receive:true');
 
     }
 });
