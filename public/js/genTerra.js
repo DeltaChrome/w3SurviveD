@@ -168,10 +168,11 @@ AFRAME.registerComponent("genterra-component", {
         window.GEO_VERTICES = geometry.vertices;
         ///////////////////////////////////////Pointy trees///////////////////////////////////////////
         
+        //green pointy
         for (let i = 0; i < 1; i++) {
             console.log("created Tree");
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
+            entity.setAttribute('position', generatePositionVector(-1));
             entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
             entity.setAttribute('material', 'src: #pointyGreen');
             entity.setAttribute('shadow', 'cast:true');
@@ -183,9 +184,10 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
+        //light green pointy
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
+            entity.setAttribute('position', generatePositionVector(-1));
             entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
             entity.setAttribute('material', 'src: #pointylight');
             entity.setAttribute('shadow', 'cast:true');
@@ -197,9 +199,10 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
+        //brown pointy
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
+            entity.setAttribute('position', generatePositionVector(-1));
             entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
             entity.setAttribute('material', 'src: #pointyBrown');
             entity.setAttribute('shadow', 'cast:true');
@@ -211,9 +214,10 @@ AFRAME.registerComponent("genterra-component", {
 
         }
 
+        //purple pointy
         for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
+            entity.setAttribute('position', generatePositionVector(-1));
             entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
             entity.setAttribute('material', 'src: #pointyPurple');
             entity.setAttribute('shadow', 'cast:true');
@@ -230,6 +234,7 @@ AFRAME.registerComponent("genterra-component", {
 
 ////////////////////////////////////////////Rocks///////////////////////////////////////////////
 
+        //rock 1
         for (let i = 0; i < 5; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
@@ -244,6 +249,7 @@ AFRAME.registerComponent("genterra-component", {
 
         } 
 
+        //
         for (let i = 0; i < 5; i++) {
             let bush = new THREE.MeshStandardMaterial({ color: "#304f11" });
             let entity = document.createElement('a-entity');
