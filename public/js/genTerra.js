@@ -164,67 +164,6 @@ AFRAME.registerComponent("genterra-component", {
         }
 
         window.GEO_VERTICES = geometry.vertices;
-        ///////////////////////////////////////Pointy trees///////////////////////////////////////////
-        
-        for (let i = 0; i < 1; i++) {
-            console.log("created Tree");
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
-            entity.setAttribute('material', 'src: #pointyGreen');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '1 1 1');            
-
-            scene.appendChild(entity);
-
-        }
-
-        for (let i = 0; i < 1; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
-            entity.setAttribute('material', 'src: #pointylight');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
-
-            scene.appendChild(entity);
-
-        }
-
-        for (let i = 0; i < 1; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
-            entity.setAttribute('material', 'src: #pointyBrown');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
-
-            scene.appendChild(entity);
-
-        }
-
-        for (let i = 0; i < 1; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
-            entity.setAttribute('material', 'src: #pointyPurple');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
-
-            scene.appendChild(entity);
-
-        }
-
-
-
 
 ////////////////////////////////////////////Rocks///////////////////////////////////////////////
 
@@ -344,7 +283,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #rock5-obj');
-            entity.setAttribute('material', 'mtl: #rock5-mat');
+            entity.setAttribute('material', 'mtl: #rock5-mat');+
             entity.setAttribute('scale', '4 4 4');          
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
@@ -354,15 +293,79 @@ AFRAME.registerComponent("genterra-component", {
         }
         
         /////////////////////////////////popcorn trees/////////////////////////////////////////
-        //let treePositions = {};
+        treePositions = new Array();
         
         let numTrees = 0;
 
-        for (let i = 0; i < 10; i++) {
+        for(let i = 0; i < 48; i++)
+        {
             let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #tree_1-obj');
-            entity.setAttribute('material', 'src: #popcornGreen');
+
+            currentTreePosition = generatePositionVector(-1.5);
+
+            for(let j = 0; j < treePositions.length; j++)
+            {
+                if(currentTreePosition == treePositions[j])
+                {
+
+                    console.log("changing position");
+                    onsole.log(j);
+                    currentTreePosition = generatePositionVector(-1.5);
+                    j = 0;
+
+                }
+            }
+
+            treePositions.push(currentTreePosition);
+            console.log("added tree");
+            console.log("current tree" + currentTreePosition);
+
+            entity.setAttribute('position', currentTreePosition);
+            if(i < 10)
+            {
+                entity.setAttribute('obj-model', 'obj: #tree_1-obj');                
+                entity.setAttribute('material', 'src: #popcornGreen-mtl');
+              
+            }
+            else if (i < 20)
+            {
+                entity.setAttribute('obj-model', 'obj: #tree_1-obj');                
+                entity.setAttribute('material', 'src: #popcornYellow-mtl');
+              
+            }
+            else if(i < 30)
+            {
+                entity.setAttribute('obj-model', 'obj: #tree_1-obj');                                
+                entity.setAttribute('material', 'src: #popcornRed-mtl');
+                
+            }
+            else if(i < 40)
+            {
+                entity.setAttribute('obj-model', 'obj: #tree_1-obj');                                
+                entity.setAttribute('material', 'src: #popcornPurple-mtl');
+                
+            }
+            else if(i < 42)
+            {
+                entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
+                entity.setAttribute('material', 'src: #pointyGreen-mtl');
+            }
+            else if(i < 44)
+            {
+                entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
+                entity.setAttribute('material', 'src: #pointylight-mtl');
+            }
+            else if(i < 46)
+            {
+                entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
+                entity.setAttribute('material', 'src: #pointyBrown-mtl');
+            }
+            else if(i < 48)
+            {
+                entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
+                entity.setAttribute('material', 'src: #pointyPurple-mtl');
+            }
+
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
@@ -370,16 +373,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('static-body','shape: box;');
             entity.setAttribute('constraint','collideConnected: false;');
             entity.setAttribute('id','popTree' + i);
-           // treepositions[numTrees] = entity.getAttribute('position');
-            //numTrees += 1;
 
-
-            let tree =
-            {
-            position: entity.getAttribute('position')
-            }
-
-            //console.log("created tree with id: " + entity.getAttribute('id'));
             scene.appendChild(entity);
             let box = document.createElement('a-box');
             box.setAttribute('dynamic-body','shape: box; linearDamping: 1.0; angularDamping: 1.0;');
@@ -390,153 +384,10 @@ AFRAME.registerComponent("genterra-component", {
             box.setAttribute('visible', 'false');
             box.setAttribute('class','ground');
             entity.appendChild(box);
-            
+
+         
         }
 
-        for (let i = 0; i < 10; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #tree_1-obj');
-            entity.setAttribute('material', 'src: #popcornYellow');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
-           // treepositions[numTrees] = entity.getAttribute('position');
-          //  numTrees += 1;
-            scene.appendChild(entity);
-
-        }
-
-        for (let i = 0; i < 10; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #tree_1-obj');
-            entity.setAttribute('material', 'src: #popcornRed');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
-          //  treepositions[numTrees] = entity.getAttribute('position');
-          //  numTrees += 1;
-            scene.appendChild(entity);
-
-        }
-
-        for (let i = 0; i < 10; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #tree_1-obj');
-            entity.setAttribute('material', 'src: #popcornPurple');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
-           // treepositions[numTrees] = entity.getAttribute('position');
-           // numTrees += 1;
-            scene.appendChild(entity);
-
-        }
-      
-        //////////////////////////////////Thicc Tree////////////////////////////////////
-        
-        for (let i = 0; i < 1; i++) {
-            
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
-            entity.setAttribute('material', 'src: #pointyGreen');
-            // entity.setAttribute('shadow', 'cast:true');
-            // entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '1 1 1');            
-
-            scene.appendChild(entity);
-            console.log("wy");
-        }
-
-        for (let i = 0; i < 1; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
-            entity.setAttribute('material', 'src: #pointylight');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '1 1 1');            
-
-            scene.appendChild(entity);
-
-        }
-
-        for (let i = 0; i < 1; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
-            entity.setAttribute('material', 'src: #pointyBrown');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '1 1 1');            
-
-            scene.appendChild(entity);
-
-        }
-
-        for (let i = 0; i < 1; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-1.5));
-            entity.setAttribute('obj-model', 'obj: #thicc-tree-obj');
-            entity.setAttribute('material', 'src: #pointyPurple');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '1 1 1');            
-
-            scene.appendChild(entity);
-
-        }
-        
-
-        /*
-        for (let i = 0; i < 5; i++) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('position', generatePositionVector(-0.5));
-            entity.setAttribute('obj-model', 'obj: #tree_2-obj');
-            entity.setAttribute('material', 'src: #tree_2-mat');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('static-body','shape: box;');
-            entity.setAttribute('id','iceTree' + i);
-            scene.appendChild(entity);
-
-        }
-        */
-
-
-        //CHECK ALL POSITIONS OF TREES TO AVOID STACKING
-        // for(let i = 0; i < numTrees; i++)
-        // {
-        //    // if(i != (numTrees-1))
-        //    // {
-        //         for(let j = 0; j < numTrees; j++)
-        //         {
-        //             while(treePositions[i] == treePositions[j] && i != j)
-        //             {
-        //                 //colliding and need to be moved to a different vertex
-                        
-        //             }
-        //         }
-        //   //  }
-        //   //  else
-        //   //  {
-
-        //   //  }
-        //     //move tree to new location
-        //     //update tree array for new location
-        // }
-            
 
         let plane = new THREE.Mesh( geometry, material );
 
@@ -563,24 +414,24 @@ AFRAME.registerComponent("genterra-component", {
 
             console.log(currentHandRotation);
          
-            let entity = document.createElement('a-entity');
+            let axeEntity = document.createElement('a-entity');
 
             // entity.setAttribute('position', rHand.getAttribute('position'));
             // entity.setAttribute('rotation', rHand.getAttribute('rotation'));
 
-            entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
-            entity.setAttribute('material', 'src: #Axe_1-mtl');
-            entity.setAttribute('scale', '0.2 0.2 0.2');
-            entity.setAttribute('position','0 0 0');
-            entity.setAttribute('rotation', '0 0 0');
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('visible', 'false');
-            entity.setAttribute('shadow', 'receive:true');
+            axeEntity.setAttribute('obj-model', 'obj: #Axe_1-obj');
+            axeEntity.setAttribute('material', 'src: #Axe_1-mtl');
+            axeEntity.setAttribute('scale', '0.2 0.2 0.2');
+            axeEntity.setAttribute('position','0 0 0');
+            axeEntity.setAttribute('rotation', '0 0 0');
+            axeEntity.setAttribute('shadow', 'cast:true');
+            axeEntity.setAttribute('visible', 'false');
+            axeEntity.setAttribute('shadow', 'receive:true');
            // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
           //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
-            entity.setAttribute('id', 'axe');
+          axeEntity.setAttribute('id', 'axe');
 
-            scene.appendChild(entity);
+            scene.appendChild(axeEntity);
             //entity.setAttribute('rotation', currentHandRotation);
             //rHand.appendChild(entity);
             
@@ -594,24 +445,25 @@ AFRAME.registerComponent("genterra-component", {
             axeHB.setAttribute('visible', 'false');
             scene.appendChild(axeHB)
 
-
             //********************************* CODE FOR NEXT TOOL ********************************/
-        //     entity.setAttribute('obj-model', 'obj: #Axe_1-obj');
-        //     entity.setAttribute('material', 'src: #Axe_1-mtl');
-        //     entity.setAttribute('scale', '0.2 0.2 0.2');
-        //     entity.setAttribute('position','0 0 0');
-        //     entity.setAttribute('rotation', '0 0 0');
-        //     entity.setAttribute('shadow', 'cast:true');
-        //     entity.setAttribute('visible', 'false');
-        //     entity.setAttribute('shadow', 'receive:true');
-        //    // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
-        //   //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
-        //     entity.setAttribute('id', 'axe');
+            let bowEntity = document.createElement('a-entity');
+            bowEntity.setAttribute('obj-model', 'obj: #Bow_1-obj');
+            bowEntity.setAttribute('material', 'src: #Bow-mtl');
+            bowEntity.setAttribute('scale', '0.2 0.2 0.2');
+            bowEntity.setAttribute('position','0 0 0');
+            bowEntity.setAttribute('rotation', '0 0 0');
+            bowEntity.setAttribute('shadow', 'cast:true');
+            bowEntity.setAttribute('visible', 'false');
+            bowEntity.setAttribute('shadow', 'receive:true');
+           // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
+          //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
+            bowEntity.setAttribute('id', 'bow');
 
-        //     scene.appendChild(entity);
-        //     //entity.setAttribute('rotation', currentHandRotation);
-        //     //rHand.appendChild(entity);
+            scene.appendChild(bowEntity);
+            //entity.setAttribute('rotation', currentHandRotation);
+            //rHand.appendChild(entity);
             
+            //HIT BOX//
         //     axeHB = document.createElement('a-box');
         //     axeHB.setAttribute('static-body','shape: none; angularDamping: 1.0;');
         //     axeHB.setAttribute('shape__axehead','shape: box; angularDamping: 1.0; halfExtents: 0.8 0.8 0.8; offset: 0 -1.5 -5.5;');

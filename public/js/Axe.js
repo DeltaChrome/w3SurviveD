@@ -282,13 +282,14 @@ function AddtoGame(){
 
         let toolTypeJSON = JSON.stringify(toolType);
 
+        console.log("axe html sends axe");
         socket.emit('createObject', toolTypeJSON);
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";
         ButtonTool.innerHTML = "TOOL";
         ButtonTool.className = "NotReady";
-        document.location.href = 'Hammer.html';
+        //document.location.href = 'Hammer.html';
     }
 
 }

@@ -18,6 +18,10 @@ AFRAME.registerComponent("runtime", {
     {
         window.LAST_TIME = Date.now();
         window.TOOL_TYPE = 0;
+
+        document.querySelector('#createWindSound').setAttribute('sound','loop: true;');
+        document.querySelector('#createWindSound').components['sound'].playSound();     
+    
     },
 
     tick: function()
@@ -30,6 +34,7 @@ AFRAME.registerComponent("runtime", {
         let hand = document.querySelector('#right-hand').getAttribute('rotation');
         let handpos = document.querySelector('#right-hand').getAttribute('position');
         let cameraRigPos = document.querySelector('#cameraRig').getAttribute('position');
+        let head = document.querySelector('#head').getAttribute('position');
         
         let actualHandX = handpos.x + cameraRigPos.x;
         let actualHandY = handpos.y + cameraRigPos.y;
@@ -54,9 +59,25 @@ AFRAME.registerComponent("runtime", {
             //console.log('setting position');
             
         }
+        else if(window.TOOL_TYPE == 2)
+        {
+            
+            let axe = document.querySelector('#bow');
+            //let axeHB = document.querySelector('#axeHB');
+            axe.setAttribute('rotation', {x:hand.x -90,y:hand.y,z:hand.z});
+            axe.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
+    
+            // let axeHBX = axe.getAttribute('position').x;
+            // let axeHBY = axe.getAttribute('position').y;
+            // let axeHBZ = axe.getAttribute('position').z;
+    
+            // axeHB.setAttribute('position', {x:axeHBX, y:axeHBY ,z:axeHBZ});
+            // axeHB.setAttribute('rotation', axe.getAttribute('rotation'));
+            //console.log('setting position');
+            
+        }
 
-
-
+        document.querySelector('#createWindSound').setAttribute('position',cameraRigPos);
 
         //update server with players inventory
         let inv = 

@@ -33,6 +33,7 @@
                      
             let toolType = JSON.parse(toolTypeJSON);
             let a = document.querySelector('#axe'); 
+            let b = document.querySelector('#bow'); 
             console.log(toolType.tool);
             switch(toolType.tool)
             {
@@ -46,7 +47,9 @@
                     console.log("added axe");
                 break;
                 case 2:
-                
+                    window.TOOL_TYPE = 2;
+                    b.setAttribute('visible','true');   
+                    console.log("added bow");
                 break;
                 case 3:
                 
@@ -65,33 +68,35 @@
 </head>
 <body>
     <!-- stats -->
-    <a-scene shadow="type: pcfbasic"  stats physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: true;">
+    <a-scene shadow="type: pcfbasic"  stats physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: false;">
 
         <a-assets>
           
             <!-- SOUNDS -->
             <a-asset-item crossorigin="anonymous" id="axeSound" src="/assets/sound/Axe_Hit.mp3" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item crossorigin="anonymous" id="dropSound" src="/assets/sound/pop.mp3" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item crossorigin="anonymous" id="windSound" src="/assets/sound/Forest_Wind_03.mp3" response-type="arraybuffer"></a-asset-item>
           
             <!-- IMAGES -->
             <img id="skymap" src="/assets/textures/SynthSet.png"> 
             <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
-            <img id="popcornGreen" src="/assets/textures/Popcorn_green.png">
-            <img id="popcornYellow" src="/assets/textures/Popcorn_yellow.png"> 
-            <img id="popcornRed" src="/assets/textures/Popcorn_red.png"> 
-            <img id="popcornPurple" src="/assets/textures/Popcorn_purple.png">
+            <img id="popcornGreen-mtl" src="/assets/textures/Popcorn_green.png">
+            <img id="popcornYellow-mtl" src="/assets/textures/Popcorn_yellow.png"> 
+            <img id="popcornRed-mtl" src="/assets/textures/Popcorn_red.png"> 
+            <img id="popcornPurple-mtl" src="/assets/textures/Popcorn_purple.png">
 
-            <img id="pointyGreen" src="/assets/textures/GreenPointyTree.png">
-            <img id="pointylight" src="/assets/textures/LightGreenPointyTree.png">
-            <img id="pointyBrown" src="/assets/textures/BrownPointyTree.png"> 
-            <img id="pointyPurple" src="/assets/textures/PurplePointyTree.png">
+            <img id="pointyGreen-mtl" src="/assets/textures/GreenPointyTree.png">
+            <img id="pointylight-mtl" src="/assets/textures/LightGreenPointyTree.png">
+            <img id="pointyBrown-mtl" src="/assets/textures/BrownPointyTree.png"> 
+            <img id="pointyPurple-mtl" src="/assets/textures/PurplePointyTree.png">
             <img id="Axe_1-mtl" src="/assets/textures/axesc.png"> 
+            <img id="Bow-mtl" src="/assets/textures/Bow_sc.png"> 
 
-            <img id="rock" src="/assets/textures/rock.png"> 
-
+            <img id="rock-mtl" src="/assets/textures/rock.png"> 
+            <img id="log-mtl" src="/assets/textures/Log.png"> 
 
             <a-asset-item id="thicc-tree-obj" src="/assets/models/ThiccTree.obj"></a-asset-item>
             
-
             <a-asset-item id="leftController" src="/assets/models/oculus-touch-controller-left.obj"></a-asset-item>
             <a-asset-item id="rightController" src="/assets/models/oculus-touch-controller-right.obj"></a-asset-item>
             <a-asset-item id="rightController-mat" src="/assets/textures/oculus-touch-controller-right.mtl"></a-asset-item>
@@ -114,7 +119,7 @@
             <a-asset-item id="rock_04-obj" src="/assets/models/Rock4.obj"></a-asset-item>
             <a-asset-item id="rock_05-obj" src="/assets/models/Rock5.obj"></a-asset-item>
 
-             <a-asset-item id="pointy-tree-obj" src="/assets/models/pointyTree.obj"></a-asset-item>
+            <a-asset-item id="pointy-tree-obj" src="/assets/models/pointyTree.obj"></a-asset-item>
 
             <a-asset-item id="rock1-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
             <a-asset-item id="rock1-obj" src="/assets/models/rock1.obj"></a-asset-item>
@@ -132,6 +137,7 @@
 
             <!-- adding our own models -->
             <a-asset-item id="Axe_1-obj" src="/assets/models/axetest.obj"></a-asset-item>
+            <a-asset-item id="Bow_1-obj" src="/assets/models/Bow_v4.obj"></a-asset-item>
             <!-- <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item> -->
 
         </a-assets>
@@ -144,6 +150,8 @@
         
         <!-- SOUNDS -->
         <a-entity id="createAxeSound" sound="src: #axeSound;"></a-entity>
+        <a-entity id="createDropSound" sound="src: #dropSound;"></a-entity>
+        <a-entity id="createWindSound" sound="src: #windSound;"></a-entity>
 
         <!-- Lights< -->
         <a-entity id="LightSUN" light="type:directional; 
