@@ -308,8 +308,8 @@ AFRAME.registerComponent("genterra-component", {
                 if(currentTreePosition == treePositions[j])
                 {
 
-                    console.log("changing position");
-                    onsole.log(j);
+                    //console.log("changing position");
+                    //onsole.log(j);
                     currentTreePosition = generatePositionVector(-1.5);
                     j = 0;
 
@@ -317,8 +317,8 @@ AFRAME.registerComponent("genterra-component", {
             }
 
             treePositions.push(currentTreePosition);
-            console.log("added tree");
-            console.log("current tree" + currentTreePosition);
+            //console.log("added tree");
+            //console.log("current tree" + currentTreePosition);
 
             entity.setAttribute('position', currentTreePosition);
             if(i < 10)
@@ -385,9 +385,7 @@ AFRAME.registerComponent("genterra-component", {
             box.setAttribute('class','ground');
             entity.appendChild(box);
 
-         
         }
-
 
         let plane = new THREE.Mesh( geometry, material );
 

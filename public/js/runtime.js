@@ -43,6 +43,8 @@ AFRAME.registerComponent("runtime", {
         //console.log("positions added: ", actualHandX);
         //let actualHand = cameraRigPos + handpos;
 
+
+
         if(window.TOOL_TYPE == 1)
         {
             let axe = document.querySelector('#axe');
@@ -62,11 +64,11 @@ AFRAME.registerComponent("runtime", {
         else if(window.TOOL_TYPE == 2)
         {
             
-            let axe = document.querySelector('#bow');
+            let bow = document.querySelector('#bow');
             //let axeHB = document.querySelector('#axeHB');
-            axe.setAttribute('rotation', {x:hand.x -90,y:hand.y,z:hand.z});
-            axe.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
-    
+            bow.setAttribute('rotation', {x:hand.x -90,y:hand.y,z:hand.z});
+            bow.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
+            
             // let axeHBX = axe.getAttribute('position').x;
             // let axeHBY = axe.getAttribute('position').y;
             // let axeHBZ = axe.getAttribute('position').z;
@@ -74,6 +76,16 @@ AFRAME.registerComponent("runtime", {
             // axeHB.setAttribute('position', {x:axeHBX, y:axeHBY ,z:axeHBZ});
             // axeHB.setAttribute('rotation', axe.getAttribute('rotation'));
             //console.log('setting position');
+
+            //when the bow collides with stick
+                //lock bow position to where it collided
+                //based on player hands distance vectors move bow position
+                //check for delta distance vector and add to previous
+                //if distance vector is greater than some constant
+                    //add 1 to a count var
+                //if the count var is greater than some constant
+                    //emit event or change flag for achieving fire
+                    //release bow from stick
             
         }
 
