@@ -4,6 +4,7 @@ window.NUM_ROCKS;
 window.NUM_TWIGS;
 window.NUM_LEAVES;
 window.TOOL_TYPE;//hands(0), axe(1), firebow(2), hammer(3)
+window.MAKE_FIRE;
 
 AFRAME.registerComponent("runtime", {
     schema:
@@ -18,6 +19,7 @@ AFRAME.registerComponent("runtime", {
     {
         window.LAST_TIME = Date.now();
         window.TOOL_TYPE = 0;
+        window.MAKE_FIRE = false;
 
         document.querySelector('#createWindSound').setAttribute('sound','loop: true;');
         document.querySelector('#createWindSound').components['sound'].playSound();     
@@ -43,6 +45,7 @@ AFRAME.registerComponent("runtime", {
         let axeHB = document.querySelector('#axeHB');
         let bow = document.querySelector('#bow');
         let bowHB = document.querySelector('#bowHB');
+        let stickHB = document.querySelector('#stickHB');
         //console.log(cameraRigPos);
         //console.log("positions added: ", actualHandX);
         //let actualHand = cameraRigPos + handpos;
@@ -65,20 +68,49 @@ AFRAME.registerComponent("runtime", {
         }
         else if(window.TOOL_TYPE == 2)
         {
-            bow.setAttribute('visible', 'true');
-            axe.setAttribute('visible', 'false');
-
-            bow.setAttribute('rotation', {x:hand.x,y:hand.y,z:hand.z});
-            bow.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
             
-            let bowHBX = bow.getAttribute('position').x;
-            let bowHBY = bow.getAttribute('position').y;
-            let bowHBZ = bow.getAttribute('position').z;
+            if(window.MAKE_FIRE == false)
+            {
+                bow.setAttribute('visible', 'true');
+                axe.setAttribute('visible', 'false');
+    
+                bow.setAttribute('rotation', {x:hand.x,y:hand.y,z:hand.z});
+                bow.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
+                
+                let bowHBX = bow.getAttribute('position').x;
+                let bowHBY = bow.getAttribute('position').y;
+                let bowHBZ = bow.getAttribute('position').z;
+    
+                bowHB.setAttribute('position', {x:bowHBX, y:bowHBY ,z:bowHBZ});
+                bowHB.setAttribute('rotation', bow.getAttribute('rotation'));
+                //console.log('setting position');
+            }
+            else
+            {
 
-            bowHB.setAttribute('position', {x:bowHBX, y:bowHBY ,z:bowHBZ});
-            bowHB.setAttribute('rotation', bow.getAttribute('rotation'));
-            //console.log('setting position');
+                console.log("make fire is true");
+                bow.setAttribute('visible', 'true');
+                axe.setAttribute('visible', 'false');
 
+                let stickHBX = stickHB.getAttribute('position').x;
+                let stickHBY = stickHB.getAttribute('position').y;
+                let stickHBZ = stickHB.getAttribute('position').z;
+
+                let bowX = bow.getAttribute('position').x;
+                let bowY = bow.getAttribute('position').y;
+                let bowZ = bow.getAttribute('position').z;
+
+                bow.setAttribute('rotation', {x:0,y:0,z:0});
+                bow.setAttribute('position', {x:stickHBX, y:stickHBY + 0.35,z:actualHandZ} );
+                
+                let bowHBX = bow.getAttribute('position').x;
+                let bowHBY = bow.getAttribute('position').y;
+                let bowHBZ = bow.getAttribute('position').z;
+    
+                bowHB.setAttribute('position', {x:bowX, y:bowY ,z:bowZ});
+                bowHB.setAttribute('rotation', bow.getAttribute('rotation'));
+                //console.log('setting position');
+            }
             //when the bow collides with stick
                 //lock bow position to where it collided
                 //based on player hands distance vectors move bow position

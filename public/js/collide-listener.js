@@ -12,8 +12,17 @@ AFRAME.registerComponent('collide-listener', {
     dropSound.setAttribute('sound', 'volume: 1.5');
     
     let axe = document.querySelector('#axeHB');
-    //let axe = document.querySelector('#axeHB');
-  
+    let bow = document.querySelector('#bowHB');
+
+    bow.addEventListener('collide', function (e) 
+    {
+      console.log("bow collided with: " + e.detail.body.el.getAttribute('id'));
+      if(e.detail.body.el.getAttribute('id') == ('stickHB'))
+      {
+        console.log("colliding bow with stick")
+        window.MAKE_FIRE = true;
+      }
+    });
 
     axe.addEventListener('collide', function (e) {
 
@@ -23,6 +32,7 @@ AFRAME.registerComponent('collide-listener', {
       }
       for(let i = 0; i < 48; i++)//change to select as i doesnt actually do anything here, i think
       {
+        console.log("axe collided with: " + e.detail.body.el.getAttribute('id'));
           if(e.detail.body.el.getAttribute('id') == ('popTreeH' + i) && e.detail.body.el.components['object-status'].data.dtSinceLastHit <= 0)
           {
             if(e.detail.body.el.components['object-status'].data.hitPoints > 0)

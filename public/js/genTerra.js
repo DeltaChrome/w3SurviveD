@@ -387,10 +387,10 @@ AFRAME.registerComponent("genterra-component", {
             }
             else if(i < 49)
             {
-                //let firepit = document.createElement('a-entity');
+                let firestick = document.createElement('a-entity');
                 //firepit.setAttribute('remove-component', {});
                 // firepit.setAttribute('position', generatePositionVector(-0.2));
-                entity.setAttribute('position', { x: currentTree[0], y: currentTree[1] + 1.3, z: currentTree[2] });
+                entity.setAttribute('position', { x: currentTree[0], y: currentTree[1] + 1.4, z: currentTree[2] });
                 entity.setAttribute('obj-model', 'obj: #Firepit-obj');
                 entity.setAttribute('material', 'src: #Firepit-mtl');
                 entity.setAttribute('scale', '0.1 0.1 0.1');
@@ -398,6 +398,28 @@ AFRAME.registerComponent("genterra-component", {
                 entity.setAttribute('shadow', 'receive:true');
                 entity.setAttribute('id', 'firepit');
                 scene.appendChild(entity);
+
+                firestick.setAttribute('position', { x: currentTree[0] - 0.5, y: currentTree[1] + 1.6, z: currentTree[2] -0.5 });
+                firestick.setAttribute('obj-model', 'obj: #branch-obj');
+                firestick.setAttribute('material', 'src: #branch-mtl');
+                firestick.setAttribute('scale', '0.02 0.02 0.02');
+                firestick.setAttribute('shadow', 'cast:true');
+                firestick.setAttribute('shadow', 'receive:true');
+                firestick.setAttribute('id', 'firestick');
+                scene.appendChild(firestick);
+
+                //HIT BOX//
+                let stickHB = document.createElement('a-box');
+                
+                stickHB.setAttribute('dynamic-body', 'shape: none; angularDamping: 1.0; linearDamping: 1.0');
+                stickHB.setAttribute('shape__stick', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 0.3 3 0.3; offset: 0 3.5 0;');
+                stickHB.setAttribute('scale', '0.1 0.1 0.1');
+                stickHB.setAttribute('position',{ x: currentTree[0] - 0.5, y: currentTree[1] + 1.6, z: currentTree[2] -0.5 });
+                //     axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
+                stickHB.setAttribute('id', 'stickHB');
+                stickHB.setAttribute('visible', 'false');
+                scene.appendChild(stickHB)
+
             }
             
             if (i < 48) 
