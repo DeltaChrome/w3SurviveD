@@ -13,11 +13,11 @@
      <script src="js/aframe-teleport-controls.js"></script>
      <script src="js/aframe-physics-system.js"></script>
      <script src="js/grab-listener.js"></script>
-     <!-- <script src="js/mesh-smooth.js"></script> -->
+     <script src="js/mesh-smootha.js"></script>
      <script src="js/Water.js"></script>
      <script src="js/object-status.js"></script>
      <!-- <script src="https://unpkg.com/aframe-haptics-component/dist/aframe-haptics-component.min.js"></script> -->
-    <script src="js/aframe-haptics-component.min.js"></script>
+     <script src="js/aframe-haptics-component.min.js"></script>
      <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
      <!-- <script src="js/aframe-teleport-controls.min.js"></script> -->
      <script src="/socket.io/socket.io.js"></script>
@@ -69,7 +69,7 @@
 </head>
 <body>
     <!-- stats -->
-    <a-scene shadow="type: pcfbasic"  stats physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: false;">
+    <a-scene shadow="type: pcfbasic"  stats physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: true;">
 
         <a-assets>
           
@@ -138,12 +138,12 @@
 
             <!-- adding our own models -->
             <a-asset-item id="Axe_1-obj" src="/assets/models/axetest.obj"></a-asset-item>
-            <a-asset-item id="Bow_1-obj" src="/assets/models/Bow_v4.obj"></a-asset-item>
+            <a-asset-item id="Bow_1-obj" src="/assets/models/Bow_v6.obj"></a-asset-item>
             <!-- <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item> -->
 
         </a-assets>
 
-        <a-entity id="terrainGenerationObj" mesh-smooth genterra-component genwater-component position="0 0 0"></a-entity>
+        <a-entity id="terrainGenerationObj" mesh-smootha genterra-component genwater-component position="0 0 0"></a-entity>
         <a-entity id="sky"
                 geometry="primitive:sphere; radius:500"
                 material="shader:flat; src:#skymap; side:back">

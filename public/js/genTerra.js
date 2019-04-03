@@ -35,14 +35,14 @@ AFRAME.registerComponent("genterra-component", {
                     for(let o = 0; o < octave; o++)
                     {
                        
-                       if(o > 0)
-                       {
-                           pitch = w / (2.0 * o);
-                       }
-                        else
-                       {
-                           pitch = w;
-                       }
+                    //    if(o > 0)
+                    //    {
+                        pitch = w / (2.0 ** o);
+                    //    }
+                    //     else
+                    //    {
+                    //        pitch = w;
+                    //    }
                         
                         sampleX1 = Math.floor(Math.floor((x / pitch)) * pitch);
                         sampleY1 = Math.floor(Math.floor((y / pitch)) * pitch);
@@ -366,6 +366,7 @@ AFRAME.registerComponent("genterra-component", {
                 entity.setAttribute('material', 'src: #pointyPurple-mtl');
             }
 
+            //entity.setAttribute('mesh-smootha',{});
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('shader', 'standard');
@@ -410,7 +411,7 @@ AFRAME.registerComponent("genterra-component", {
             let currentHandRotation = rHand.getAttribute('rotation');
             let currentHandPosition = rHand.getAttribute('position');
 
-            console.log(currentHandRotation);
+            //console.log(currentHandRotation);
          
             let axeEntity = document.createElement('a-entity');
 
@@ -453,24 +454,24 @@ AFRAME.registerComponent("genterra-component", {
             bowEntity.setAttribute('shadow', 'cast:true');
             bowEntity.setAttribute('visible', 'false');
             bowEntity.setAttribute('shadow', 'receive:true');
-           // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
-          //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
+            // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
+            //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
             bowEntity.setAttribute('id', 'bow');
 
             scene.appendChild(bowEntity);
             //entity.setAttribute('rotation', currentHandRotation);
             //rHand.appendChild(entity);
-            
+
             //HIT BOX//
-        //     axeHB = document.createElement('a-box');
-        //     axeHB.setAttribute('static-body','shape: none; angularDamping: 1.0;');
-        //     axeHB.setAttribute('shape__axehead','shape: box; angularDamping: 1.0; halfExtents: 0.8 0.8 0.8; offset: 0 -1.5 -5.5;');
-        //     axeHB.setAttribute('scale','0.1 0.1 0.1');
-            
-        //    // axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
-        //     axeHB.setAttribute('id','axeHB');
-        //     axeHB.setAttribute('visible', 'false');
-        //     scene.appendChild(axeHB)
+            bowHB = document.createElement('a-box');
+            bowHB.setAttribute('static-body', 'shape: none; angularDamping: 1.0;');
+            bowHB.setAttribute('shape__bowString', 'shape: box; angularDamping: 1.0; halfExtents: 1 1 1; offset: 0 1 0;');
+            bowHB.setAttribute('scale', '0.1 0.1 0.1');
+
+            //     axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
+            bowHB.setAttribute('id', 'bowHB');
+            bowHB.setAttribute('visible', 'false');
+            scene.appendChild(bowHB)
             //********************************* CODE FOR NEXT TOOL ********************************/
 
             //console.log(Context_AF.el.getObject3D('mesh'));

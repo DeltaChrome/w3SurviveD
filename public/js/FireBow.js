@@ -259,20 +259,35 @@ function myFunction(){
 
 function AddtoGame(){
     
+    let socket = io();
+        
+    //default connect event
+    socket.on('connect', function() {
+        console.log("connected!");
+    });
 
     if(ToolComplete)
     {
+
+        let toolType =
+        {
+            tool: 2
+        }
+
+        let toolTypeJSON = JSON.stringify(toolType);
+
+        console.log("firebow html sends bow");
+        socket.emit('createObject', toolTypeJSON);
+
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";
         ButtonTool.innerHTML = "TOOL";
         ButtonTool.className = "NotReady";
-        document.location.href = 'index.html';
+        //document.location.href = 'index.html';
     }
 
 }
-
-
 
 // if(readyForCraft === true)
 //     {

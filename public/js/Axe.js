@@ -284,6 +284,10 @@ function AddtoGame(){
 
         console.log("axe html sends axe");
         socket.emit('createObject', toolTypeJSON);
+
+
+
+        
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";

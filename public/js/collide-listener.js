@@ -12,6 +12,8 @@ AFRAME.registerComponent('collide-listener', {
     dropSound.setAttribute('sound', 'volume: 1.5');
     
     let axe = document.querySelector('#axeHB');
+    //let axe = document.querySelector('#axeHB');
+  
 
     axe.addEventListener('collide', function (e) {
 

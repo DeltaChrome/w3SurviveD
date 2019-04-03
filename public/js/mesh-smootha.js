@@ -1,4 +1,4 @@
-AFRAME.registerComponent('mesh-smooth', {
+AFRAME.registerComponent('mesh-smootha', {
     init: function () {
         let Context = this;
       this.el.addEventListener('object3dset', (e) => {

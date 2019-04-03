@@ -39,16 +39,19 @@ AFRAME.registerComponent("runtime", {
         let actualHandX = handpos.x + cameraRigPos.x;
         let actualHandY = handpos.y + cameraRigPos.y;
         let actualHandZ = handpos.z + cameraRigPos.z;
+        let axe = document.querySelector('#axe');
+        let axeHB = document.querySelector('#axeHB');
+        let bow = document.querySelector('#bow');
+        let bowHB = document.querySelector('#bowHB');
         //console.log(cameraRigPos);
         //console.log("positions added: ", actualHandX);
         //let actualHand = cameraRigPos + handpos;
 
-
-
         if(window.TOOL_TYPE == 1)
         {
-            let axe = document.querySelector('#axe');
-            let axeHB = document.querySelector('#axeHB');
+            axe.setAttribute('visible', 'true');
+            bow.setAttribute('visible', 'false');
+            
             axe.setAttribute('rotation', hand);
             axe.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
     
@@ -58,23 +61,22 @@ AFRAME.registerComponent("runtime", {
     
             axeHB.setAttribute('position', {x:axeHBX, y:axeHBY ,z:axeHBZ});
             axeHB.setAttribute('rotation', axe.getAttribute('rotation'));
-            //console.log('setting position');
             
         }
         else if(window.TOOL_TYPE == 2)
         {
-            
-            let bow = document.querySelector('#bow');
-            //let axeHB = document.querySelector('#axeHB');
-            bow.setAttribute('rotation', {x:hand.x -90,y:hand.y,z:hand.z});
+            bow.setAttribute('visible', 'true');
+            axe.setAttribute('visible', 'false');
+
+            bow.setAttribute('rotation', {x:hand.x,y:hand.y,z:hand.z});
             bow.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
             
-            // let axeHBX = axe.getAttribute('position').x;
-            // let axeHBY = axe.getAttribute('position').y;
-            // let axeHBZ = axe.getAttribute('position').z;
-    
-            // axeHB.setAttribute('position', {x:axeHBX, y:axeHBY ,z:axeHBZ});
-            // axeHB.setAttribute('rotation', axe.getAttribute('rotation'));
+            let bowHBX = bow.getAttribute('position').x;
+            let bowHBY = bow.getAttribute('position').y;
+            let bowHBZ = bow.getAttribute('position').z;
+
+            bowHB.setAttribute('position', {x:bowHBX, y:bowHBY ,z:bowHBZ});
+            bowHB.setAttribute('rotation', bow.getAttribute('rotation'));
             //console.log('setting position');
 
             //when the bow collides with stick
@@ -100,8 +102,6 @@ AFRAME.registerComponent("runtime", {
         }
         //call event updateInventory
 
-
-     
         // console.log(axe.getAttribute('position'));
         // console.log('running');
     }
