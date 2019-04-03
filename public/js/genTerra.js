@@ -154,9 +154,15 @@ AFRAME.registerComponent("genterra-component", {
 
         geometry.rotateX(THREE.Math.degToRad(270));
 
+        let currentTree = [];
+
         function generatePositionVector(off)
         {
             let vertexIndex = generateNumber(100);
+
+            currentTree[0] = geometry.vertices[vertexIndex].x;
+            currentTree[1] = geometry.vertices[vertexIndex].y + off;
+            currentTree[2] = geometry.vertices[vertexIndex].z;
 
             return(geometry.vertices[vertexIndex].x + " " + (geometry.vertices[vertexIndex].y + off) + " " + geometry.vertices[vertexIndex].z);
            //return(geometry.vertices[vertexIndex]);
@@ -291,13 +297,15 @@ AFRAME.registerComponent("genterra-component", {
             scene.appendChild(entity);
 
         }
-        
+
+       
+
         /////////////////////////////////popcorn trees/////////////////////////////////////////
         treePositions = new Array();
         
         let numTrees = 0;
 
-        for(let i = 0; i < 48; i++)
+        for(let i = 0; i < 49; i++)
         {
             let entity = document.createElement('a-entity');
 
@@ -313,14 +321,26 @@ AFRAME.registerComponent("genterra-component", {
                     currentTreePosition = generatePositionVector(-1.5);
                     j = 0;
 
+                } else if (currentTree[1] < -6 && i == 48) 
+                {
+                    currentTreePosition = generatePositionVector(-1.5);
+                    j = 0;
                 }
             }
 
+           // console.log("tree position y: " + currentTree[1]);
+
+            if(currentTree[1] < -6 && i < 48)
+            {
+               // console.log(currentTree[1]);
+               console.log("test");
+                currentTree[1] = 600;
+            }
             treePositions.push(currentTreePosition);
             //console.log("added tree");
             //console.log("current tree" + currentTreePosition);
 
-            entity.setAttribute('position', currentTreePosition);
+            entity.setAttribute('position', {x:currentTree[0],y:currentTree[1],z:currentTree[2]});
             if(i < 10)
             {
                 entity.setAttribute('obj-model', 'obj: #tree_1-obj');                
@@ -365,28 +385,88 @@ AFRAME.registerComponent("genterra-component", {
                 entity.setAttribute('obj-model', 'obj: #pointy-tree-obj');
                 entity.setAttribute('material', 'src: #pointyPurple-mtl');
             }
+            else if(i < 49)
+            {
+                //let firepit = document.createElement('a-entity');
+                //firepit.setAttribute('remove-component', {});
+                // firepit.setAttribute('position', generatePositionVector(-0.2));
+                entity.setAttribute('position', { x: currentTree[0], y: currentTree[1] + 1.3, z: currentTree[2] });
+                entity.setAttribute('obj-model', 'obj: #Firepit-obj');
+                entity.setAttribute('material', 'src: #Firepit-mtl');
+                entity.setAttribute('scale', '0.1 0.1 0.1');
+                entity.setAttribute('shadow', 'cast:true');
+                entity.setAttribute('shadow', 'receive:true');
+                entity.setAttribute('id', 'firepit');
+                scene.appendChild(entity);
+            }
+            
+            if (i < 48) 
+            {
+                //entity.setAttribute('mesh-smootha',{});
+                entity.setAttribute('shadow', 'cast:true');
+                entity.setAttribute('shadow', 'receive:true');
+                entity.setAttribute('shader', 'standard');
+                entity.setAttribute('scale', '0.8 0.8 0.8');
+                entity.setAttribute('static-body', 'shape: box;');
+                entity.setAttribute('constraint', 'collideConnected: false;');
+                entity.setAttribute('id', 'popTree' + i);
 
-            //entity.setAttribute('mesh-smootha',{});
-            entity.setAttribute('shadow', 'cast:true');
-            entity.setAttribute('shadow', 'receive:true');
-            entity.setAttribute('shader', 'standard');
-            entity.setAttribute('scale', '0.8 0.8 0.8');            
-            entity.setAttribute('static-body','shape: box;');
-            entity.setAttribute('constraint','collideConnected: false;');
-            entity.setAttribute('id','popTree' + i);
+                scene.appendChild(entity);
+                let box = document.createElement('a-box');
+                box.setAttribute('dynamic-body', 'shape: box; linearDamping: 1.0; angularDamping: 1.0;');
+                box.setAttribute('scale', '1.4 20 1.4');
+                box.setAttribute('constraint', 'type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #popTree' + i + ';');
+                box.setAttribute('object-status', 'hitPoints: 5;');
+                box.setAttribute('id', 'popTreeH' + i);// + i
+                box.setAttribute('visible', 'false');
+                box.setAttribute('class', 'ground');
+                entity.appendChild(box);
+            }
 
-            scene.appendChild(entity);
-            let box = document.createElement('a-box');
-            box.setAttribute('dynamic-body','shape: box; linearDamping: 1.0; angularDamping: 1.0;');
-            box.setAttribute('scale','1.4 20 1.4');
-            box.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #popTree' + i +';');
-            box.setAttribute('object-status','hitPoints: 5;');
-            box.setAttribute('id','popTreeH' + i);// + i
-            box.setAttribute('visible', 'false');
-            box.setAttribute('class','ground');
-            entity.appendChild(box);
+
+            
+            // if(i == 47)
+            // {
+            //     currentTreePosition = generatePositionVector(-0.2);
+
+            //     console.log("in 47th");
+
+            //     for(let j = 0; j < treePositions.length; j++)
+            //     {
+            //         if(currentTreePosition == treePositions[j])
+            //         {
+    
+            //             console.log("changing position of firepit");
+            //             //onsole.log(j);
+            //             currentTreePosition = generatePositionVector(-0.2);
+            //             j = 0;
+    
+            //         } else if (currentTree[1] < -6) 
+            //         {
+            //             // console.log(currentTree[1]);
+                        
+            //             console.log("test firepit");
+            //             currentTreePosition = generatePositionVector(-0.2);
+            //             j = 0;
+            //         }
+            //     }
+
+            //     let firepit = document.createElement('a-entity');
+            //     firepit.setAttribute('remove-component', {});
+            //     // firepit.setAttribute('position', generatePositionVector(-0.2));
+            //     firepit.setAttribute('position', {x:currentTree[0],y:currentTree[1],z:currentTree[2]});
+            //     firepit.setAttribute('obj-model', 'obj: #Firepit-obj');
+            //     firepit.setAttribute('material', 'src: #Firepit-mtl'); 
+            //     firepit.setAttribute('scale', '0.1 0.1 0.1');
+            //     firepit.setAttribute('shadow', 'cast:true');
+            //     firepit.setAttribute('shadow', 'receive:true');
+            //     firepit.setAttribute('id','firepit');
+            //     scene.appendChild(firepit);
+            // }
 
         }
+
+       
 
         let plane = new THREE.Mesh( geometry, material );
 
@@ -428,7 +508,7 @@ AFRAME.registerComponent("genterra-component", {
             axeEntity.setAttribute('shadow', 'receive:true');
            // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
           //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
-          axeEntity.setAttribute('id', 'axe');
+            axeEntity.setAttribute('id', 'axe');
 
             scene.appendChild(axeEntity);
             //entity.setAttribute('rotation', currentHandRotation);
@@ -465,7 +545,7 @@ AFRAME.registerComponent("genterra-component", {
             //HIT BOX//
             bowHB = document.createElement('a-box');
             bowHB.setAttribute('static-body', 'shape: none; angularDamping: 1.0;');
-            bowHB.setAttribute('shape__bowString', 'shape: box; angularDamping: 1.0; halfExtents: 1 1 1; offset: 0 1 0;');
+            bowHB.setAttribute('shape__bowstring', 'shape: box; angularDamping: 1.0; halfExtents: 0.3 0.3 2.8; offset: -0.25 0 -2.5;');
             bowHB.setAttribute('scale', '0.1 0.1 0.1');
 
             //     axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
