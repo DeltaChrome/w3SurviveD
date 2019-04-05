@@ -558,7 +558,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('position', generatePositionVector(-0.2));
             entity.setAttribute('obj-model', 'obj: #Dead-tree');
             entity.setAttribute('material', 'src: #pointyPurple');
-            entity.setAttribute('scale', '0.6 1.5 0.6');
+            entity.setAttribute('scale', '0.6 1 0.6');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
@@ -571,7 +571,7 @@ AFRAME.registerComponent("genterra-component", {
             entity.setAttribute('position', generatePositionVector(-0.2));
             entity.setAttribute('obj-model', 'obj: #Dead-tree');
             entity.setAttribute('material', 'src: #pointyBrown');
-            entity.setAttribute('scale', '0.6 1.5 0.6');
+            entity.setAttribute('scale', '0.6 1 0.6');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
 
