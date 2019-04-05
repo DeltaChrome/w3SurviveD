@@ -259,15 +259,32 @@ function myFunction(){
 
 function AddtoGame(){
     
+    let socket = io();
+        
+    //default connect event
+    socket.on('connect', function() {
+        console.log("connected!");
+    });
 
     if(ToolComplete)
     {
+        let toolType =
+        {
+            tool: 3
+        }
+
+        let toolTypeJSON = JSON.stringify(toolType);
+
+        console.log("hammer html sends hammer");
+        socket.emit('createObject', toolTypeJSON);
+
+
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";
         ButtonTool.innerHTML = "TOOL";
         ButtonTool.className = "NotReady";
-        document.location.href = 'FireBow.html';
+        //document.location.href = 'FireBow.html';
     }
 
 }

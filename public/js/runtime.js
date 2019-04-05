@@ -10,6 +10,7 @@ window.FIRE_PROGRESS;
 window.FIRE_COOLDOWN;
 window.FIRE_COMPLETE;
 window.PREVIOUS;
+window.SPAWN_SHELTER;
 
 AFRAME.registerComponent("runtime", {
     schema:
@@ -32,7 +33,8 @@ AFRAME.registerComponent("runtime", {
         window.NUM_LOGS = 0;
         window.FIRE_PROGRESS = 0; 
         window.FIRE_COMPLETE = false;               
-        window.FIRE_COOLDOWN = false;               
+        window.FIRE_COOLDOWN = false;   
+        window.SPAWN_SHELTER = false;            
 
         document.querySelector('#createWindSound').setAttribute('sound','loop: true;');
         document.querySelector('#createWindSound').components['sound'].playSound();     
@@ -60,6 +62,8 @@ AFRAME.registerComponent("runtime", {
         let bow = document.querySelector('#bow');
         let bowHB = document.querySelector('#bowHB');
         let stickHB = document.querySelector('#stickHB');
+        let hammer = document.querySelector('#hammer');
+        let hammerHB = document.querySelector('#hammerHB');
         //console.log(cameraRigPos);
         //console.log("positions added: ", actualHandX);
         //let actualHand = cameraRigPos + handpos;
@@ -174,6 +178,40 @@ AFRAME.registerComponent("runtime", {
                     //emit event or change flag for achieving fire
                     //release bow from stick
             
+        }
+        else if(window.TOOL_TYPE == 3)
+        {
+            axe.setAttribute('visible', 'false');
+            bow.setAttribute('visible', 'false');
+            hammer.setAttribute('visible', 'true');
+            
+            hammer.setAttribute('rotation', hand);
+            hammer.setAttribute('position', {x:actualHandX, y:actualHandY ,z:actualHandZ} );
+    
+            let hammerHBX = hammer.getAttribute('position').x;
+            let hammerHBY = hammer.getAttribute('position').y;
+            let hammerHBZ = hammer.getAttribute('position').z;
+    
+            hammerHB.setAttribute('position', {x:hammerHBX, y:hammerHBY ,z:hammerHBZ});
+            hammerHB.setAttribute('rotation', hammer.getAttribute('rotation'));
+
+            if(window.SPAWN_SHELTER == true)
+            {
+                let shelter = document.createElement('a-entity');
+                shelter.setAttribute('obj-model', 'obj: #Shelter-obj');
+                shelter.setAttribute('material', 'src: #Shelter-mtl');
+                shelter.setAttribute('scale', '0.4 0.4 0.4');
+                shelter.setAttribute('position',{x:cameraRigPos.x, y:cameraRigPos.y + 1, z:cameraRigPos.z});
+                shelter.setAttribute('rotation', '0 0 0');
+                shelter.setAttribute('shadow', 'cast:true');
+                shelter.setAttribute('visible', 'true');
+                shelter.setAttribute('shadow', 'receive:true');
+    
+                shelter.setAttribute('id', 'shelter');
+    
+                scene.appendChild(shelter);
+                window.SPAWN_SHELTER = false;
+            }
         }
 
         document.querySelector('#createWindSound').setAttribute('position',cameraRigPos);

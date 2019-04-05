@@ -13,6 +13,17 @@ AFRAME.registerComponent('collide-listener', {
     
     let axe = document.querySelector('#axeHB');
     let bow = document.querySelector('#bowHB');
+    let hammer = document.querySelector('#hammerHB');
+
+    hammer.addEventListener('collide', function (e) 
+    {
+      //console.log("bow collided with: " + e.detail.body.el.getAttribute('id'));
+      if(e.detail.body.el.getAttribute('id') == ('log'))
+      {
+        console.log("spawn shelter")
+        window.SPAWN_SHELTER = true;
+      }
+    });
 
     bow.addEventListener('collide', function (e) 
     {
@@ -57,7 +68,8 @@ AFRAME.registerComponent('collide-listener', {
                 log.setAttribute('position', {x:currentTree.getAttribute('position').x,y:currentTree.getAttribute('position').y + 1.65,z:currentTree.getAttribute('position').z - 0.7});
                 log.setAttribute('rotation','90 0 0');
                 log.setAttribute('scale','0.15 0.15 0.15');
-                log.setAttribute('static-body',{});  
+                log.setAttribute('dynamic-body', 'shape: none; angularDamping: 1.0; linearDamping: 1.0;');
+                log.setAttribute('shape__log', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 0.8 6 0.8; offset: 0 6 0;');
                 log.setAttribute('obj-model','obj: #log-obj');
                 log.setAttribute('material','src: #log-mtl');
                 log.setAttribute('id','log');

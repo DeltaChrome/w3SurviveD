@@ -685,7 +685,7 @@ AFRAME.registerComponent("genterra-component", {
            // axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
             axeHB.setAttribute('id','axeHB');
             axeHB.setAttribute('visible', 'false');
-            scene.appendChild(axeHB)
+            scene.appendChild(axeHB);
 
             //********************************* CODE FOR NEXT TOOL ********************************/
             let bowEntity = document.createElement('a-entity');
@@ -697,12 +697,10 @@ AFRAME.registerComponent("genterra-component", {
             bowEntity.setAttribute('shadow', 'cast:true');
             bowEntity.setAttribute('visible', 'false');
             bowEntity.setAttribute('shadow', 'receive:true');
-            // entity.setAttribute('static-body','shape: box; angularDamping: 1.0;');
-            //  entity.setAttribute('constraint','type: pointToPoint; collideConnected: false; target: #right-hand');
+
             bowEntity.setAttribute('id', 'bow');
 
             scene.appendChild(bowEntity);
-            //rHand.appendChild(entity);
 
             //HIT BOX//
             bowHB = document.createElement('a-box');
@@ -710,18 +708,53 @@ AFRAME.registerComponent("genterra-component", {
             bowHB.setAttribute('shape__bowstring', 'shape: box; angularDamping: 1.0; halfExtents: 0.3 0.3 2.8; offset: -0.25 0 -2.5;');
             bowHB.setAttribute('scale', '0.1 0.1 0.1');
 
-            //     axeHB.setAttribute('constraint','type: pointToPoint; maxForce: 10000000; collideConnected: false; target: #axe');
+            
             bowHB.setAttribute('id', 'bowHB');
             bowHB.setAttribute('visible', 'false');
-            scene.appendChild(bowHB)
+            scene.appendChild(bowHB);
             //********************************* CODE FOR NEXT TOOL ********************************/
 
-            //console.log(Context_AF.el.getObject3D('mesh'));
+            //********************************* CODE FOR NEXT TOOL ********************************/
+            let hammerEntity = document.createElement('a-entity');
+            hammerEntity.setAttribute('obj-model', 'obj: #Hammer_1-obj');
+            hammerEntity.setAttribute('material', 'src: #Hammer-mtl');
+            hammerEntity.setAttribute('scale', '0.2 0.2 0.2');
+            hammerEntity.setAttribute('position','0 0 0');
+            hammerEntity.setAttribute('rotation', '0 0 0');
+            hammerEntity.setAttribute('shadow', 'cast:true');
+            hammerEntity.setAttribute('visible', 'false');
+            hammerEntity.setAttribute('shadow', 'receive:true');
+
+            hammerEntity.setAttribute('id', 'hammer');
+
+            scene.appendChild(hammerEntity);
+
+            //HIT BOX//
+            hammerHB = document.createElement('a-box');
+            hammerHB.setAttribute('static-body', 'shape: none; angularDamping: 1.0;');
+            hammerHB.setAttribute('shape__hammerhead', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 2 2 2; offset: 0 1 0;');
+            hammerHB.setAttribute('scale', '0.1 0.1 0.1');
+            
+            hammerHB.setAttribute('id', 'hammerHB');
+            hammerHB.setAttribute('visible', 'false');
+            scene.appendChild(hammerHB);
+            //********************************* CODE FOR NEXT TOOL ********************************/
 
         });
         terraObj.setObject3D('mesh', plane);
         terraObj.setAttribute('class','ground');
 
+        // let log = document.createElement('a-entity');
+        // log.setAttribute('position', '0 0 0');
+        // log.setAttribute('rotation', '90 0 0');
+        // log.setAttribute('scale', '0.15 0.15 0.15');
+        // log.setAttribute('dynamic-body', 'shape: none; angularDamping: 1.0; linearDamping: 1.0;');
+        // log.setAttribute('shape__log', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 0.8 6 0.8; offset: 0 6 0;');
+        // log.setAttribute('obj-model', 'obj: #log-obj');
+        // log.setAttribute('material', 'src: #log-mtl');
+        // log.setAttribute('id', 'log');
+        // log.setAttribute('class', 'Log');
+        // scene.appendChild(log);
         // let waterGeo = new THREE.PlaneGeometry(1000, 1000);
         // for (let i = 0; i < waterGeo.vertices.length; i++) 
         // {
