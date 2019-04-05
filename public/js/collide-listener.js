@@ -16,10 +16,10 @@ AFRAME.registerComponent('collide-listener', {
 
     bow.addEventListener('collide', function (e) 
     {
-      console.log("bow collided with: " + e.detail.body.el.getAttribute('id'));
+      //console.log("bow collided with: " + e.detail.body.el.getAttribute('id'));
       if(e.detail.body.el.getAttribute('id') == ('stickHB'))
       {
-        console.log("colliding bow with stick")
+        //console.log("colliding bow with stick")
         window.MAKE_FIRE = true;
       }
     });
@@ -32,7 +32,7 @@ AFRAME.registerComponent('collide-listener', {
       }
       for(let i = 0; i < 48; i++)//change to select as i doesnt actually do anything here, i think
       {
-        console.log("axe collided with: " + e.detail.body.el.getAttribute('id'));
+        //console.log("axe collided with: " + e.detail.body.el.getAttribute('id'));
           if(e.detail.body.el.getAttribute('id') == ('popTreeH' + i) && e.detail.body.el.components['object-status'].data.dtSinceLastHit <= 0)
           {
             if(e.detail.body.el.components['object-status'].data.hitPoints > 0)
@@ -43,7 +43,7 @@ AFRAME.registerComponent('collide-listener', {
               axeSound.components['sound'].stopSound();
               rightHandActual.components['haptics'].pulse(1.0, 200);
               axeSound.setAttribute('position', axe.getAttribute('position'));
-              console.log("volume: " + axeSound.getAttribute('sound').volume);
+              //console.log("volume: " + axeSound.getAttribute('sound').volume);
               axeSound.components['sound'].playSound();
               
               e.detail.body.el.setAttribute('object-status','hitPoints: ' + hp + ';');
@@ -60,6 +60,8 @@ AFRAME.registerComponent('collide-listener', {
                 log.setAttribute('static-body',{});  
                 log.setAttribute('obj-model','obj: #log-obj');
                 log.setAttribute('material','src: #log-mtl');
+                log.setAttribute('id','log');
+                log.setAttribute('class','Log');
                 scene.appendChild(log);
                 axeSound.components['sound'].stopSound();
                 dropSound.setAttribute('position', currentTree.getAttribute('position'));
@@ -72,27 +74,31 @@ AFRAME.registerComponent('collide-listener', {
 
     rightHand.addEventListener('collide', function (e) 
     {
-      console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
-      console.log(window.IS_GRABBING);
+     // console.log('right hand collided: ' + e.detail.body.el.getAttribute('id'));
+      //console.log(window.IS_GRABBING);
       
-     if ((window.IS_GRABBING == true ) && (e.detail.body.el.getAttribute('id') != 'terrainGenerationObj') && (e.detail.body.el.getAttribute('id') != 'right-hand') && (e.detail.body.el.getAttribute('id') != 'axe') ) 
+     if ((window.IS_GRABBING == true ) && ((e.detail.body.el.getAttribute('id') == 'rock') || (e.detail.body.el.getAttribute('id') == 'branch') || (e.detail.body.el.getAttribute('id') == 'leaf'))) 
       {
         if (e.detail.body.el.getAttribute('visible'))
         {
-
+        
           e.detail.body.el.setAttribute('visible', 'false');
 
           if (e.detail.body.el.getAttribute('class') == 'Rock') 
           {
-              window.NUM_ROCKS += 1;
+            window.NUM_ROCKS += 1;
           }
           else if (e.detail.body.el.getAttribute('class') == 'Branch')
           {
-              window.NUM_TWIGS += 1;
+            window.NUM_TWIGS += 1;
           }
           else if (e.detail.body.el.getAttribute('class') == 'Leaves')
           {
-              window.NUM_LEAVES += 1;
+            window.NUM_LEAVES += 1;
+          }
+          else if(e.detail.body.el.getAttribute('class') == 'Log')
+          {
+            window.NUM_LOGS += 1;
           }
         }
       }

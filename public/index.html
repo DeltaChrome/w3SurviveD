@@ -35,6 +35,7 @@
             let toolType = JSON.parse(toolTypeJSON);
             let a = document.querySelector('#axe'); 
             let b = document.querySelector('#bow'); 
+            let h = document.querySelector('#hammer');             
             console.log(toolType.tool);
             switch(toolType.tool)
             {
@@ -53,7 +54,9 @@
                     console.log("added bow");
                 break;
                 case 3:
-                
+                    window.TOOL_TYPE = 3;
+                    h.setAttribute('visible','true');   
+                    console.log("added hammer");
                 break;
             }
             //need to create switch statement for data
@@ -72,7 +75,7 @@
     <a-scene shadow="type: pcfbasic"  stats physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: true;">
 
         <a-assets>
-          
+
             <!-- SOUNDS -->
             <a-asset-item crossorigin="anonymous" id="axeSound" src="/assets/sound/Axe_Hit.mp3" response-type="arraybuffer"></a-asset-item>
             <a-asset-item crossorigin="anonymous" id="dropSound" src="/assets/sound/pop.mp3" response-type="arraybuffer"></a-asset-item>
@@ -113,8 +116,6 @@
             <a-asset-item id="tree_2-obj" src="/assets/models/IceCreme_tree.obj"></a-asset-item>
             <a-asset-item id="tree_3-obj" src="/assets/models/tree_2_2.obj"></a-asset-item>
             <a-asset-item id="tree_3-mat" src="/assets/textures/tree_2_2.mtl"></a-asset-item>
-            <!--<a-asset-item id="rock_01-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>-->
-            <!--<a-asset-item id="rock_01-obj" src="/assets/models/rock_01.obj"></a-asset-item>-->
 
             <a-asset-item id="rock_01-obj" src="/assets/models/Rock1.obj"></a-asset-item>
             <a-asset-item id="rock_02-obj" src="/assets/models/Rock2.obj"></a-asset-item>
@@ -125,7 +126,7 @@
             <a-asset-item id="pointy-tree-obj" src="/assets/models/pointyTree.obj"></a-asset-item>
 
             <a-asset-item id="rock1-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
-            <a-asset-item id="rock1-obj" src="/assets/models/rock1.obj"></a-asset-item>
+            <a-asset-item id="rock1-obj" src="/assets/models/rock_01.obj"></a-asset-item>
             <a-asset-item id="rock2-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
             <a-asset-item id="rock2-obj" src="/assets/models/rock2.obj"></a-asset-item>
             <a-asset-item id="rock3-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
@@ -189,7 +190,7 @@
             <!-- camera -->
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <!-- hand controls -->
-            <!-- <a-entity id="left-hand" static-body="shape: box;" grab-listener constraint="type: lock" oculus-touch-controls="hand: left"></a-entity> -->
+            <a-entity id="left-hand" static-body="shape: box;" haptics constraint="collideConnected: false" rotation="0 0 0" scale="0.2 0.2 0.2" grab-listener oculus-touch-controls="hand: left"></a-entity>
             <a-entity id="right-hand" static-body="shape: box;" haptics runtime constraint="collideConnected: false" rotation="0 0 0" scale="0.2 0.2 0.2" grab-listener oculus-touch-controls="hand: right;">
 
                  <!-- <a-entity id="axe" static-body="shape: box;" obj-model="obj: #Axe_1-obj;" material="src: #Axe_1-mtl" constraint="collideConnected: false" rotation="0 0 0" scale="1 1 1"></a-entity> -->
