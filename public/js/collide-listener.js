@@ -18,9 +18,9 @@ AFRAME.registerComponent('collide-listener', {
     hammer.addEventListener('collide', function (e) 
     {
       //console.log("bow collided with: " + e.detail.body.el.getAttribute('id'));
-      if(e.detail.body.el.getAttribute('id') == ('log'))
+      if(e.detail.body.el.getAttribute('id') == ('log') && e.detail.body.el.getAttribute('visible') == true)
       {
-        console.log("spawn shelter")
+        e.detail.body.el.setAttribute('visible','false');
         window.SPAWN_SHELTER = true;
       }
     });

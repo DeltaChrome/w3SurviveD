@@ -87,7 +87,7 @@ AFRAME.registerComponent("runtime", {
         else if(window.TOOL_TYPE == 2)
         {
             
-            if(window.MAKE_FIRE == false)
+            if(window.MAKE_FIRE == false || window.FIRE_COMPLETE == true)
             {
                 bow.setAttribute('visible', 'true');
                 axe.setAttribute('visible', 'false');
@@ -225,6 +225,9 @@ AFRAME.registerComponent("runtime", {
             logs: window.NUM_LOGS
         }
         //call event updateInventory
+        let invJSON = JSON.stringify(inv);
+
+        //socket.emit('update', invJSON);
 
         // console.log(axe.getAttribute('position'));
         // console.log('running');

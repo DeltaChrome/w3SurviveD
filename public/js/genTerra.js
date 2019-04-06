@@ -156,9 +156,6 @@ AFRAME.registerComponent("genterra-component", {
 
         let currentTree = [];
 
-
-
-
         function planeEquation(vertex1, vertex2, vertex3)
         {
             //create vectors from points
@@ -187,12 +184,40 @@ AFRAME.registerComponent("genterra-component", {
             let xOffset = generateNumber(10) - 5;
             let zOffset = generateNumber(10) - 5;
 
+            let currentV = geometry.vertices[index];
+            let sideRV = geometry.vertices[index + 1];
+            let aboveV = geometry.vertices[index - 10];
+            let adjacentTRV = geometry.vertices[index - 9];//or -10 + 1
 
-            
+            let sideLV = geometry.vertices[index - 1];
+            let belowV = geometry.vertices[index + 10];
+            let adjacentTLV = geometry.vertices[index - 11];//or -10 - 1
+            let adjacentBLV = geometry.vertices[index + 9];//or +10 - 1
+            let adjacentBRV = geometry.vertices[index + 11];//or +10 + 1
+
             if(xOffset > 0)
             {
                 if(zOffset < 0)
                 {
+                    //take current vertex
+                    //take current vertex - 10(as index)
+                    //take current vertex - 10(as index) + 1
+                    //if in this triangle call plane equation
+                    //else
+                    //take current vertex
+                    //take current vertex + 1
+                    //take current vertex - 10(as index) + 1
+                    let x1 = currentV.x;
+                    let x2 = sideRV.x;
+                    let x3 = adjacentTRV.x;
+                    let y1 = currentV.z;
+                    let y2 = sideRV.z;
+                    let y3 = adjacentTRV.z;
+
+                    console.log("current vertex at x: " + x1);
+
+                    let areOfLargeTriangle = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
+
 
                 }
                 else
@@ -254,11 +279,9 @@ AFRAME.registerComponent("genterra-component", {
         let randomValidVertexIndex = generateNumber(64);
 
         let randomValidVertex = generatePositionVectorRayCasted(randomValidVertexIndex);
-
-
         
         //IF THERE IS TIME, RAY CAST EACH ITEM TO BE ON THE ANGLE OF A SURFACE AND NOT JUST PLACED AT A VERTEX
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
 
@@ -311,7 +334,7 @@ AFRAME.registerComponent("genterra-component", {
             scene.appendChild(entity);
         }
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 1; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(0));
