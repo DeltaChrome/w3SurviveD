@@ -163,6 +163,27 @@ AFRAME.registerComponent("runtime", {
                     if(window.FIRE_PROGRESS > 5)
                     {
                         window.FIRE_COMPLETE = true;
+
+                        let fire = document.createElement('a-entity');
+
+                        fire.setAttribute('position', document.querySelector('#firepit').getAttribute('position'));
+
+                        fire.setAttribute('particle-system', 
+                        'preset: default; texture: ./assets/textures/Fire.png; color: #E8C700,#B52105,#E8C700;positionSpread: 1 1 1;particleCount: 10; maxAge: 0.075; size: 4; dragValue: 1; velocityValue: 0, 0.00000005, 0;velocitySpread: 0.0000005, 0.0000005, 0.000005;accelerationValue: 0, -20, 0;accelerationSpread: -0.00000005, 0, -0.000000005;');
+                        // <a-entity id="particles" position="0 0 0" 
+                        // particle-system="preset: default; 
+                        // texture: ./assets/textures/Fire.png; 
+                        // color: #E8C700,#B52105,#E8C700;
+                        // positionSpread: 1 1 1;
+                        // particleCount: 10; 
+                        // maxAge: 0.075; 
+                        // size: 4; 
+                        // dragValue: 1; 
+                        // velocityValue: 0, 0.00000005, 0;
+                        // velocitySpread: 0.0000005, 0.0000005, 0.000005;
+                        // accelerationValue: 0, -20, 0;
+                        // accelerationSpread: -0.00000005, 0, -0.000000005;
+                        // "></a-entity>
                     }
                 }
 
