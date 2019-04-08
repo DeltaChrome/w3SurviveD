@@ -146,7 +146,7 @@ function MaterialButton_A(){
 
             if(craftDone_Rock)
             {
-                ToolC.className = "show";
+                ToolB.className = "show";
                 console.log("Done");
                 CraftingArea.removeChild(Material_A);
                 touchCount_Rock = 0;
@@ -217,7 +217,8 @@ function MaterialButton_B(){
             {
                 readyForCraft_Stick = false;
                 console.log(touchCount_Stick);
-                ToolB.className = "show";
+                ToolA.className = "show";
+                ToolC.className = "show";
                 console.log("Hello");
                 CraftingArea.removeChild(Material_B);
             }
