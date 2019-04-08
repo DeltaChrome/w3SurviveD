@@ -35,6 +35,10 @@ Material_B.onclick = function(){MaterialButton_B()};
 ButtonMaterial.onclick = function(){myFunction()};
 ButtonTool.onclick = function(){AddtoGame()};
 
+//first alert
+alert("Please tell the VR player to find a fire pit");
+
+
 let hint = document.getElementById("progressText");
 hint.className = 'hide';
 
@@ -262,12 +266,17 @@ function AddtoGame(){
 
     if(ToolComplete)
     {
+        //last alert
+        alert("Please ask the Vr player to start a fire by using the fireBow on the stick found in the fire pit");
+
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";
         ButtonTool.innerHTML = "TOOL";
         ButtonTool.className = "NotReady";
-        document.location.href = 'index.html';
+
+        //next page
+        document.location.href = 'Hammer.html';
     }
 
 }

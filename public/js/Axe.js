@@ -37,6 +37,9 @@ Material_B.onclick = function(){MaterialButton_B()};
 ButtonMaterial.onclick = function(){myFunction()};
 ButtonTool.onclick = function(){AddtoGame()};
 
+//first alert
+alert("Please tell the VR player to gather twigs and rocks found on the ground");
+
 
 window.setInterval(function(){
     progress();
@@ -271,12 +274,17 @@ function AddtoGame(){
 
     if(ToolComplete)
     {
+        //last alert
+        alert("Please ask the Vr player to cut down a tree with the axe");
+
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";
         ButtonTool.innerHTML = "TOOL";
         ButtonTool.className = "NotReady";
-        document.location.href = 'Hammer.html';
+
+        //next page
+        document.location.href = 'FireBow.html';
     }
 
 }

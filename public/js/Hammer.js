@@ -35,6 +35,10 @@ Material_B.onclick = function(){MaterialButton_B()};
 ButtonMaterial.onclick = function(){myFunction()};
 ButtonTool.onclick = function(){AddtoGame()};
 
+//first alert
+alert("Please tell the VR player to return to the tree they chopped down, there will be a log on the ground where it stood");
+
+
 let hint = document.getElementById("progressText");
 hint.className = 'hide';
 
@@ -262,12 +266,15 @@ function AddtoGame(){
 
     if(ToolComplete)
     {
+        alert("Please tell the Vr player to use the hammer on the log to create a shelter");
+
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";
         ButtonTool.innerHTML = "TOOL";
         ButtonTool.className = "NotReady";
-        document.location.href = 'FireBow.html';
+
+        document.location.href = 'index.html';
     }
 
 }
