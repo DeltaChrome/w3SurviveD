@@ -38,6 +38,8 @@ AFRAME.registerComponent("runtime", {
 
         document.querySelector('#createWindSound').setAttribute('sound','loop: true;');
         document.querySelector('#createWindSound').components['sound'].playSound();     
+
+        
     
     },
 
@@ -54,6 +56,8 @@ AFRAME.registerComponent("runtime", {
         let handpos = document.querySelector('#right-hand').getAttribute('position');
         let cameraRigPos = document.querySelector('#cameraRig').getAttribute('position');
         let head = document.querySelector('#head').getAttribute('position');
+        let firepitPos = document.querySelector('#firepit').getAttribute('position');
+        let firepit = document.querySelector('#firepit');
         
         let actualHandX = handpos.x + cameraRigPos.x;
         let actualHandY = handpos.y + cameraRigPos.y;
@@ -159,12 +163,9 @@ AFRAME.registerComponent("runtime", {
                         window.FIRE_COMPLETE = true;
 
                         let fire = document.createElement('a-entity');
-
-                        fire.setAttribute('position', document.querySelector('#firepit').getAttribute('position'));
-
-                        fire.setAttribute('particle-system', 'preset: default; texture: ./assets/textures/Fire.png; color: #E8C700,#B52105,#E8C700;positionSpread: 1 1 1;particleCount: 10; maxAge: 0.075; size: 4; dragValue: 1; velocityValue: 0, 0.00000005, 0;velocitySpread: 0.0000005, 0.0000005, 0.000005;accelerationValue: 0, -20, 0;accelerationSpread: -0.00000005, 0, -0.000000005;');
-         
-                        scene.appendChild(fire);
+                        fire.setAttribute('id','fireparticles');
+                        fire.setAttribute('particle-system', 'preset: stars; texture: ./assets/textures/Fire.png; color: #E8C700,#B52105,#E8C700; positionSpread: 1 1 1;particleCount: 10; maxAge: 0.75; size: 2; dragValue: 4; ');
+                        firepit.appendChild(fire);
                     }
                 }
 

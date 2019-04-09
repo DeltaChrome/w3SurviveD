@@ -220,8 +220,8 @@ AFRAME.registerComponent("genterra-component", {
 
                     let areOfLargeTriangle = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
                     
-                    x1 = pointToCheck.x;
-                    y1 = pointToCheck.z;
+                   // x1 = pointToCheck.x;
+                   // y1 = pointToCheck.z;
 
                     let areOfLargeTP1 = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
                     
@@ -268,11 +268,6 @@ AFRAME.registerComponent("genterra-component", {
 
 
             let objectVertexPosition = new THREE.Vector3(geometry.vertices[index].x,geometry.vertices[index].y,geometry.vertices[index].z);
-
-            
-
-
-
 
             return(objectVertexPosition);
         }
