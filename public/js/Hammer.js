@@ -263,9 +263,25 @@ function myFunction(){
 
 function AddtoGame(){
     
+    let socket = io();
+        
+    //default connect event
+    socket.on('connect', function() {
+        console.log("connected!");
+    });
 
     if(ToolComplete)
     {
+        let toolType =
+        {
+            tool: 3
+        }
+
+        let toolTypeJSON = JSON.stringify(toolType);
+
+        console.log("hammer html sends hammer");
+        socket.emit('createObject', toolTypeJSON);
+
         alert("Please tell the Vr player to use the hammer on the log to create a shelter");
 
         ToolA.style.visibility = "Hidden";

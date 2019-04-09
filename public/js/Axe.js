@@ -143,7 +143,6 @@ function MaterialButton_A(){
                 console.log("Gasolin3");
             }
 
-
             if(touchCount_Rock === 6)
             {
                 readyForCraft_Rock = false;
@@ -270,10 +269,29 @@ function myFunction(){
 }
 
 function AddtoGame(){
-    
+
+    let socket = io();
+        
+        //default connect event
+        socket.on('connect', function() {
+            console.log("connected!");
+        });
 
     if(ToolComplete)
     {
+        let toolType =
+        {
+            tool: 1
+        }
+
+        let toolTypeJSON = JSON.stringify(toolType);
+
+        console.log("axe html sends axe");
+        socket.emit('createObject', toolTypeJSON);
+
+
+
+        
         //last alert
         alert("Please ask the Vr player to cut down a tree with the axe");
 
@@ -282,6 +300,7 @@ function AddtoGame(){
         ToolC.style.visibility = "Hidden";
         ButtonTool.innerHTML = "TOOL";
         ButtonTool.className = "NotReady";
+        //document.location.href = 'Hammer.html';
 
         //next page
         document.location.href = 'FireBow.html';

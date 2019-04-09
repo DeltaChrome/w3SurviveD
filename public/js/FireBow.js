@@ -264,9 +264,25 @@ function myFunction(){
 
 function AddtoGame(){
     
+    let socket = io();
+        
+    //default connect event
+    socket.on('connect', function() {
+        console.log("connected!");
+    });
 
     if(ToolComplete)
     {
+
+        let toolType =
+        {
+            tool: 2
+        }
+
+        let toolTypeJSON = JSON.stringify(toolType);
+
+        console.log("firebow html sends bow");
+        socket.emit('createObject', toolTypeJSON);
         //last alert
         alert("Please ask the Vr player to start a fire by using the fireBow on the stick found in the fire pit");
 
@@ -281,8 +297,6 @@ function AddtoGame(){
     }
 
 }
-
-
 
 // if(readyForCraft === true)
 //     {

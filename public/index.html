@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<!-- control+alt+i opens dope editor in real time -->
+<head>
+     <title>weSurviv3D</title>
+     <script src ="/js/aframe-v0.8.2.min.js"></script>
+     <script src="js/component.js"></script>   
+     <script src="js/genTerra.js"></script>  
+     <script src="js/trees.js"></script>
+     <script src="js/runtime.js"></script>
+     <script src="js/remove-component.js"></script>
+     <script src="js/collide-listener.js"></script>
+     <script src="js/aframe-teleport-controls.js"></script>
+     <script src="js/aframe-physics-system.js"></script>
+     <script src="js/grab-listener.js"></script>
+     <script src="js/mesh-smootha.js"></script>
+     <script src="js/Water.js"></script>
+     <script src="js/object-status.js"></script>
+     <!-- <script src="https://unpkg.com/aframe-haptics-component/dist/aframe-haptics-component.min.js"></script> -->
+     <script src="js/aframe-haptics-component.min.js"></script>
+     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
+     <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
+     <!-- <script src="js/aframe-teleport-controls.min.js"></script> -->
+     <script src="/socket.io/socket.io.js"></script>
+     <script>
+        let socket = io();
+        
+        //default connect event
+        socket.on('connect', function() {
+            console.log("connected!");
+        });
+        
+        //spawining an object
+        socket.on('Spawn_Object', function(toolTypeJSON) {
+                     
+            let toolType = JSON.parse(toolTypeJSON);
+            let a = document.querySelector('#axe'); 
+            let b = document.querySelector('#bow'); 
+            let h = document.querySelector('#hammer');             
+            console.log(toolType.tool);
+            switch(toolType.tool)
+            {
+                case 0:
+                    window.TOOL_TYPE = 0;
+                    a.setAttribute('visible','false');   
+                break;
+                case 1:
+                    window.TOOL_TYPE = 1;
+                    a.setAttribute('visible','true');   
+                    console.log("added axe");
+                break;
+                case 2:
+                    window.TOOL_TYPE = 2;
+                    b.setAttribute('visible','true');   
+                    console.log("added bow");
+                break;
+                case 3:
+                    window.TOOL_TYPE = 3;
+                    h.setAttribute('visible','true');   
+                    console.log("added hammer");
+                break;
+            }
+            //need to create switch statement for data
+            //check to see what tool to spawn
+            //spawn object
+
+            //create rgb color string for css
+            // let confirmationStr = 'boolean: ' + data.b + '.';
+            // console.log("boolean received: " + confirmationStr);
+        });
+     </script>
+    
+</head>
+<body>
+    <!-- stats -->
+    <a-scene shadow="type: pcfbasic"   physics="driver: local; contactEquationStiffness: 1000; gravity: 0; friction: 100; debug: false;">
+
+        <a-assets>
+
+            <!-- SOUNDS -->
+            <a-asset-item crossorigin="anonymous" id="axeSound" src="/assets/sound/Axe_Hit.mp3" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item crossorigin="anonymous" id="dropSound" src="/assets/sound/pop.mp3" response-type="arraybuffer"></a-asset-item>
+            <a-asset-item crossorigin="anonymous" id="windSound" src="/assets/sound/Forest_Wind_03.mp3" response-type="arraybuffer"></a-asset-item>
+          
+            <!-- IMAGES -->
+            <img id="skymap" src="/assets/textures/SynthSet.png"> 
+            <img id="tree_2-mat" src="/assets/textures/IceCreme_tree.png">  
+            <img id="popcornGreen-mtl" src="/assets/textures/Popcorn_green.png">
+            <img id="popcornYellow-mtl" src="/assets/textures/Popcorn_yellow.png"> 
+            <img id="popcornRed-mtl" src="/assets/textures/Popcorn_red.png"> 
+            <img id="popcornPurple-mtl" src="/assets/textures/Popcorn_purple.png">
+
+            <img id="pointyGreen-mtl" src="/assets/textures/GreenPointyTree.png">
+            <img id="pointylight-mtl" src="/assets/textures/LightGreenPointyTree.png">
+            <img id="pointyBrown-mtl" src="/assets/textures/BrownPointyTree.png"> 
+            <img id="pointyPurple-mtl" src="/assets/textures/PurplePointyTree.png">
+            <img id="Axe_1-mtl" src="/assets/textures/axesc.png"> 
+            <img id="Bow-mtl" src="/assets/textures/Bow_sc.png"> 
+            <img id="Hammer-mtl" src="/assets/textures/Hammer.png"> 
+
+            <img id="Firepit-mtl" src="/assets/textures/Firepit.png"> 
+            <img id="Shelter-mtl" src="/assets/textures/Shelter.png"> 
+
+            <img id="rock-mtl" src="/assets/textures/rock.png"> 
+            <img id="log-mtl" src="/assets/textures/Log.png"> 
+            <img id="branch-mtl" src="/assets/textures/twig.png"> 
+
+            <a-asset-item id="thicc-tree-obj" src="/assets/models/ThiccTree.obj"></a-asset-item>
+            
+            <a-asset-item id="leftController" src="/assets/models/oculus-touch-controller-left.obj"></a-asset-item>
+            <a-asset-item id="rightController" src="/assets/models/oculus-touch-controller-right.obj"></a-asset-item>
+            <a-asset-item id="rightController-mat" src="/assets/textures/oculus-touch-controller-right.mtl"></a-asset-item>
+            <a-asset-item id="leftController-mat" src="/assets/textures/oculus-touch-controller-left.mtl"></a-asset-item>
+            
+            <a-asset-item id="log-obj" src="/assets/models/Log_1.obj"></a-asset-item>
+
+            <a-asset-item id="tree_1-obj" src="/assets/models/poptree.obj"></a-asset-item>
+            <a-asset-item id="water-obj" src="/assets/models/plue.obj"></a-asset-item>
+            <a-asset-item id="tree_1-mat" src="/assets/textures/tree_1_1.mtl"></a-asset-item>
+            <a-asset-item id="tree_2-obj" src="/assets/models/IceCreme_tree.obj"></a-asset-item>
+            <a-asset-item id="tree_3-obj" src="/assets/models/tree_2_2.obj"></a-asset-item>
+            <a-asset-item id="tree_3-mat" src="/assets/textures/tree_2_2.mtl"></a-asset-item>
+
+            <!-- Rocks -->
+            <a-asset-item id="Round_Rock-obj" src="/assets/models/rock_01.obj"></a-asset-item>
+            <a-asset-item id="rock_01-obj" src="/assets/models/Rock1.obj"></a-asset-item>
+            <a-asset-item id="rock_02-obj" src="/assets/models/Rock2.obj"></a-asset-item>
+            <a-asset-item id="rock_03-obj" src="/assets/models/Rock3.obj"></a-asset-item>
+            <a-asset-item id="rock_04-obj" src="/assets/models/Rock4.obj"></a-asset-item>
+            <a-asset-item id="rock_05-obj" src="/assets/models/Rock5.obj"></a-asset-item>
+
+            <a-asset-item id="pointy-tree-obj" src="/assets/models/pointyTree.obj"></a-asset-item>
+
+            <a-asset-item id="rock1-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock1-obj" src="/assets/models/rock_01.obj"></a-asset-item>
+            <a-asset-item id="rock2-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock2-obj" src="/assets/models/rock2.obj"></a-asset-item>
+            <a-asset-item id="rock3-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock3-obj" src="/assets/models/rock3.obj"></a-asset-item>
+            <a-asset-item id="rock4-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock4-obj" src="/assets/models/rock4.obj"></a-asset-item>
+            <a-asset-item id="rock5-mat" src="/assets/textures/rock_01.mtl"></a-asset-item>
+            <a-asset-item id="rock5-obj" src="/assets/models/rock5.obj"></a-asset-item>
+
+            <a-asset-item id="bush-obj" src=/assets/models/Bush_1.obj></a-asset-item>
+            <a-asset-item id="branch-obj" src=/assets/models/Twig_1.obj></a-asset-item>
+
+            <!-- Tools -->
+            <a-asset-item id="Axe_1-obj" src="/assets/models/axetest.obj"></a-asset-item>
+            <a-asset-item id="Bow_1-obj" src="/assets/models/Bow_v6.obj"></a-asset-item>
+            <a-asset-item id="Hammer_1-obj" src="/assets/models/Hammer_v4.obj"></a-asset-item>
+
+            <a-asset-item id="Firepit-obj" src="/assets/models/firepit_UV.obj"></a-asset-item>
+            <a-asset-item id="Shelter-obj" src="/assets/models/Shelter.obj"></a-asset-item>
+            
+            <!-- <a-asset-item id="Axe_1-mtl" src="/assets/textures/Axe_1.mtl"></a-asset-item> -->
+
+        </a-assets>
+
+        <a-entity id="terrainGenerationObj" mesh-smootha genterra-component genwater-component position="0 0 0"></a-entity>
+        <a-entity id="sky"
+                geometry="primitive:sphere; radius:500"
+                material="shader:flat; src:#skymap; side:back">
+        </a-entity>
+        
+        <!-- SOUNDS -->
+        <a-entity id="createAxeSound" sound="src: #axeSound;"></a-entity>
+        <a-entity id="createDropSound" sound="src: #dropSound;"></a-entity>
+        <a-entity id="createWindSound" sound="src: #windSound;"></a-entity>
+
+        <!-- Lights< -->
+        <a-entity id="LightSUN" light="type:directional; 
+        castShadow:true;
+        color:#e0d498; 
+        intensity:1.2; 
+        shadowCameraLeft: -250;
+        shadowCameraBottom: -250;
+        shadowCameraRight: 250;
+        shadowCameraTop: 250;
+        shadowMapHeight: 512;
+        shadowMapWidth: 512;" 
+        scale="10 10 10" position="40 40 20"></a-entity>
+        <!-- shadowCameraVisible: true; -->
+
+        <a-entity id="LightBounce1 Side" light="type:directional; color:#e0d498; intensity:0.1;"
+        scale="10 10 10" position="-40 0 -20" rotation="180 0 0"></a-entity>
+
+        <a-entity id="LightBounce1 Side2" light="type:directional; color:#e0d498; intensity:0.1;"
+        scale="10 10 10" position="40 0 20" rotation="180 0 0"></a-entity>
+
+        <a-entity id="LightBounce2 Bottom" light="type:directional; color:#e0d498; intensity:0.1;"
+        scale="10 10 10" position="0 -0.025 0" rotation="90 0 0"></a-entity>
+
+        <a-entity light="type: ambient;  color:#e0d498;  intensity:0.3;"></a-entity>
+        <!-- Lights> -->
+        <a-ocean position="0 -8 0" color="#2759aa" depth="200" width="200" opacity="1" density="0.00025"></a-ocean>
+        <a-entity id="cameraRig" position="0 0 0">
+            <!-- camera -->
+            <a-entity id="head" camera wasd-controls look-controls></a-entity>
+            <!-- hand controls -->
+            <a-entity id="left-hand" static-body="shape: box;" haptics constraint="collideConnected: false" rotation="0 0 0" scale="0.2 0.2 0.2" grab-listener oculus-touch-controls="hand: left"></a-entity>
+            <a-entity id="right-hand" static-body="shape: box;" haptics runtime constraint="collideConnected: false" rotation="0 0 0" scale="0.2 0.2 0.2" grab-listener oculus-touch-controls="hand: right;">
+
+                 <!-- <a-entity id="axe" static-body="shape: box;" obj-model="obj: #Axe_1-obj;" material="src: #Axe_1-mtl" constraint="collideConnected: false" rotation="0 0 0" scale="1 1 1"></a-entity> -->
+   
+            </a-entity>
+           
+            <a-box 
+            scale="0.1 0.1 0.1"
+            
+            id="hand"
+            dynamic-body="shape: box;"
+            constraint="target: #right-hand; type: pointToPoint; targetPivot: 0 0 0; axis: 0 0 0; collideConnected: false"
+            visible="false"
+            
+                    ></a-box>
+          </a-entity>
+
+        <!-- <a-entity id="axe" position="0,0,0" scale="0.2,0.2,0.2" geometry="#Axe_1-obj" material="#Axe_1-mtl" dynamic-body="shape: box;"
+        constraint="target: #right-hand; type: pointToPoint; targetPivot: 0 0 0; axis: 0 0 0;"
+        ></a-entity> -->
+
+    </a-scene>
+ 
+</body>
+
+</html>

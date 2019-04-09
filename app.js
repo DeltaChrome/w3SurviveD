@@ -4,9 +4,9 @@ const http = require("http");
 const server = http.createServer(app);
 
 const socketIO  = require('socket.io')(server);
+const LISTEN_PORT = 8080;
 
-
- const LISTEN_PORT = 8080;
+let inventory;
 
  app.use(express.static(__dirname + '/public'));
 
@@ -66,7 +66,25 @@ socketIO.on('connection', function(socket) {
 
     socket.on('SpwnObj', function(data) {
         console.log('SpwnObj event heard');
-        socketIO.sockets.emit('Spawn_Object', {b:true});
+        socketIO.sockets.emit('Spawn_Object', data);
+    });
+
+    socket.on('createObject', function(data) {
+        console.log('create event heard');
+
+        socketIO.sockets.emit('Spawn_Object', data);
+    });
+
+    socket.on('update', function(data) {
+        console.log('update event heard');
+
+        inventory = data;
+        //socketIO.sockets.emit('updateGame', data);
+    });
+    socket.on('pullData', function(data) {
+        console.log('pull event heard');
+
+        socketIO.sockets.emit('updateGame', inventory);
     });
 });
 
