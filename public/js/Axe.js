@@ -31,11 +31,31 @@ let ButtonTool = document.getElementById("ToolButton");
 let hint = document.getElementById("progressText");
 hint.className = 'hide';
 
+//booleans that check for clickability
+let hasStick = false;
+let hasRock = false;
+
 //OnClicks
-Material_A.onclick = function(){MaterialButton_A()};
-Material_B.onclick = function(){MaterialButton_B()};
+//Material_A.onclick = function(){MaterialButton_A()};
+//Material_B.onclick = function(){MaterialButton_B()};
 ButtonMaterial.onclick = function(){myFunction()};
 ButtonTool.onclick = function(){AddtoGame()};
+
+
+///-------------------------------- controls clickibility of the materials
+window.setInterval(function(){
+    //This controls the access to the material button for the rock
+    if(hasRock)
+    {
+        Material_A.onclick = function(){MaterialButton_A()};
+    }
+
+    //This controls the access to the material button for the stick
+    if(hasStick)
+    {
+        Material_B.onclick = function(){MaterialButton_B()};
+    }
+}, 10);
 
 //first alert
 alert("Please tell the VR player to gather twigs and rocks found on the ground");
@@ -269,7 +289,7 @@ function myFunction(){
 
 }
 
-function AddtoGame(){
+function AddtoGame(){ 
     
 
     if(ToolComplete)
