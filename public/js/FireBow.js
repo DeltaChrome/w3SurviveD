@@ -25,7 +25,7 @@ let ToolA = document.getElementById("ToolA");
 let ToolB = document.getElementById("ToolB");
 let ToolC = document.getElementById("ToolC");
 let progressBar = document.getElementById("Bar");
-let progressText = document.getElementById("progressText");
+let progressText = document.getElementById("Hint");
 let ButtonMaterial = document.getElementById("MatButton");
 let ButtonTool = document.getElementById("ToolButton");
 
@@ -35,7 +35,11 @@ Material_B.onclick = function(){MaterialButton_B()};
 ButtonMaterial.onclick = function(){myFunction()};
 ButtonTool.onclick = function(){AddtoGame()};
 
-let hint = document.getElementById("Hint");
+//first alert
+alert("Please tell the VR player to find a fire pit");
+
+
+let hint = document.getElementById("progressText");
 hint.className = 'hide';
 
 window.setInterval(function(){
@@ -142,7 +146,7 @@ function MaterialButton_A(){
 
             if(craftDone_Rock)
             {
-                ToolC.className = "show";
+                ToolB.className = "show";
                 console.log("Done");
                 CraftingArea.removeChild(Material_A);
                 touchCount_Rock = 0;
@@ -213,7 +217,8 @@ function MaterialButton_B(){
             {
                 readyForCraft_Stick = false;
                 console.log(touchCount_Stick);
-                ToolB.className = "show";
+                ToolA.className = "show";
+                ToolC.className = "show";
                 console.log("Hello");
                 CraftingArea.removeChild(Material_B);
             }
@@ -236,9 +241,9 @@ function myFunction(){
         readyForCraft_Rock = true;
         rockActive = true;
         stickActive = false;
-        active = true;
+        active = true;  
         console.log("RockAdded");
-        Material_A.style.bottom = "50%";
+        // Material_A.style.bottom = "50%";
         return;
     }
     if(SelectedItem === "Stick" && !craftDone_Stick)
@@ -250,7 +255,7 @@ function myFunction(){
         rockActive = false;
         active = true;
         console.log("StickAdded");
-        Material_B.style.bottom = "40%";
+        // Material_B.style.bottom = "40%";
         return;
     }
 }
@@ -262,12 +267,17 @@ function AddtoGame(){
 
     if(ToolComplete)
     {
+        //last alert
+        alert("Please ask the Vr player to start a fire by using the fireBow on the stick found in the fire pit");
+
         ToolA.style.visibility = "Hidden";
         ToolB.style.visibility = "Hidden";
         ToolC.style.visibility = "Hidden";
         ButtonTool.innerHTML = "TOOL";
         ButtonTool.className = "NotReady";
-        document.location.href = 'index.html';
+
+        //next page
+        document.location.href = 'Hammer.html';
     }
 
 }
