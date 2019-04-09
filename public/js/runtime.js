@@ -48,6 +48,7 @@ AFRAME.registerComponent("runtime", {
         window.DELTA_TIME = currentTime - window.LAST_TIME;
         window.LAST_TIME  = currentTime;
 
+        let scene = document.querySelector('a-scene');
         let rightHand = document.querySelector('#right-hand');
         let hand = document.querySelector('#right-hand').getAttribute('rotation');
         let handpos = document.querySelector('#right-hand').getAttribute('position');
@@ -64,9 +65,6 @@ AFRAME.registerComponent("runtime", {
         let stickHB = document.querySelector('#stickHB');
         let hammer = document.querySelector('#hammer');
         let hammerHB = document.querySelector('#hammerHB');
-        //console.log(cameraRigPos);
-        //console.log("positions added: ", actualHandX);
-        //let actualHand = cameraRigPos + handpos;
 
         if(window.TOOL_TYPE == 1)
         {
@@ -108,7 +106,7 @@ AFRAME.registerComponent("runtime", {
             else if(window.FIRE_COMPLETE == false)
             {
                 
-                console.log("make fire is true");
+               // console.log("make fire is true");
                 bow.setAttribute('visible', 'true');
                 axe.setAttribute('visible', 'false');
 
@@ -122,10 +120,6 @@ AFRAME.registerComponent("runtime", {
 
                 bow.setAttribute('rotation', {x:0,y:0,z:0});
                 bowHB.setAttribute('rotation', bow.getAttribute('rotation'));
-                
-                // let bowXOffset = bow.getAttribute('position').x;
-                // let bowYOffset = bow.getAttribute('position').y;
-                // let bowZOffset = bow.getAttribute('position').z;
  
                 if((actualHandZ < stickHBZ + 0.6) && (actualHandZ > stickHBZ))
                 {
@@ -139,14 +133,14 @@ AFRAME.registerComponent("runtime", {
                     bowHB.setAttribute('rotation', bow.getAttribute('rotation'));
                     let difference = Math.abs(window.PREVIOUS - bowHB.getAttribute('position').z);
                     
-                    console.log("previous z position" + window.PREVIOUS);
-                    console.log("difference between positions" + difference);
+                  //  console.log("previous z position" + window.PREVIOUS);
+                   // console.log("difference between positions" + difference);
 
                     window.PREVIOUS = bowHB.getAttribute('position').z;          
 
                     if(difference > 0.001)
                     {
-                        console.log("small feedback");
+                      //  console.log("small feedback");
                         rightHand.components['haptics'].pulse(0.1, 1500 * difference);
                     }
                     window.FIRE_COOLDOWN = true;
@@ -169,20 +163,8 @@ AFRAME.registerComponent("runtime", {
                         fire.setAttribute('position', document.querySelector('#firepit').getAttribute('position'));
 
                         fire.setAttribute('particle-system', 'preset: default; texture: ./assets/textures/Fire.png; color: #E8C700,#B52105,#E8C700;positionSpread: 1 1 1;particleCount: 10; maxAge: 0.075; size: 4; dragValue: 1; velocityValue: 0, 0.00000005, 0;velocitySpread: 0.0000005, 0.0000005, 0.000005;accelerationValue: 0, -20, 0;accelerationSpread: -0.00000005, 0, -0.000000005;');
-                        // <a-entity id="particles" position="0 0 0" 
-                        // particle-system="preset: default; 
-                        // texture: ./assets/textures/Fire.png; 
-                        // color: #E8C700,#B52105,#E8C700;
-                        // positionSpread: 1 1 1;
-                        // particleCount: 10; 
-                        // maxAge: 0.075; 
-                        // size: 4; 
-                        // dragValue: 1; 
-                        // velocityValue: 0, 0.00000005, 0;
-                        // velocitySpread: 0.0000005, 0.0000005, 0.000005;
-                        // accelerationValue: 0, -20, 0;
-                        // accelerationSpread: -0.00000005, 0, -0.000000005;
-                        // "></a-entity>
+         
+                        scene.appendChild(fire);
                     }
                 }
 

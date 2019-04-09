@@ -195,6 +195,8 @@ AFRAME.registerComponent("genterra-component", {
             let adjacentBLV = geometry.vertices[index + 9];//or +10 - 1
             let adjacentBRV = geometry.vertices[index + 11];//or +10 + 1
 
+            let pointToCheck =  new THREE.Vector3(currentV[index].x, currentV[index].y, currentV[index].z) + new THREE.Vector3(xOffset, 0, zOffset);
+
             if(xOffset > 0)
             {
                 if(zOffset < 0)
@@ -217,7 +219,31 @@ AFRAME.registerComponent("genterra-component", {
                     console.log("current vertex at x: " + x1);
 
                     let areOfLargeTriangle = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
+                    
+                    x1 = pointToCheck.x;
+                    y1 = pointToCheck.z;
 
+                    let areOfLargeTP1 = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
+                    
+                    x2 = sideRV.x;
+                    y2 = sideRV.z;
+
+                    let areOfLargeTP2 = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
+                    
+                    x3 = currentV.x;
+                    y3 = currentV.z;
+
+                    let areOfLargeTP3 = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
+                    
+
+                    if((areOfLargeTP1 + areOfLargeTP2 + areOfLargeTP3) == areOfLargeTriangle)
+                    {
+                        //then do plane equation
+                    }
+                    else
+                    {
+                        //do plane equation of the other triangle
+                    }
 
                 }
                 else
@@ -755,7 +781,7 @@ AFRAME.registerComponent("genterra-component", {
             //HIT BOX//
             hammerHB = document.createElement('a-box');
             hammerHB.setAttribute('static-body', 'shape: none; angularDamping: 1.0;');
-            hammerHB.setAttribute('shape__hammerhead', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 2 2 2; offset: 0 1 0;');
+            hammerHB.setAttribute('shape__hammerhead', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 0.8 0.8 0.8; offset: 0 4 0;');
             hammerHB.setAttribute('scale', '0.1 0.1 0.1');
             
             hammerHB.setAttribute('id', 'hammerHB');
