@@ -195,7 +195,7 @@ AFRAME.registerComponent("genterra-component", {
             let adjacentBLV = geometry.vertices[index + 9];//or +10 - 1
             let adjacentBRV = geometry.vertices[index + 11];//or +10 + 1
 
-            let pointToCheck =  new THREE.Vector3(currentV[index].x, currentV[index].y, currentV[index].z) + new THREE.Vector3(xOffset, 0, zOffset);
+            //let pointToCheck =  new THREE.Vector3(currentV[index].x, currentV[index].y, currentV[index].z) + new THREE.Vector3(xOffset, 0, zOffset);
 
             if(xOffset > 0)
             {
