@@ -75,9 +75,8 @@ body{
 }
 #progressText{
     position:absolute;
-    color: #1a1a1a;
+    color: whitesmoke;
     font-family: 'Oswald';
-    bottom: 100px;
 }
 
 #SlotA{
@@ -99,6 +98,7 @@ body{
     justify-content: center;
     display: flex;
     overflow: hidden;
+    background-color: yellow;
     
 }
 
@@ -182,6 +182,7 @@ body{
 h1{
     color: whitesmoke;
     font-family: 'Oswald';
+    font-size: 5vw;
 
 }
 
@@ -216,11 +217,10 @@ h3{
 
 button{
     background-color: #0d0d0d;
-    color: 001B32;
     width: 100%;
     height: 100%;
     border: 0px;
-    font-size: 30px;
+    font-size: 5vw;
     overflow: hidden;
     outline: none; 
     font-family: 'Oswald';
@@ -231,7 +231,6 @@ button{
     transition: transform 0.25s;
     overflow: hidden;
     position: absolute;
-    bottom: 125px;
 }
 
 #Material_A:active{
@@ -245,7 +244,6 @@ button{
     transition: transform 0.25s;
     overflow: hidden;
     position: absolute;
-    bottom: 225px;
 
 }
 
@@ -263,7 +261,7 @@ button:active
 }
 
 .Ready{
-    background-color: #0d0d0d;
+    background-color: green;
     transition: background-color 0.25s;
     color: whitesmoke;
 
