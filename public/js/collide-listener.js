@@ -10,7 +10,7 @@ AFRAME.registerComponent('collide-listener', {
     axeSound = document.querySelector('#createAxeSound');
     axeSound.setAttribute('sound', 'volume: 1.5');
     dropSound.setAttribute('sound', 'volume: 1.5');
-    
+
     let axe = document.querySelector('#axeHB');
     let bow = document.querySelector('#bowHB');
     let hammer = document.querySelector('#hammerHB');
@@ -20,8 +20,13 @@ AFRAME.registerComponent('collide-listener', {
       //console.log("bow collided with: " + e.detail.body.el.getAttribute('id'));
       if(e.detail.body.el.getAttribute('id') == ('log') && e.detail.body.el.getAttribute('visible') == true)
       {
+        let hammerSound = document.querySelector('#createHammerSound');
+
         e.detail.body.el.setAttribute('visible','false');
         window.SPAWN_SHELTER = true;
+        hammerSound.components['sound'].stopSound();
+        hammerSound.setAttribute('position', hammer.getAttribute('position'));
+        hammerSound.components['sound'].playSound();
       }
     });
 

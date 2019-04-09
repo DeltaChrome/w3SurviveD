@@ -297,12 +297,12 @@ AFRAME.registerComponent("genterra-component", {
             }
         }
 
-        let randomValidVertexIndex = generateNumber(64);
+        //let randomValidVertexIndex = generateNumber(64);
 
-        let randomValidVertex = generatePositionVectorRayCasted(randomValidVertexIndex);
+       // let randomValidVertex = generatePositionVectorRayCasted(randomValidVertexIndex);
         
         //IF THERE IS TIME, RAY CAST EACH ITEM TO BE ON THE ANGLE OF A SURFACE AND NOT JUST PLACED AT A VERTEX
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 20; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
 
@@ -333,17 +333,7 @@ AFRAME.registerComponent("genterra-component", {
           // let tempZ = generateNumber(150) - 75;
 
 
-
-
-
-
-
-
-
-
-
-
-            entity.setAttribute('position', );
+            entity.setAttribute('position', generatePositionVector(0));
             entity.setAttribute('obj-model', 'obj: #rock1-obj');
             entity.setAttribute('material', 'mtl: #rock1-mat');
             entity.setAttribute('scale', '0.1 0.1 0.1');
@@ -356,7 +346,7 @@ AFRAME.registerComponent("genterra-component", {
         }
 
         //purple pointy
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 20; i++) {
             let entity = document.createElement('a-entity');
             entity.setAttribute('remove-component', {}); 
             entity.setAttribute('position', generatePositionVector(0));

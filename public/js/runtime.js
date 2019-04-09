@@ -155,9 +155,17 @@ AFRAME.registerComponent("runtime", {
                 }
                 else if(window.FIRE_COOLDOWN == true)
                 {
+
+                    let bowSound = document.querySelector('#createBowSound');
                     window.FIRE_PROGRESS += 1;
                     window.FIRE_COOLDOWN = false;
                     rightHand.components['haptics'].pulse(0.5, 200);
+
+                    bowSound.components['sound'].stopSound();
+                    bowSound.setAttribute('position', bowHB.getAttribute('position'));
+                    bowSound.components['sound'].playSound();
+
+                    let fireSound = document.querySelector('#createFireSound');
                     if(window.FIRE_PROGRESS > 5)
                     {
                         window.FIRE_COMPLETE = true;
@@ -166,6 +174,11 @@ AFRAME.registerComponent("runtime", {
                         fire.setAttribute('id','fireparticles');
                         fire.setAttribute('particle-system', 'preset: stars; texture: ./assets/textures/Fire.png; color: #E8C700,#B52105,#E8C700; positionSpread: 1 1 1;particleCount: 10; maxAge: 0.75; size: 2; dragValue: 4; ');
                         firepit.appendChild(fire);
+
+                        fireSound.components['sound'].stopSound();
+                        fireSound.setAttribute('position', firepit.getAttribute('position'));
+                        fireSound.setAttribute('sound', 'loop: true');
+                        fireSound.components['sound'].playSound();
                     }
                 }
 
