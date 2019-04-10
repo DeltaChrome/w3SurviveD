@@ -345,22 +345,24 @@ AFRAME.registerComponent("genterra-component", {
             scene.appendChild(entity);
         }
 
-        //purple pointy
+        //purple branch
         for (let i = 0; i < 20; i++) {
             let entity = document.createElement('a-entity');
+            let pos = generatePositionVector(0.1);
             entity.setAttribute('remove-component', {}); 
-            entity.setAttribute('position', generatePositionVector(0));
+            entity.setAttribute('position', {x:currentTree[0] + 0.5, y:currentTree[1], z:currentTree[2]});
             entity.setAttribute('obj-model', 'obj: #branch-obj');
             entity.setAttribute('material', 'src: #branch-mtl');
             entity.setAttribute('scale', '0.05 0.05 0.05');
             entity.setAttribute('rotation', '0 0 90');
             entity.setAttribute('static-body','shape: none;');
-            entity.setAttribute('shape__branch', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 0.3 0.3 3; offset: 0 0 3.5;');
+            entity.setAttribute('shape__branch', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 2 15 2; offset: 0 16.5 0;');
             entity.setAttribute('shadow', 'cast:true');
             entity.setAttribute('shadow', 'receive:true');
             entity.setAttribute('id', 'branch');
-            entity.setAttribute('class', 'Branch');            
+            entity.setAttribute('class', 'Branch');        
             scene.appendChild(entity);
+
         }
 
 ////////////////////////////////////////////Rocks///////////////////////////////////////////////
@@ -729,7 +731,7 @@ AFRAME.registerComponent("genterra-component", {
             //HIT BOX//
             hammerHB = document.createElement('a-box');
             hammerHB.setAttribute('static-body', 'shape: none; angularDamping: 1.0;');
-            hammerHB.setAttribute('shape__hammerhead', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 0.8 0.8 0.8; offset: 0 4 0;');
+            hammerHB.setAttribute('shape__hammerhead', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 0.8 0.8 0.8; offset: 0 -0.5 -4.5;');
             hammerHB.setAttribute('scale', '0.1 0.1 0.1');
             
             hammerHB.setAttribute('id', 'hammerHB');
@@ -741,24 +743,6 @@ AFRAME.registerComponent("genterra-component", {
         terraObj.setObject3D('mesh', plane);
         terraObj.setAttribute('class','ground');
 
-        // let log = document.createElement('a-entity');
-        // log.setAttribute('position', '0 0 0');
-        // log.setAttribute('rotation', '90 0 0');
-        // log.setAttribute('scale', '0.15 0.15 0.15');
-        // log.setAttribute('dynamic-body', 'shape: none; angularDamping: 1.0; linearDamping: 1.0;');
-        // log.setAttribute('shape__log', 'shape: box; angularDamping: 1.0; linearDamping: 1.0; halfExtents: 0.8 6 0.8; offset: 0 6 0;');
-        // log.setAttribute('obj-model', 'obj: #log-obj');
-        // log.setAttribute('material', 'src: #log-mtl');
-        // log.setAttribute('id', 'log');
-        // log.setAttribute('class', 'Log');
-        // scene.appendChild(log);
-        // let waterGeo = new THREE.PlaneGeometry(1000, 1000);
-        // for (let i = 0; i < waterGeo.vertices.length; i++) 
-        // {
-
-        //     waterGeo.vertices[i].z = -8;
-
-        // }
         let waterMaterial = new THREE.MeshStandardMaterial({ shader: 'ocean', color: "#24529e" });
         //let waterPlane = new THREE.Mesh(waterGeo, waterMaterial);
        // waterPlane.rotateX(THREE.Math.degToRad(270));
@@ -794,10 +778,6 @@ AFRAME.registerComponent("genterra-component", {
 
      tick: function()
     {
-        // var time = performance.now() * 0.001;
-        // water.material.uniforms[ "time" ].value += 1.0 / 60.0;
-         //material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
-        //console.log(generateNumber(3));
-
+  
     }
 });

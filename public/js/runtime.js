@@ -243,7 +243,7 @@ AFRAME.registerComponent("runtime", {
         //call event updateInventory
         let invJSON = JSON.stringify(inv);
 
-        //socket.emit('update', invJSON);
+        socket.emit('update', invJSON);
 
         // console.log(axe.getAttribute('position'));
         // console.log('running');

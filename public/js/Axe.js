@@ -31,11 +31,54 @@ let ButtonTool = document.getElementById("ToolButton");
 let hint = document.getElementById("progressText");
 hint.className = 'hide';
 
+//booleans that check for clickability
+let hasStick = false;
+let hasRock = false;
+
 //OnClicks
-Material_A.onclick = function(){MaterialButton_A()};
-Material_B.onclick = function(){MaterialButton_B()};
+//Material_A.onclick = function(){MaterialButton_A()};
+//Material_B.onclick = function(){MaterialButton_B()};
 ButtonMaterial.onclick = function(){myFunction()};
 ButtonTool.onclick = function(){AddtoGame()};
+
+let socket = io();
+
+//default connect event
+socket.on('connect', function() {
+    console.log("connected!");
+});
+
+///-------------------------------- controls clickibility of the materials
+window.setInterval(function(){
+    //This controls the access to the material button for the rock
+
+    socket.emit('pullData');
+
+    if(hasRock)
+    {
+        Material_A.onclick = function(){MaterialButton_A()};
+    }
+
+    //This controls the access to the material button for the stick
+    if(hasStick)
+    {
+        Material_B.onclick = function(){MaterialButton_B()};
+    }
+}, 10);
+
+socket.on('updateGame', function(inventoryJSON) {
+    console.log('update event heard');
+    let inv = JSON.parse(inventoryJSON);
+    
+    if(inv.rocks > 0)
+    {
+        hasRock = true;
+    }
+    if(inv.twigs > 0)
+    {
+        hasStick = true;
+    }
+});
 
 //first alert
 alert("Please tell the VR player to gather twigs and rocks found on the ground");

@@ -79,11 +79,12 @@ socketIO.on('connection', function(socket) {
         console.log('update event heard');
 
         inventory = data;
+        console.log(inventory);
         //socketIO.sockets.emit('updateGame', data);
     });
-    socket.on('pullData', function(data) {
+    socket.on('pullData', function() {
         console.log('pull event heard');
-
+        console.log(inventory);
         socketIO.sockets.emit('updateGame', inventory);
     });
 });
