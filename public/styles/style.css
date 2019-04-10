@@ -85,7 +85,7 @@ body{
     height: 75%;
     align-items: center;
     justify-content: center;
-    display: flex;    
+    display: block;    
     overflow: hidden;
     background-color: #1a1a1a;
     
@@ -146,6 +146,29 @@ body{
     background-color: #0e0e0e;
     
 }
+
+#MaterialASlot{
+    /* background-color: green; */
+    width: 100%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+    /* background-color: #0e0e0e; */
+}
+
+#MaterialBSlot{
+    /* background-color: orange; */
+    width: 100%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+    /* background-color: #0e0e0e; */
+}
+
 
 #ToolArea{
     height: 100%;
